@@ -34,7 +34,7 @@ def run_history_agent(guest: Guest) -> dict:
     obs_block = "\n".join(obs_texts)
 
     response = _client.messages.create(
-        model=settings.orchestrator_model,
+        model=settings.fast_model,
         max_tokens=1024,
         system=_PROMPT,
         messages=[{

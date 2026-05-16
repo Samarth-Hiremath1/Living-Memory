@@ -66,4 +66,22 @@ def parse_observation(
         if interests:
             graph.upsert_guest(guest)
 
-    return obs, parsed.get("action_items", [])
+    # Normalize action_items — Claude returns objects {department, action, urgency};
+    # frontend expects plain strings.
+    raw_items = parsed.get("action_items", [])
+    action_items: list[str] = []
+    for item in raw_items:
+        if isinstance(item, str):
+            action_items.append(item)
+        elif isinstance(item, dict):
+            action = item.get("action", "")
+            dept = item.get("department", "")
+            urgency = item.get("urgency", "")
+            label = f"[{dept.title()}] {action}".strip() if dept else action
+            if urgency and urgency == "now":
+                label = f"⚡ {label}"
+            action_items.append(label)
+        else:
+            action_items.append(str(item))
+
+    return obs, action_items

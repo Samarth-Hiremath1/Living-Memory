@@ -80,15 +80,14 @@ def main():
     detail("Seeding graph store with synthetic data...")
     seed_data()
     detail("Graph ready.")
-
     pause(1)
 
     # ── Beat 1: Setup ─────────────────────────────────────────────────────────
-    step(1, "Setup — Anna Lindqvist books Rosewood Schloss Fuschl")
+    step(1, "Setup — Anna Lindqvist books Rosewood Sand Hill")
     anna = graph.get_guest("guest-anna-lindqvist")
     stay = graph.get_stay("stay-anna-fuschl-2024")
     result(f"Guest: {anna.name} | From: {anna.home_city} | Flight: {stay.flight_number}")
-    result(f"Property: Rosewood Schloss Fuschl, Austria")
+    result(f"Property: Rosewood Sand Hill, Menlo Park, California")
     result(f"Consent level: {anna.consent_level.value}")
     pause(2)
 
@@ -97,33 +96,31 @@ def main():
     detail("Anna received the booking confirmation and clicked 'Have a moment with us?'")
     detail("60-second ElevenLabs Conversational AI session completed.")
     MOCK_TRANSCRIPT = """
-Anna: I'm flying from Tokyo — it's a long one, about 13 hours.
-Ambassador: That sounds like quite a journey. Are you looking forward to slowing down once you arrive?
-Anna: Very much. I've been working non-stop. I want to walk in the mountains if the weather holds.
-Ambassador: The Alps in September are really something. Is there anything particular you've been imagining?
-Anna: Just quiet, honestly. And I heard there's a lake? I'd love to see it at dawn.
-Ambassador: Sunrise over the Fuschlsee is one of those things you remember. We'll make sure your mornings are as free as you'd like.
-Anna: That's lovely. Oh, and I love Austrian wine — specifically Grüner. If you have any, I'd be very happy.
-Ambassador: We'll take care of that. We're genuinely looking forward to having you, Anna. Safe travels.
+Anna: I'm flying back from Frankfurt — long week of meetings. Landing at SFO and heading straight to Sand Hill from the airport.
+Ambassador: That sounds like quite a journey. Is there anything you've been imagining about your time with us this weekend?
+Anna: Honestly? Just quiet. I want to walk in the oak grove if the weather holds. And the spa, definitely the spa.
+Ambassador: Natalie at our spa has a session designed exactly for long-haul arrivals — I'll make sure she knows you're coming.
+Anna: That's lovely. Oh — and I love natural wine if there's anything special on the list.
+Ambassador: Our sommelier will have something waiting for you. We're genuinely looking forward to having you, Anna. Safe travels.
 """.strip()
     result("Transcript captured ↓")
     print(f"\n{DIM}{MOCK_TRANSCRIPT}{RESET}\n")
     pause(2)
 
     # ── Beat 3: Flight pull ───────────────────────────────────────────────────
-    step(3, "Flight Agent — Real-time status for JL43 (Tokyo → Vienna)")
+    step(3, "Flight Agent — Real-time status for LH454 (Frankfurt → SFO)")
     pause(1, "Querying AviationStack")
     flight = get_flight_status(stay.flight_number)
     if flight:
         result(f"Flight: {flight.flight_number} | {flight.airline}")
         result(f"Status: {flight.status.upper()} | Delay: {flight.delay_minutes or 0} min")
-        result(f"Arrives Vienna ({flight.destination_iata}): {flight.estimated_arrival or flight.scheduled_arrival}")
+        result(f"Arrives SFO: {flight.estimated_arrival or flight.scheduled_arrival}")
     pause(2)
 
     # ── Beat 4: Arrival plan generation ──────────────────────────────────────
     step(4, "Orchestrator — Generating Anna's arrival plan")
-    detail("Running: flight_agent → history_agent → place_agent → wellness_agent → synthesizer → friend_filter")
-    pause(1, "Synthesizing arrival plan (calling Claude Sonnet)")
+    detail("Running: flight_agent → history_agent → place_agent → wellness_agent → synthesizer")
+    pause(1, "Synthesizing arrival plan (calling Claude)")
 
     plan = generate_arrival_plan(
         guest_id="guest-anna-lindqvist",
@@ -132,15 +129,14 @@ Ambassador: We'll take care of that. We're genuinely looking forward to having y
     )
 
     if "error" not in plan:
-        result(f"Arrival plan generated in <30s")
+        result(f"Arrival plan generated")
         result(f"Room temperature: {plan.get('room_temperature_f')}°F")
         result(f"Welcome amenity: {plan.get('welcome_amenity')}")
         result(f"Moments to create: {len(plan.get('moments_to_create', []))}")
         if plan.get("placemaker_intro"):
-            result(f"PlaceMaker intro: {plan['placemaker_intro'][:80]}...")
+            result(f"PlaceMaker intro: {str(plan['placemaker_intro'])[:80]}...")
     else:
-        result(f"[Demo fallback] Plan generated from cached data")
-
+        result(f"[Demo fallback] Error: {plan.get('error')}")
     pause(2)
 
     # ── Beat 5: Manager dossier ───────────────────────────────────────────────
@@ -158,7 +154,7 @@ Ambassador: We'll take care of that. We're genuinely looking forward to having y
     step(6, "Friend Filter — Live rewrite of a 'creepy' insight")
     RAW_INSIGHT = (
         "Based on analysis of 3 past stays, guest shows 87% preference for outdoor/nature "
-        "activities and 73% likelihood of requesting Grüner Veltliner based on beverage ordering patterns."
+        "activities and 73% likelihood of requesting natural wine based on beverage ordering patterns."
     )
     detail(f"Raw (creepy): {RAW_INSIGHT}")
     pause(1, "Running friend_filter (Claude Haiku)")
@@ -167,29 +163,29 @@ Ambassador: We'll take care of that. We're genuinely looking forward to having y
     pause(2)
 
     # ── Beat 7: Staff observation capture ─────────────────────────────────────
-    step(7, "Live Observation — Waiter speaks: 'Anna asked about hikes'")
-    OBS_TEXT = "Anna at table 6 just asked about mountain hikes for tomorrow morning"
+    step(7, "Live Observation — Spa staff speaks: 'Anna asked about a sunset trail walk'")
+    OBS_TEXT = "Anna in bungalow 7 just asked about a guided walk on the Sand Hill trail tomorrow at sunset"
     detail(f"Voice transcribed: '{OBS_TEXT}'")
     pause(1, "Claude parsing observation")
     obs, actions = parse_observation(
         raw_text=OBS_TEXT,
         stay_id="stay-anna-fuschl-2024",
         guest_id="guest-anna-lindqvist",
-        property_id="schloss-fuschl",
+        property_id="sand-hill",
         source=ObservationSource.STAFF_VOICE,
     )
     result(f"Graph updated: {obs.tags}")
     if actions:
-        result(f"Action item: {actions[0].get('action', 'Contact PlaceMaker Gerald Aichriedler')}")
+        result(f"Action item: {actions[0].get('action', 'Contact PlaceMaker Natalie Cheng about sunset trail walk')}")
     pause(2)
 
     # ── Beat 8: Cross-property magic ──────────────────────────────────────────
     step(8, "Cross-Property Memory — Anna books Hôtel de Crillon (3 months later)")
     detail("Paris property loading Anna's graph...")
-    detail("Signals available: hiking interest (Fuschl), Grüner Veltliner, Tokyo connection, dawn routine")
-    result("Paris dossier pre-populated with Schloss Fuschl memory")
+    detail("Signals available: trail walk interest (Sand Hill), natural wine, San Francisco home, restorative pace")
+    result("Paris dossier pre-populated with Sand Hill memory")
     result("PlaceMaker match: Sophie Dubois (literary Paris guide) — recommended for Anna's contemplative pace")
-    result("Note: 'She tends to reach for a rosé — the sommelier can select from the Alsace section'")
+    result("Note: 'A natural wine welcome would land well — the sommelier can select from the Loire section'")
     pause(2)
 
     # ── Done ──────────────────────────────────────────────────────────────────

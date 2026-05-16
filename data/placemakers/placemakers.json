@@ -1,102 +1,109 @@
 [
   {
-    "id": "pm-gerald-aichriedler",
-    "property_id": "schloss-fuschl",
-    "name": "Gerald Aichriedler",
-    "role": "Alpine Guide & Forager",
-    "location": "Hof bei Salzburg, Austria",
-    "bio": "Gerald has guided the Salzkammergut mountains for 22 years. He grew up in the Fuschl valley and knows every trail, every seasonal mushroom patch, and every farmer who produces anything worth tasting. He speaks three languages and has the rare gift of slowing people down without their noticing. His morning mushroom walks in September are legendary among returning guests.",
+    "id": "pm-reylon-agustin",
+    "property_id": "sand-hill",
+    "name": "Reylon Agustin",
+    "role": "Executive Chef, Madera",
+    "location": "Menlo Park, California",
+    "bio": "Reylon leads Madera's kitchen, the Michelin-starred restaurant at the heart of Rosewood Sand Hill. His cooking is rooted in California ingredient sourcing — most of what arrives at the kitchen each morning comes from within 100 miles. He has a deep relationship with growers across Half Moon Bay, Santa Cruz, and the East Bay. He occasionally hosts in-person chef's table conversations for engaged guests.",
     "offerings": [
       {
-        "name": "Dawn Alpine Walk",
-        "duration": "3 hours",
-        "description": "A guided sunrise hike above Lake Fuschl, ending with Austrian Jause (a farmhouse snack) at his family's alpine hut. Groups of 1–4 only.",
-        "best_for": "Early risers, nature lovers, anyone wanting a genuinely local experience",
-        "season": "April–October"
-      },
-      {
-        "name": "Mushroom Foraging Walk",
+        "name": "Chef's Table at Madera",
         "duration": "2.5 hours",
-        "description": "September foraging in the forest above the castle. Gerald identifies, harvests, and hands the finds to the kitchen for that evening's menu. Includes a short lesson in mycology.",
-        "best_for": "Food-curious guests, those interested in the Austrian landscape",
-        "season": "September–October"
+        "description": "A seven-course tasting at the kitchen pass, paired with Napa and Sonoma wines selected by the sommelier. Reylon visits between courses to talk about the producers.",
+        "best_for": "Food-serious guests, anyone interested in California's farm-to-table evolution",
+        "season": "Year-round"
       },
       {
-        "name": "Fly Fishing on the Fuschlsee",
+        "name": "Coastside Farm Visit",
         "duration": "Half day",
-        "description": "Private fly fishing tuition and guided session on the lake. Equipment provided. Beginners welcome — Gerald is extraordinarily patient.",
-        "best_for": "Guests seeking contemplative outdoor experiences, beginners and experienced anglers both",
-        "season": "May–September"
+        "description": "A private morning drive over the Santa Cruz Mountains to a Half Moon Bay farm Reylon sources from. Includes farm walk, a short lesson in seasonal California produce, and lunch at the farmhouse.",
+        "best_for": "Slow travelers, food enthusiasts, those interested in California agriculture",
+        "season": "Year-round (best March–October)"
       }
     ],
-    "availability_windows": ["6:00–10:00 AM (walks)", "2:00–6:00 PM (fishing)"],
+    "availability_windows": ["Evenings 6:00–10:00 PM (chef's table)", "Mornings (farm visits by arrangement)"],
     "ideal_guest_profiles": [
-      "Guests interested in hiking, nature, the Austrian landscape",
-      "Food-curious guests (foraging walks pair with chef's table)",
-      "Guests seeking mindful, unhurried outdoor experience",
-      "Photographers — the light is extraordinary at dawn"
-    ],
-    "contact": "gerald@schloss-fuschl-placemakers.at"
-  },
-  {
-    "id": "pm-maria-brandner",
-    "property_id": "schloss-fuschl",
-    "name": "Maria Brandner",
-    "role": "Salzburg Cultural Historian",
-    "location": "Salzburg, Austria",
-    "bio": "Maria spent 15 years as a curator at the Salzburg Museum before pivoting to private cultural guiding. She makes Mozart feel contemporary, Baroque architecture feel personal, and the city's layered history feel like a story being told specifically for you. She is the only guide the hotel recommends for guests who already 'know Salzburg.'",
-    "offerings": [
-      {
-        "name": "Salzburg After the Crowds",
-        "duration": "3 hours",
-        "description": "A private evening walking tour of Salzburg with Maria — starting at dusk. Focuses on the lesser-known medieval corners, the Jewish history, the Baroque gardens after closing. Ends at a wine bar she has used for 20 years.",
-        "best_for": "Returning visitors to Salzburg, culturally curious guests, those who find standard tours too surface-level",
-        "season": "Year-round"
-      },
-      {
-        "name": "Mozart Beyond the Kitsch",
-        "duration": "2 hours",
-        "description": "The Mozarteum archives, the composer's actual apartments (not the tourist version), and Maria's own analysis of what his letters reveal. For guests who already know the music.",
-        "best_for": "Classical music lovers, particularly those attending or having attended the Salzburg Festival",
-        "season": "Year-round"
-      }
-    ],
-    "availability_windows": ["10:00 AM–1:00 PM", "4:00–8:00 PM"],
-    "ideal_guest_profiles": [
-      "Classical music enthusiasts",
-      "Cultural travelers who find standard tours too generic",
-      "Guests arriving from or going to the Salzburg Festival",
-      "Repeat visitors to Austria who want to go deeper"
+      "Food-curious guests, particularly those interested in California cuisine",
+      "Guests who have engaged thoughtfully with the menu or asked about sourcing",
+      "Returning guests who want a deeper culinary experience",
+      "Wine enthusiasts (Napa/Sonoma adjacent)"
     ]
   },
   {
-    "id": "pm-josef-huber",
-    "property_id": "schloss-fuschl",
-    "name": "Josef Huber",
-    "role": "Winemaker & Cellar Master",
-    "location": "Wachau Valley / Schloss Fuschl cellar",
-    "bio": "Josef manages the hotel's cellar and curates a private collection of Austrian wines that most guests never see. His family has farmed Grüner Veltliner in the Wachau for three generations. He is laconic, precise, and extraordinarily knowledgeable. He will not recommend a wine he doesn't believe in.",
+    "id": "pm-natalie-cheng",
+    "property_id": "sand-hill",
+    "name": "Natalie Cheng",
+    "role": "Wellness Director & Yoga Teacher",
+    "location": "Menlo Park, California",
+    "bio": "Natalie leads the spa and wellness program at Sand Hill. She trained at the Esalen Institute and spent a decade in Northern California's wellness community before joining Rosewood. Her practice integrates yoga, breathwork, and recovery science — particularly for jet-lagged or high-stress arrivals. She has a soft, deliberate manner; guests often describe their first session with her as the moment their trip actually began.",
     "offerings": [
       {
-        "name": "Private Cellar Tasting",
+        "name": "Garden Sunrise Yoga",
+        "duration": "60 minutes",
+        "description": "A private or small-group session in the property's meditation garden at sunrise. Gentle, restorative, and adapted to each guest's energy. Especially good for jet-lagged arrivals from Europe or Asia.",
+        "best_for": "Long-haul arrivals, wellness-focused guests, anyone struggling with sleep",
+        "season": "Year-round (outdoors weather permitting)"
+      },
+      {
+        "name": "Recovery Session",
         "duration": "90 minutes",
-        "description": "A guided vertical tasting in the castle's 13th-century wine cellar. Six wines, three Austrian appellations, Josef's personal commentary. Not available to all guests — by introduction only.",
-        "best_for": "Wine-serious guests, those with a genuine interest in Austrian viticulture",
+        "description": "A combined treatment: 30 minutes of guided breathwork, a 60-minute restorative massage with magnesium oil, and a private tea ceremony in the garden afterward. Designed for guests who've just stepped off a long flight.",
+        "best_for": "Jet-lagged arrivals, business travelers in transition, guests seeking deep rest",
         "season": "Year-round"
       },
       {
-        "name": "Wachau Valley Day Trip",
-        "duration": "Full day",
-        "description": "A private drive to the Wachau with Josef. Three family domaines not open to the public. Lunch at a vineyard where the chef is Josef's cousin. Return by 7pm for dinner.",
-        "best_for": "Wine enthusiasts willing to invest a full day",
-        "season": "May–October"
+        "name": "Sand Hill Trail Walk",
+        "duration": "90 minutes",
+        "description": "A guided walking meditation along the property's private trail through the oak grove. No phones, no agenda — just the trail, the bay laurel, and a slow conversation if the guest wants one.",
+        "best_for": "Guests in need of mental decompression, those interested in mindful practices",
+        "season": "Year-round"
       }
     ],
-    "availability_windows": ["Afternoons 3:00–6:00 PM (cellar)", "Full day Wachau (by arrangement)"],
+    "availability_windows": ["6:00–10:00 AM (sunrise yoga)", "11:00 AM–6:00 PM (treatments & walks)"],
     "ideal_guest_profiles": [
-      "Wine-serious guests — those who know Austrian wine or want to learn",
-      "Guests who have mentioned wine, rosé, or winery visits",
-      "Slow travelers interested in food and drink provenance"
+      "Long-haul arrivals (Europe, Asia)",
+      "Wellness-focused guests",
+      "Burned-out professionals seeking deep recovery",
+      "Guests with mention of stress, sleep, or pace concerns"
+    ]
+  },
+  {
+    "id": "pm-david-park-sh",
+    "property_id": "sand-hill",
+    "name": "David Park",
+    "role": "Napa & Sonoma Wine Curator",
+    "location": "Menlo Park / Napa Valley",
+    "bio": "David is a longtime sommelier who left a Napa winery to curate Sand Hill's wine program and lead private valley experiences. He has personal relationships with twenty-plus family-owned producers across Napa and Sonoma — including several who don't take walk-ins. His itineraries skip the famous names in favor of the small, deeply serious estates that California wine people know about and tourists generally don't.",
+    "offerings": [
+      {
+        "name": "Private Napa Day",
+        "duration": "Full day",
+        "description": "A chauffeured day in Napa with David — three small producers, lunch at a vineyard, no tasting rooms, no crowds. Each producer is chosen based on the guest's palate.",
+        "best_for": "Wine-serious guests, anyone interested in California viticulture beyond the obvious",
+        "season": "Year-round (especially during harvest, Aug–Oct)"
+      },
+      {
+        "name": "Sonoma Coast & Russian River",
+        "duration": "Full day",
+        "description": "Pinot and cool-climate Chardonnay along the Sonoma Coast and Russian River. Three estates plus a long lunch overlooking the vines.",
+        "best_for": "Pinot Noir enthusiasts, guests interested in California's cooler-climate wines",
+        "season": "Year-round"
+      },
+      {
+        "name": "Sand Hill Cellar Tasting",
+        "duration": "75 minutes",
+        "description": "A private tasting in the property's wine cellar. Six wines drawn from David's personal selection, including bottles not on the Madera list.",
+        "best_for": "Guests who can't carve out a full day in the valley but love wine",
+        "season": "Year-round"
+      }
+    ],
+    "availability_windows": ["Full day (Napa/Sonoma trips)", "Afternoons 3:00–6:00 PM (cellar tastings)"],
+    "ideal_guest_profiles": [
+      "Wine enthusiasts, particularly California-curious",
+      "Guests who have engaged thoughtfully with the wine list",
+      "Returning guests who have done the famous Napa tour and want depth",
+      "Slow travelers willing to invest a full day"
     ]
   },
   {

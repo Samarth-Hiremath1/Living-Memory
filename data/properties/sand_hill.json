@@ -1,0 +1,68 @@
+{
+  "id": "sand-hill",
+  "name": "Rosewood Sand Hill",
+  "city": "Menlo Park",
+  "country": "United States",
+  "region": "Silicon Valley, California",
+  "character": "Sixteen acres of orchards, oak groves, and low California-modern bungalows at the base of the Santa Cruz Mountains. Rosewood Sand Hill is the rare luxury hotel that feels like a private estate. It is the unofficial living room of Silicon Valley — Sand Hill Road's venture firms are a five-minute drive — but the property's deepest character is its quiet. Mornings start with fog burning off the hills. The pool is heated year-round. Madera (Michelin-starred) anchors the property. The spa is set in its own building behind the meditation garden. Guests come here to slow down, recover, and think clearly.",
+  "cultural_calendar": [
+    {
+      "name": "Stanford reunion weekends",
+      "period": "Multiple weekends each year",
+      "notes": "The property fills with alumni returning to campus. The concierge maintains relationships with Stanford for private campus access and faculty introductions."
+    },
+    {
+      "name": "Napa harvest season",
+      "period": "August–October",
+      "notes": "A 90-minute drive north. The hotel arranges private tastings at family-owned wineries that don't take walk-ins."
+    },
+    {
+      "name": "Filoli Gardens bloom",
+      "period": "March–May",
+      "notes": "Historic estate gardens 15 minutes away. Private after-hours access can be arranged."
+    },
+    {
+      "name": "Stanford Symphony / Live at Memorial",
+      "period": "October–May",
+      "notes": "Classical performances at Stanford's Memorial Church and Bing Concert Hall. The concierge has access to faculty-only seating sections."
+    }
+  ],
+  "signature_amenities": [
+    "The Spa at Sand Hill (16-acre garden setting)",
+    "Madera restaurant (Michelin-starred, Chef Reylon Agustin)",
+    "Heated outdoor pool, year-round",
+    "Sand Hill Trail private morning walks",
+    "Curated Napa and Sonoma wine experiences",
+    "Stanford campus and faculty introductions"
+  ],
+  "room_amenity_options": [
+    "Garden bungalow with private terrace",
+    "Heated outdoor fireplace",
+    "California organic toiletries (Le Labo)",
+    "In-room cold-pressed juice and adaptogen options",
+    "Plush robe and slippers (heated cabinet)"
+  ],
+  "welcome_amenity_options": [
+    {
+      "id": "napa-flight",
+      "name": "Napa Valley welcome flight",
+      "description": "A small-format tasting of three Napa wines selected by the sommelier, with a card from chef Reylon Agustin. Served in-room or on the terrace."
+    },
+    {
+      "id": "garden-tea",
+      "name": "Hand-blended California herbal tea",
+      "description": "A house tea blend from herbs grown in the property's meditation garden. Served with a small ceramic pot, ideal after a long flight."
+    },
+    {
+      "id": "recovery-basket",
+      "name": "Recovery basket",
+      "description": "Cold-pressed greens, organic dark chocolate, magnesium mineral water, and a handwritten note. For jet-lagged or long-haul arrivals."
+    },
+    {
+      "id": "valley-essentials",
+      "name": "Valley essentials",
+      "description": "Local sourdough from Manresa Bread, Mariposa Baking shortbread, Equator coffee beans, and seasonal stone fruit from a Half Moon Bay farm."
+    }
+  ],
+  "placemaker_ids": ["pm-reylon-agustin", "pm-natalie-cheng", "pm-david-park-sh"]
+}

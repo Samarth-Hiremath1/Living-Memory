@@ -8,7 +8,6 @@ import anthropic
 from ..config import settings
 from ..graph.schema import Guest, Stay, ArrivalPlan, Property
 from ..graph.store import graph
-from .friend_filter import filter_insights
 
 _client = anthropic.Anthropic(api_key=settings.anthropic_api_key)
 _PROMPT = (Path(__file__).parent.parent / "prompts" / "synthesizer.md").read_text()
@@ -25,9 +24,8 @@ def run_synthesizer(
 ) -> ArrivalPlan:
     prop = graph.get_property(stay.property_id)
 
-    # Friend-filter the history patterns before feeding to synthesizer
-    raw_patterns = history.get("patterns", [])
-    filtered_patterns = filter_insights(raw_patterns) if raw_patterns else []
+    # History agent already returns warm patterns; synthesizer enforces tone again.
+    filtered_patterns = history.get("patterns", [])
 
     payload = {
         "guest": {
@@ -62,7 +60,7 @@ def run_synthesizer(
 
     response = _client.messages.create(
         model=settings.orchestrator_model,
-        max_tokens=2048,
+        max_tokens=1500,
         system=_PROMPT,
         messages=[{"role": "user", "content": json.dumps(payload, indent=2)}],
     )
@@ -77,18 +75,38 @@ def run_synthesizer(
     except Exception:
         result = {}
 
+    # Coerce fields that Claude sometimes returns as dicts into strings
+    def _to_str(val):
+        if val is None or isinstance(val, str):
+            return val
+        if isinstance(val, dict):
+            # Try common shapes: {name, why} or {name, offering, why}
+            parts = []
+            for k in ("name", "placemaker", "offering", "why", "reason", "timing"):
+                if k in val and val[k]:
+                    parts.append(str(val[k]))
+            return " — ".join(parts) if parts else str(val)
+        return str(val)
+
+    welcome_amenity = result.get("welcome_amenity")
+    if isinstance(welcome_amenity, dict):
+        welcome_amenity = welcome_amenity.get("name") or welcome_amenity.get("description") or str(welcome_amenity)
+
+    moments = result.get("moments_to_create", [])
+    moments = [m if isinstance(m, str) else (m.get("text") if isinstance(m, dict) else str(m)) for m in moments]
+
     # Build the ArrivalPlan
     plan = ArrivalPlan(
         guest_id=guest.id,
         stay_id=stay.id,
         property_id=stay.property_id,
         room_temperature_f=result.get("room_temperature_f", 68),
-        welcome_amenity=result.get("welcome_amenity"),
-        moments_to_create=result.get("moments_to_create", []),
-        itinerary=result.get("itinerary", []),
-        placemaker_intro=result.get("placemaker_intro"),
-        flight_status=result.get("flight_status"),
-        jet_lag_note=result.get("jet_lag_note"),
+        welcome_amenity=welcome_amenity,
+        moments_to_create=moments,
+        itinerary=result.get("itinerary", []) if isinstance(result.get("itinerary"), list) else [],
+        placemaker_intro=_to_str(result.get("placemaker_intro")),
+        flight_status=_to_str(result.get("flight_status")),
+        jet_lag_note=_to_str(result.get("jet_lag_note")),
         raw_dossier=result.get("dossier_markdown", ""),
     )
 

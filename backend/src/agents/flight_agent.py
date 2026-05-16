@@ -63,18 +63,23 @@ def run_flight_agent(stay: Stay, guest: Guest) -> FlightAgentResult:
             error="Flight not found — using cached data",
         )
 
-    # Rough jet lag: Tokyo (JST +9) → Salzburg (CET +1) = 8h diff
-    # For demo: hardcode origin offset from guest nationality
-    origin_offsets = {
-        "Japanese": 9,
-        "American": -5,
-        "British": 0,
-        "French": 1,
-        "Australian": 10,
-        "Chinese": 8,
-    }
-    origin_offset = origin_offsets.get(guest.nationality or "", 0)
-    dest_offset = 1  # CET (Salzburg)
+    # Anna's return: Frankfurt (CET +2 in summer / +1 winter) → SFO (PDT -7 / PST -8)
+    # ≈ 9 hour difference. Use the flight info if available, else fall back to a heuristic.
+    if flight_info and "FRA" in (flight_info.origin_iata or "") and "SFO" in (flight_info.destination_iata or ""):
+        origin_offset = 2
+        dest_offset = -7
+    else:
+        origin_offsets = {
+            "Japanese": 9,
+            "American": -7,
+            "British": 0,
+            "French": 1,
+            "Australian": 10,
+            "Chinese": 8,
+            "Swedish": 1,
+        }
+        origin_offset = origin_offsets.get(guest.nationality or "", 0)
+        dest_offset = -7  # PDT (San Francisco / Sand Hill)
 
     jet_lag = compute_jet_lag_profile(origin_offset, dest_offset)
 

@@ -122,19 +122,19 @@ def _parse_cached(data: dict) -> FlightInfo:
 
 
 def _demo_flight(flight_number: str) -> FlightInfo:
-    """Deterministic demo flight for Anna Lindqvist's arrival."""
+    """Deterministic demo flight for Anna Lindqvist's arrival into SFO."""
     return FlightInfo(
         flight_number=flight_number.upper(),
-        airline="Japan Airlines",
-        origin="Tokyo Narita International Airport",
-        origin_iata="NRT",
-        destination="Vienna International Airport",
-        destination_iata="VIE",
-        scheduled_departure="2024-09-15T11:30:00+09:00",
-        scheduled_arrival="2024-09-15T16:45:00+01:00",
-        estimated_arrival="2024-09-15T16:52:00+01:00",
+        airline="Lufthansa",
+        origin="Frankfurt am Main Airport",
+        origin_iata="FRA",
+        destination="San Francisco International Airport",
+        destination_iata="SFO",
+        scheduled_departure="2024-09-15T10:30:00+02:00",
+        scheduled_arrival="2024-09-15T13:15:00-07:00",
+        estimated_arrival="2024-09-15T13:22:00-07:00",
         status="active",
         delay_minutes=7,
-        gate="D12",
-        terminal="2",
+        gate="G92",
+        terminal="International",
     )

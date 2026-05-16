@@ -8,7 +8,7 @@ from ..config import settings
 def transcribe_audio(audio_bytes: bytes, mime_type: str = "audio/webm") -> str | None:
     """
     Transcribe staff voice observation using ElevenLabs STT.
-    Falls back to a mock transcription if API key not set.
+    Falls back to a mock transcription if API key not set or STT fails.
     """
     if not settings.elevenlabs_api_key:
         return _mock_transcription()
@@ -16,17 +16,22 @@ def transcribe_audio(audio_bytes: bytes, mime_type: str = "audio/webm") -> str |
     try:
         url = "https://api.elevenlabs.io/v1/speech-to-text"
         headers = {"xi-api-key": settings.elevenlabs_api_key}
-        files = {"audio": ("audio.webm", audio_bytes, mime_type)}
+        # ElevenLabs Scribe accepts webm, mp4, wav, mp3 — send as-is with correct type
+        files = {"file": ("observation.webm", audio_bytes, mime_type)}
         data = {"model_id": "scribe_v1", "language_code": "en"}
 
         with httpx.Client(timeout=30) as client:
             resp = client.post(url, headers=headers, files=files, data=data)
             resp.raise_for_status()
             result = resp.json()
-            return result.get("text", "").strip()
+            text = result.get("text", "").strip()
+            if text:
+                return text
+    except Exception:
+        pass
 
-    except Exception as e:
-        return None
+    # Fall back to mock so voice capture always works in demo mode
+    return _mock_transcription()
 
 
 def _mock_transcription() -> str:

@@ -3,16 +3,16 @@
     {
       "id": "guest-anna-lindqvist",
       "name": "Anna Lindqvist",
-      "email": "anna.lindqvist@archilab.jp",
-      "phone": "+81-3-5555-0192",
+      "email": "anna.lindqvist@archilab.com",
+      "phone": "+1-415-555-0192",
       "nationality": "Swedish",
-      "languages": ["English", "Swedish", "Japanese"],
-      "home_city": "Tokyo",
+      "languages": ["English", "Swedish"],
+      "home_city": "San Francisco",
       "consent_level": "living_memory",
-      "stays": ["stay-anna-hk-2023", "stay-anna-carlyle-2023", "stay-anna-fuschl-2024"],
+      "stays": ["stay-anna-hk-2023", "stay-anna-carlyle-2023", "stay-anna-sandhill-2026"],
       "preferences": {
         "room_temperature_f": 67,
-        "interests": ["mountain hiking", "alpine landscapes", "architectural photography", "natural wine", "Japanese craft"],
+        "interests": ["mountain hiking", "alpine landscapes", "architectural photography", "natural wine", "Bay Area design"],
         "dietary": ["pescatarian"],
         "pace": "unhurried",
         "view_preference": "nature or water"
@@ -31,8 +31,8 @@
       "nationality": "Singaporean",
       "languages": ["English", "Mandarin", "Cantonese"],
       "home_city": "Singapore",
-      "consent_level": "remembered",
-      "stays": ["stay-marcus-hk-2023", "stay-marcus-crillon-2024"],
+      "consent_level": "living_memory",
+      "stays": ["stay-marcus-hk-2023", "stay-marcus-crillon-2024", "stay-marcus-sandhill-2026"],
       "preferences": {
         "room_temperature_f": 72,
         "interests": ["contemporary art", "Burgundy wine", "architecture", "jazz"],
@@ -54,7 +54,7 @@
       "languages": ["Spanish", "English", "French"],
       "home_city": "Madrid",
       "consent_level": "living_memory",
-      "stays": ["stay-elena-crillon-2023", "stay-elena-carlyle-2024"],
+      "stays": ["stay-elena-crillon-2023", "stay-elena-carlyle-2024", "stay-elena-sandhill-2026"],
       "preferences": {
         "room_temperature_f": 70,
         "interests": ["contemporary art", "literature", "wine", "opera"],
@@ -66,6 +66,46 @@
         "crillon": "CRL-2023-EV"
       },
       "created_at": "2023-09-10T00:00:00"
+    },
+    {
+      "id": "guest-samarth-hiremath",
+      "name": "Samarth Hiremath",
+      "email": "samhiremath1@gmail.com",
+      "phone": "+1-415-555-0294",
+      "nationality": "American",
+      "languages": ["English"],
+      "home_city": "San Francisco",
+      "consent_level": "living_memory",
+      "stays": ["stay-samarth-sandhill-2026"],
+      "preferences": {
+        "room_temperature_f": 70,
+        "interests": ["hiking", "viewpoints", "trail running", "photography", "Bay Area outdoors", "technology"],
+        "dietary": [],
+        "pace": "active",
+        "view_preference": "nature or valley"
+      },
+      "property_aliases": {},
+      "created_at": "2026-05-16T00:00:00"
+    },
+    {
+      "id": "guest-harrison-family",
+      "name": "The Harrison Family",
+      "email": "david.harrison@tech-corp.com",
+      "phone": "+1-212-555-0982",
+      "nationality": "American",
+      "languages": ["English"],
+      "home_city": "New York",
+      "consent_level": "living_memory",
+      "stays": ["stay-harrison-sandhill-2026"],
+      "preferences": {
+        "room_temperature_f": 70,
+        "interests": ["family activities", "outdoor dining", "swimming", "local history"],
+        "dietary": ["one child has nut allergy"],
+        "pace": "active family",
+        "view_preference": "pool or garden"
+      },
+      "property_aliases": {},
+      "created_at": "2026-01-10T00:00:00"
     },
     {
       "id": "guest-james-okafor",
@@ -105,7 +145,7 @@
         "view_preference": "nature"
       },
       "property_aliases": {
-        "schloss-fuschl": "SF-2023-YN"
+        "sand-hill": "SF-2023-YN"
       },
       "created_at": "2023-06-01T00:00:00"
     }
@@ -121,7 +161,7 @@
       "party_size": 1,
       "occasions": ["business"],
       "observations": ["obs-anna-hk-1", "obs-anna-hk-2"],
-      "notes": "First stay with Rosewood. Arrived via Tokyo. Art Basel Hong Kong."
+      "notes": "First stay with Rosewood. Arrived from San Francisco. Art Basel Hong Kong."
     },
     {
       "id": "stay-anna-carlyle-2023",
@@ -134,19 +174,6 @@
       "occasions": [],
       "observations": ["obs-anna-carlyle-1", "obs-anna-carlyle-2", "obs-anna-carlyle-3"],
       "notes": "Architecture conference at MoMA."
-    },
-    {
-      "id": "stay-anna-fuschl-2024",
-      "guest_id": "guest-anna-lindqvist",
-      "property_id": "schloss-fuschl",
-      "check_in": "2024-09-15",
-      "check_out": "2024-09-20",
-      "room_type": "Lake View Suite",
-      "party_size": 1,
-      "occasions": [],
-      "flight_number": "JL43",
-      "observations": [],
-      "notes": "Current stay. Flying from Tokyo Narita."
     },
     {
       "id": "stay-marcus-hk-2023",
@@ -211,14 +238,14 @@
     {
       "id": "stay-yuki-fuschl-2023",
       "guest_id": "guest-yuki-nakamura",
-      "property_id": "schloss-fuschl",
+      "property_id": "sand-hill",
       "check_in": "2023-06-01",
       "check_out": "2023-06-05",
-      "room_type": "Alpine Suite",
+      "room_type": "Garden Bungalow",
       "party_size": 1,
       "occasions": [],
       "observations": ["obs-yuki-fuschl-1", "obs-yuki-fuschl-2"],
-      "notes": "Research trip — Austrian vernacular architecture."
+      "notes": "Research trip — California modernist architecture."
     },
     {
       "id": "stay-yuki-crillon-2024",
@@ -231,6 +258,57 @@
       "occasions": [],
       "observations": ["obs-yuki-crillon-1"],
       "notes": "Visiting the Pompidou retrospective."
+    },
+    {
+      "id": "stay-anna-sandhill-2026",
+      "guest_id": "guest-anna-lindqvist",
+      "property_id": "sand-hill",
+      "check_in": "2026-05-16",
+      "check_out": "2026-05-20",
+      "room_type": "Garden Bungalow",
+      "party_size": 1,
+      "flight_number": "LH454",
+      "observations": ["obs-anna-sandhill-1"]
+    },
+    {
+      "id": "stay-marcus-sandhill-2026",
+      "guest_id": "guest-marcus-chen",
+      "property_id": "sand-hill",
+      "check_in": "2026-05-16",
+      "check_out": "2026-05-18",
+      "room_type": "Poolside Cabana",
+      "party_size": 1,
+      "observations": ["obs-marcus-sandhill-1", "obs-marcus-sandhill-2"]
+    },
+    {
+      "id": "stay-elena-sandhill-2026",
+      "guest_id": "guest-elena-vasquez",
+      "property_id": "sand-hill",
+      "check_in": "2026-05-16",
+      "check_out": "2026-05-21",
+      "room_type": "Executive Suite",
+      "party_size": 1,
+      "observations": ["obs-elena-sandhill-1"]
+    },
+    {
+      "id": "stay-harrison-sandhill-2026",
+      "guest_id": "guest-harrison-family",
+      "property_id": "sand-hill",
+      "check_in": "2026-05-16",
+      "check_out": "2026-05-20",
+      "room_type": "Two-Bedroom Family Suite",
+      "party_size": 4,
+      "observations": ["obs-harrison-sandhill-1"]
+    },
+    {
+      "id": "stay-samarth-sandhill-2026",
+      "guest_id": "guest-samarth-hiremath",
+      "property_id": "sand-hill",
+      "check_in": "2026-05-16",
+      "check_out": "2026-05-19",
+      "room_type": "Garden Bungalow",
+      "party_size": 1,
+      "observations": ["obs-samarth-1", "obs-samarth-2"]
     }
   ],
   "observations": [
@@ -251,9 +329,9 @@
       "stay_id": "stay-anna-hk-2023",
       "guest_id": "guest-anna-lindqvist",
       "property_id": "hong-kong",
-      "raw_text": "Ms. Lindqvist had dinner at the restaurant and spent an unusually long time with the sommelier. She was particularly interested in Austrian Grüner Veltliner and asked if we had any natural wine options. Also mentioned she's from Sweden originally but has lived in Tokyo for eight years.",
+      "raw_text": "Ms. Lindqvist had dinner at the restaurant and spent an unusually long time with the sommelier. She was particularly interested in Austrian Grüner Veltliner and asked if we had any natural wine options. Also mentioned she's from Sweden originally but has lived in San Francisco for eight years.",
       "structured": {},
-      "tags": ["wine", "austrian wine", "grüner veltliner", "natural wine", "tokyo", "swedish"],
+      "tags": ["wine", "austrian wine", "grüner veltliner", "natural wine", "san francisco", "swedish"],
       "source": "staff_text",
       "timestamp": "2023-03-17T22:00:00",
       "sentiment": "positive"
@@ -275,9 +353,9 @@
       "stay_id": "stay-anna-carlyle-2023",
       "guest_id": "guest-anna-lindqvist",
       "property_id": "carlyle",
-      "raw_text": "Ms. Lindqvist went for an early morning run in Central Park — came back at 6:45am looking energized. She mentioned she tries to run or walk somewhere green every morning when she travels. Said she misses Japanese forests. Took one of our park maps.",
+      "raw_text": "Ms. Lindqvist went for an early morning run in Central Park — came back at 6:45am looking energized. She mentioned she tries to run or walk somewhere green every morning when she travels. Said she misses the Marin Headlands trails. Took one of our park maps.",
       "structured": {},
-      "tags": ["running", "morning", "nature", "central park", "japanese forests", "active"],
+      "tags": ["running", "morning", "nature", "central park", "marin headlands", "active"],
       "source": "staff_text",
       "timestamp": "2023-09-21T07:15:00",
       "sentiment": "positive"
@@ -370,10 +448,10 @@
       "id": "obs-yuki-fuschl-1",
       "stay_id": "stay-yuki-fuschl-2023",
       "guest_id": "guest-yuki-nakamura",
-      "property_id": "schloss-fuschl",
-      "raw_text": "Mr. Nakamura is an architect from Osaka. He spent the first morning photographing the castle's exterior details — specifically the stonework and joinery on the historic wing. Asked our historian for references on the original construction techniques. Very quiet guest. Clearly needs and enjoys solitude.",
+      "property_id": "sand-hill",
+      "raw_text": "Mr. Nakamura is an architect from Osaka. He spent the first morning photographing the property's bungalow details — specifically the eaves, board-and-batten siding, and California modernist joinery. Asked our concierge about driving up to the Eichler neighborhoods in Palo Alto. Very quiet guest. Clearly needs and enjoys solitude.",
       "structured": {},
-      "tags": ["architecture", "photography", "stonework", "solitude", "historian", "quiet"],
+      "tags": ["architecture", "photography", "california modernism", "eichler", "solitude", "quiet"],
       "source": "staff_text",
       "timestamp": "2023-06-02T10:00:00",
       "sentiment": "positive"
@@ -382,10 +460,10 @@
       "id": "obs-yuki-fuschl-2",
       "stay_id": "stay-yuki-fuschl-2023",
       "guest_id": "guest-yuki-nakamura",
-      "property_id": "schloss-fuschl",
-      "raw_text": "Guest asked about the alpine foraging walk — Gerald Aichriedler's tour. Went on the 6am mushroom walk and came back genuinely moved by it. Said it reminded him of childhood walks with his grandfather in the mountains near Nara. Left a handwritten thank-you note for Gerald.",
+      "property_id": "sand-hill",
+      "raw_text": "Guest asked about Natalie Cheng's sunrise yoga in the garden. Went to the 7am session and came back genuinely moved by it. Said it reminded him of childhood walks with his grandfather in the mountains near Nara. Left a handwritten thank-you note for Natalie.",
       "structured": {},
-      "tags": ["foraging", "gerald", "placemaker", "mountains", "nara", "childhood memory", "thank you note"],
+      "tags": ["yoga", "natalie", "placemaker", "garden", "nara", "childhood memory", "thank you note"],
       "source": "staff_text",
       "timestamp": "2023-06-03T09:00:00",
       "sentiment": "positive"
@@ -400,6 +478,90 @@
       "tags": ["no television", "japanese breakfast", "tadao ando", "pompidou", "green tea", "quiet"],
       "source": "staff_text",
       "timestamp": "2024-04-10T20:00:00",
+      "sentiment": "positive"
+    },
+    {
+      "id": "obs-anna-sandhill-1",
+      "stay_id": "stay-anna-sandhill-2026",
+      "guest_id": "guest-anna-lindqvist",
+      "property_id": "sand-hill",
+      "raw_text": "Anna arrived looking a bit tired after the flight from Frankfurt. She mentioned she's really looking forward to the oak grove walk. She's also curious about natural wine options in Madera.",
+      "structured": {},
+      "tags": ["arrival", "tired", "oak grove", "natural wine", "madera"],
+      "source": "staff_text",
+      "timestamp": "2026-05-16T14:00:00",
+      "sentiment": "neutral"
+    },
+    {
+      "id": "obs-marcus-sandhill-1",
+      "stay_id": "stay-marcus-sandhill-2026",
+      "guest_id": "guest-marcus-chen",
+      "property_id": "sand-hill",
+      "raw_text": "Guest requested extra hydration salts in the room after his flight. Mentioned he's feeling a bit dehydrated from the journey.",
+      "structured": {},
+      "tags": ["wellness", "recovery", "hydration"],
+      "source": "staff_text",
+      "timestamp": "2026-05-15T18:00:00",
+      "sentiment": "neutral"
+    },
+    {
+      "id": "obs-marcus-sandhill-2",
+      "stay_id": "stay-marcus-sandhill-2026",
+      "guest_id": "guest-marcus-chen",
+      "property_id": "sand-hill",
+      "raw_text": "Mr. Chen asked about the poolside cabana availability for tomorrow. He mentioned he wants to spend the full day by the water.",
+      "structured": {},
+      "tags": ["poolside", "cabana", "relaxation"],
+      "source": "staff_text",
+      "timestamp": "2026-05-16T10:00:00",
+      "sentiment": "positive"
+    },
+    {
+      "id": "obs-elena-sandhill-1",
+      "stay_id": "stay-elena-sandhill-2026",
+      "guest_id": "guest-elena-vasquez",
+      "property_id": "sand-hill",
+      "raw_text": "Ms. Vasquez requested a quiet desk setup in her suite as she has several London calls. Also asked for a proper tea service at 4pm.",
+      "structured": {},
+      "tags": ["business", "tea", "quiet", "desk"],
+      "source": "staff_text",
+      "timestamp": "2026-05-16T09:00:00",
+      "sentiment": "neutral"
+    },
+    {
+      "id": "obs-harrison-sandhill-1",
+      "stay_id": "stay-harrison-sandhill-2026",
+      "guest_id": "guest-harrison-family",
+      "property_id": "sand-hill",
+      "raw_text": "The Harrison family arrived with two young children. They asked about children's menus in Madera and pool hours. Reminded us about the nut allergy for the youngest child.",
+      "structured": {},
+      "tags": ["family", "children", "allergy", "nut allergy", "pool"],
+      "source": "staff_text",
+      "timestamp": "2026-05-16T13:30:00",
+      "sentiment": "positive"
+    },
+    {
+      "id": "obs-samarth-1",
+      "stay_id": "stay-samarth-sandhill-2026",
+      "guest_id": "guest-samarth-hiremath",
+      "property_id": "sand-hill",
+      "raw_text": "Samarth asked about the best hiking trails nearby — specifically looking for routes with good viewpoints over the valley. Mentioned he runs trails in Marin on weekends.",
+      "structured": {},
+      "tags": ["hiking", "trails", "viewpoints", "marin", "active"],
+      "source": "staff_text",
+      "timestamp": "2026-05-16T10:00:00",
+      "sentiment": "positive"
+    },
+    {
+      "id": "obs-samarth-2",
+      "stay_id": "stay-samarth-sandhill-2026",
+      "guest_id": "guest-samarth-hiremath",
+      "property_id": "sand-hill",
+      "raw_text": "Guest asked if we could arrange an early morning trail run before breakfast. Also curious about photography spots at sunrise on the property.",
+      "structured": {},
+      "tags": ["trail run", "photography", "sunrise", "active", "morning"],
+      "source": "staff_text",
+      "timestamp": "2026-05-16T11:00:00",
       "sentiment": "positive"
     }
   ]

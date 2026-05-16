@@ -1,0 +1,105 @@
+{
+  "JL43": {
+    "cached_at": 1778963922.934023,
+    "data": {
+      "flight_date": "2026-05-17",
+      "flight_status": "scheduled",
+      "departure": {
+        "airport": "Haneda Airport",
+        "timezone": "Asia/Tokyo",
+        "iata": "HND",
+        "icao": "RJTT",
+        "terminal": "3",
+        "gate": null,
+        "delay": null,
+        "scheduled": "2026-05-17T09:45:00+00:00",
+        "estimated": "2026-05-17T09:45:00+00:00",
+        "actual": null,
+        "estimated_runway": null,
+        "actual_runway": null
+      },
+      "arrival": {
+        "airport": "Heathrow",
+        "timezone": "Europe/London",
+        "iata": "LHR",
+        "icao": "EGLL",
+        "terminal": "3",
+        "gate": null,
+        "baggage": null,
+        "scheduled": "2026-05-17T15:55:00+00:00",
+        "delay": null,
+        "estimated": null,
+        "actual": null,
+        "estimated_runway": null,
+        "actual_runway": null
+      },
+      "airline": {
+        "name": "Japan Airlines",
+        "iata": "JL",
+        "icao": "JTL"
+      },
+      "flight": {
+        "number": "43",
+        "iata": "JL43",
+        "icao": "JTL43",
+        "codeshared": null
+      },
+      "aircraft": null,
+      "live": null
+    }
+  },
+  "LH454": {
+    "cached_at": 1778971333.829133,
+    "data": {
+      "flight_date": "2026-05-16",
+      "flight_status": "landed",
+      "departure": {
+        "airport": "Frankfurt International Airport",
+        "timezone": "Europe/Berlin",
+        "iata": "FRA",
+        "icao": "EDDF",
+        "terminal": "1",
+        "gate": "Z23",
+        "delay": 5,
+        "scheduled": "2026-05-16T10:25:00+00:00",
+        "estimated": "2026-05-16T10:25:00+00:00",
+        "actual": "2026-05-16T11:05:00+00:00",
+        "estimated_runway": "2026-05-16T11:05:00+00:00",
+        "actual_runway": "2026-05-16T11:05:00+00:00"
+      },
+      "arrival": {
+        "airport": "San Francisco International",
+        "timezone": "America/Los_Angeles",
+        "iata": "SFO",
+        "icao": "KSFO",
+        "terminal": "I",
+        "gate": "G13",
+        "baggage": "CL4",
+        "scheduled": "2026-05-16T12:40:00+00:00",
+        "delay": 5,
+        "estimated": "2026-05-16T12:39:00+00:00",
+        "actual": "2026-05-16T12:45:00+00:00",
+        "estimated_runway": "2026-05-16T12:45:00+00:00",
+        "actual_runway": "2026-05-16T12:45:00+00:00"
+      },
+      "airline": {
+        "name": "Lufthansa",
+        "iata": "LH",
+        "icao": "DLH"
+      },
+      "flight": {
+        "number": "454",
+        "iata": "LH454",
+        "icao": "DLH454",
+        "codeshared": null
+      },
+      "aircraft": {
+        "registration": null,
+        "iata": null,
+        "icao": null,
+        "icao24": "3C4AD8"
+      },
+      "live": null
+    }
+  }
+}

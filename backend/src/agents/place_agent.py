@@ -52,7 +52,7 @@ def run_place_agent(guest: Guest, property_id: str, history: dict) -> dict:
     }
 
     response = _client.messages.create(
-        model=settings.orchestrator_model,
+        model=settings.fast_model,
         max_tokens=512,
         system=_PROMPT,
         messages=[{"role": "user", "content": json.dumps(payload, indent=2)}],

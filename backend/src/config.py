@@ -7,7 +7,8 @@ class Settings(BaseSettings):
 
     anthropic_api_key: str = ""
     elevenlabs_api_key: str = ""
-    elevenlabs_agent_id: str = ""
+    elevenlabs_agent_id: str = ""  # Welcome Ambassador
+    elevenlabs_assistant_agent_id: str = ""  # General Assistance / PlaceMaker Engine
     elevenlabs_voice_id: str = "EXAVITQu4vr4xnSDxMaL"  # default: Bella
     aviationstack_api_key: str = ""
 
@@ -17,7 +18,7 @@ class Settings(BaseSettings):
 
     # Model config
     orchestrator_model: str = "claude-sonnet-4-5"
-    fast_model: str = "claude-haiku-4-5-20251001"
+    fast_model: str = "claude-haiku-4-5"
 
 
 settings = Settings()
