@@ -19,6 +19,7 @@ interface Plan {
 }
 
 interface Guest {
+  id: string
   name: string
   nationality: string
   home_city: string
@@ -26,6 +27,7 @@ interface Guest {
 }
 
 interface Stay {
+  id: string
   check_in: string
   check_out: string | null
   room_type: string | null
@@ -138,8 +140,8 @@ function ArrivalCard({ arrival }: { arrival: Arrival }) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          guest_id: guest ? "guest-anna-lindqvist" : "",
-          stay_id: stay.check_in,
+          guest_id: guest?.id || "guest-anna-lindqvist",
+          stay_id: stay.id || "stay-anna-fuschl-2024",
           welcome_transcript: null,
         }),
       })
@@ -216,12 +218,14 @@ export default function ManagerPage() {
   const DEMO_ARRIVALS: Arrival[] = [
     {
       guest: {
+        id: "guest-anna-lindqvist",
         name: "Anna Lindqvist",
         nationality: "Swedish",
         home_city: "Tokyo",
         consent_level: "living_memory",
       },
       stay: {
+        id: "stay-anna-fuschl-2024",
         check_in: new Date().toISOString().split("T")[0],
         check_out: null,
         room_type: "Lake View Suite",

@@ -1,0 +1,1303 @@
+{
+  "guests": {
+    "guest-anna-lindqvist": {
+      "id": "guest-anna-lindqvist",
+      "name": "Anna Lindqvist",
+      "email": "anna.lindqvist@archilab.jp",
+      "phone": "+81-3-5555-0192",
+      "nationality": "Swedish",
+      "languages": [
+        "English",
+        "Swedish",
+        "Japanese"
+      ],
+      "home_city": "Tokyo",
+      "consent_level": "living_memory",
+      "stays": [
+        "stay-anna-hk-2023",
+        "stay-anna-carlyle-2023",
+        "stay-anna-fuschl-2024"
+      ],
+      "preferences": {
+        "room_temperature_f": 67,
+        "interests": [
+          "mountain hiking",
+          "alpine landscapes",
+          "architectural photography",
+          "natural wine",
+          "Japanese craft"
+        ],
+        "dietary": [
+          "pescatarian"
+        ],
+        "pace": "unhurried",
+        "view_preference": "nature or water"
+      },
+      "property_aliases": {
+        "hong-kong": "RWHK-2023-AL",
+        "carlyle": "CAR-2023-0891"
+      },
+      "created_at": "2023-03-15T00:00:00",
+      "updated_at": "2026-05-16T20:25:10.121410"
+    },
+    "guest-marcus-chen": {
+      "id": "guest-marcus-chen",
+      "name": "Marcus Chen",
+      "email": "m.chen@ventures.sg",
+      "phone": "+65-9111-4872",
+      "nationality": "Singaporean",
+      "languages": [
+        "English",
+        "Mandarin",
+        "Cantonese"
+      ],
+      "home_city": "Singapore",
+      "consent_level": "remembered",
+      "stays": [
+        "stay-marcus-hk-2023",
+        "stay-marcus-crillon-2024"
+      ],
+      "preferences": {
+        "room_temperature_f": 72,
+        "interests": [
+          "contemporary art",
+          "Burgundy wine",
+          "architecture",
+          "jazz"
+        ],
+        "dietary": [],
+        "pace": "efficient",
+        "view_preference": "city"
+      },
+      "property_aliases": {
+        "hong-kong": "RWHK-2023-MC"
+      },
+      "created_at": "2023-05-20T00:00:00",
+      "updated_at": "2026-05-16T20:25:10.121736"
+    },
+    "guest-elena-vasquez": {
+      "id": "guest-elena-vasquez",
+      "name": "Elena Vasquez",
+      "email": "elena@vasquez-foundation.org",
+      "phone": "+34-91-555-0231",
+      "nationality": "Spanish",
+      "languages": [
+        "Spanish",
+        "English",
+        "French"
+      ],
+      "home_city": "Madrid",
+      "consent_level": "living_memory",
+      "stays": [
+        "stay-elena-crillon-2023",
+        "stay-elena-carlyle-2024"
+      ],
+      "preferences": {
+        "room_temperature_f": 70,
+        "interests": [
+          "contemporary art",
+          "literature",
+          "wine",
+          "opera"
+        ],
+        "dietary": [
+          "vegetarian"
+        ],
+        "pace": "cultural",
+        "view_preference": "historic"
+      },
+      "property_aliases": {
+        "crillon": "CRL-2023-EV"
+      },
+      "created_at": "2023-09-10T00:00:00",
+      "updated_at": "2026-05-16T20:25:10.121740"
+    },
+    "guest-james-okafor": {
+      "id": "guest-james-okafor",
+      "name": "James Okafor",
+      "email": "jokafor@thebridge.fund",
+      "phone": "+44-20-7946-0182",
+      "nationality": "British-Nigerian",
+      "languages": [
+        "English",
+        "Yoruba"
+      ],
+      "home_city": "London",
+      "consent_level": "standard",
+      "stays": [
+        "stay-james-carlyle-2024"
+      ],
+      "preferences": {
+        "room_temperature_f": 72,
+        "interests": [
+          "jazz",
+          "African contemporary art",
+          "food culture"
+        ],
+        "dietary": [],
+        "pace": "social",
+        "view_preference": "city"
+      },
+      "property_aliases": {},
+      "created_at": "2024-01-08T00:00:00",
+      "updated_at": "2026-05-16T20:25:10.121743"
+    },
+    "guest-yuki-nakamura": {
+      "id": "guest-yuki-nakamura",
+      "name": "Yuki Nakamura",
+      "email": "y.nakamura@kenchiku.co.jp",
+      "phone": "+81-6-4396-5521",
+      "nationality": "Japanese",
+      "languages": [
+        "Japanese",
+        "English"
+      ],
+      "home_city": "Osaka",
+      "consent_level": "living_memory",
+      "stays": [
+        "stay-yuki-fuschl-2023",
+        "stay-yuki-crillon-2024"
+      ],
+      "preferences": {
+        "room_temperature_f": 68,
+        "interests": [
+          "architecture",
+          "craftsmanship",
+          "natural wine",
+          "silence",
+          "alpine landscapes"
+        ],
+        "dietary": [
+          "no red meat"
+        ],
+        "pace": "contemplative",
+        "view_preference": "nature"
+      },
+      "property_aliases": {
+        "schloss-fuschl": "SF-2023-YN"
+      },
+      "created_at": "2023-06-01T00:00:00",
+      "updated_at": "2026-05-16T20:25:10.121747"
+    }
+  },
+  "stays": {
+    "stay-anna-hk-2023": {
+      "id": "stay-anna-hk-2023",
+      "guest_id": "guest-anna-lindqvist",
+      "property_id": "hong-kong",
+      "check_in": "2023-03-15",
+      "check_out": "2023-03-19",
+      "room_type": "Harbour Suite",
+      "room_number": null,
+      "rate_code": null,
+      "party_size": 1,
+      "occasions": [
+        "business"
+      ],
+      "observations": [
+        "obs-anna-hk-1",
+        "obs-anna-hk-2"
+      ],
+      "flight_number": null,
+      "notes": "First stay with Rosewood. Arrived via Tokyo. Art Basel Hong Kong."
+    },
+    "stay-anna-carlyle-2023": {
+      "id": "stay-anna-carlyle-2023",
+      "guest_id": "guest-anna-lindqvist",
+      "property_id": "carlyle",
+      "check_in": "2023-09-20",
+      "check_out": "2023-09-24",
+      "room_type": "Central Park View Suite",
+      "room_number": null,
+      "rate_code": null,
+      "party_size": 1,
+      "occasions": [],
+      "observations": [
+        "obs-anna-carlyle-1",
+        "obs-anna-carlyle-2",
+        "obs-anna-carlyle-3"
+      ],
+      "flight_number": null,
+      "notes": "Architecture conference at MoMA."
+    },
+    "stay-anna-fuschl-2024": {
+      "id": "stay-anna-fuschl-2024",
+      "guest_id": "guest-anna-lindqvist",
+      "property_id": "schloss-fuschl",
+      "check_in": "2024-09-15",
+      "check_out": "2024-09-20",
+      "room_type": "Lake View Suite",
+      "room_number": null,
+      "rate_code": null,
+      "party_size": 1,
+      "occasions": [],
+      "observations": [],
+      "flight_number": "JL43",
+      "notes": "Current stay. Flying from Tokyo Narita."
+    },
+    "stay-marcus-hk-2023": {
+      "id": "stay-marcus-hk-2023",
+      "guest_id": "guest-marcus-chen",
+      "property_id": "hong-kong",
+      "check_in": "2023-05-20",
+      "check_out": "2023-05-23",
+      "room_type": "Harbour View Room",
+      "room_number": null,
+      "rate_code": null,
+      "party_size": 1,
+      "occasions": [
+        "business"
+      ],
+      "observations": [
+        "obs-marcus-hk-1"
+      ],
+      "flight_number": null,
+      "notes": "Investor meetings in Central."
+    },
+    "stay-marcus-crillon-2024": {
+      "id": "stay-marcus-crillon-2024",
+      "guest_id": "guest-marcus-chen",
+      "property_id": "crillon",
+      "check_in": "2024-10-01",
+      "check_out": "2024-10-05",
+      "room_type": "Place de la Concorde Suite",
+      "room_number": null,
+      "rate_code": null,
+      "party_size": 2,
+      "occasions": [
+        "anniversary"
+      ],
+      "observations": [
+        "obs-marcus-crillon-1"
+      ],
+      "flight_number": null,
+      "notes": "10th wedding anniversary with wife Sophie."
+    },
+    "stay-elena-crillon-2023": {
+      "id": "stay-elena-crillon-2023",
+      "guest_id": "guest-elena-vasquez",
+      "property_id": "crillon",
+      "check_in": "2023-09-10",
+      "check_out": "2023-09-14",
+      "room_type": "Junior Suite",
+      "room_number": null,
+      "rate_code": null,
+      "party_size": 1,
+      "occasions": [
+        "leisure"
+      ],
+      "observations": [
+        "obs-elena-crillon-1",
+        "obs-elena-crillon-2"
+      ],
+      "flight_number": null,
+      "notes": "Annual Paris visit for autumn."
+    },
+    "stay-elena-carlyle-2024": {
+      "id": "stay-elena-carlyle-2024",
+      "guest_id": "guest-elena-vasquez",
+      "property_id": "carlyle",
+      "check_in": "2024-05-15",
+      "check_out": "2024-05-18",
+      "room_type": "Classic Room",
+      "room_number": null,
+      "rate_code": null,
+      "party_size": 1,
+      "occasions": [
+        "frieze"
+      ],
+      "observations": [
+        "obs-elena-carlyle-1"
+      ],
+      "flight_number": null,
+      "notes": "Frieze New York — foundation acquisitions."
+    },
+    "stay-james-carlyle-2024": {
+      "id": "stay-james-carlyle-2024",
+      "guest_id": "guest-james-okafor",
+      "property_id": "carlyle",
+      "check_in": "2024-02-12",
+      "check_out": "2024-02-15",
+      "room_type": "Central Park View Room",
+      "room_number": null,
+      "rate_code": null,
+      "party_size": 1,
+      "occasions": [
+        "business"
+      ],
+      "observations": [
+        "obs-james-carlyle-1"
+      ],
+      "flight_number": null,
+      "notes": "First stay with Rosewood."
+    },
+    "stay-yuki-fuschl-2023": {
+      "id": "stay-yuki-fuschl-2023",
+      "guest_id": "guest-yuki-nakamura",
+      "property_id": "schloss-fuschl",
+      "check_in": "2023-06-01",
+      "check_out": "2023-06-05",
+      "room_type": "Alpine Suite",
+      "room_number": null,
+      "rate_code": null,
+      "party_size": 1,
+      "occasions": [],
+      "observations": [
+        "obs-yuki-fuschl-1",
+        "obs-yuki-fuschl-2"
+      ],
+      "flight_number": null,
+      "notes": "Research trip — Austrian vernacular architecture."
+    },
+    "stay-yuki-crillon-2024": {
+      "id": "stay-yuki-crillon-2024",
+      "guest_id": "guest-yuki-nakamura",
+      "property_id": "crillon",
+      "check_in": "2024-04-10",
+      "check_out": "2024-04-13",
+      "room_type": "Superior Room",
+      "room_number": null,
+      "rate_code": null,
+      "party_size": 1,
+      "occasions": [],
+      "observations": [
+        "obs-yuki-crillon-1"
+      ],
+      "flight_number": null,
+      "notes": "Visiting the Pompidou retrospective."
+    }
+  },
+  "observations": {
+    "obs-anna-hk-1": {
+      "id": "obs-anna-hk-1",
+      "stay_id": "stay-anna-hk-2023",
+      "guest_id": "guest-anna-lindqvist",
+      "property_id": "hong-kong",
+      "raw_text": "Guest asked about quiet breakfast spots away from the main dining room. Mentioned she prefers to start the day slowly and doesn't enjoy crowds in the morning. Recommended the harbour terrace at 7am.",
+      "structured": {},
+      "tags": [
+        "breakfast",
+        "quiet",
+        "morning routine",
+        "solitude"
+      ],
+      "source": "staff_text",
+      "staff_id": null,
+      "timestamp": "2023-03-16T07:30:00",
+      "sentiment": "positive"
+    },
+    "obs-anna-hk-2": {
+      "id": "obs-anna-hk-2",
+      "stay_id": "stay-anna-hk-2023",
+      "guest_id": "guest-anna-lindqvist",
+      "property_id": "hong-kong",
+      "raw_text": "Ms. Lindqvist had dinner at the restaurant and spent an unusually long time with the sommelier. She was particularly interested in Austrian Grüner Veltliner and asked if we had any natural wine options. Also mentioned she's from Sweden originally but has lived in Tokyo for eight years.",
+      "structured": {},
+      "tags": [
+        "wine",
+        "austrian wine",
+        "grüner veltliner",
+        "natural wine",
+        "tokyo",
+        "swedish"
+      ],
+      "source": "staff_text",
+      "staff_id": null,
+      "timestamp": "2023-03-17T22:00:00",
+      "sentiment": "positive"
+    },
+    "obs-anna-carlyle-1": {
+      "id": "obs-anna-carlyle-1",
+      "stay_id": "stay-anna-carlyle-2023",
+      "guest_id": "guest-anna-lindqvist",
+      "property_id": "carlyle",
+      "raw_text": "Guest arrived from an architecture conference and was visibly excited about a panel she attended on brutalist residential buildings. Asked if we had any architecture books in the library related to New York's mid-century period.",
+      "structured": {},
+      "tags": [
+        "architecture",
+        "brutalism",
+        "mid-century",
+        "conference",
+        "books"
+      ],
+      "source": "staff_text",
+      "staff_id": null,
+      "timestamp": "2023-09-20T18:00:00",
+      "sentiment": "positive"
+    },
+    "obs-anna-carlyle-2": {
+      "id": "obs-anna-carlyle-2",
+      "stay_id": "stay-anna-carlyle-2023",
+      "guest_id": "guest-anna-lindqvist",
+      "property_id": "carlyle",
+      "raw_text": "Ms. Lindqvist went for an early morning run in Central Park — came back at 6:45am looking energized. She mentioned she tries to run or walk somewhere green every morning when she travels. Said she misses Japanese forests. Took one of our park maps.",
+      "structured": {},
+      "tags": [
+        "running",
+        "morning",
+        "nature",
+        "central park",
+        "japanese forests",
+        "active"
+      ],
+      "source": "staff_text",
+      "staff_id": null,
+      "timestamp": "2023-09-21T07:15:00",
+      "sentiment": "positive"
+    },
+    "obs-anna-carlyle-3": {
+      "id": "obs-anna-carlyle-3",
+      "stay_id": "stay-anna-carlyle-2023",
+      "guest_id": "guest-anna-lindqvist",
+      "property_id": "carlyle",
+      "raw_text": "Guest checked in with room temperature at 67°F — said she finds hotel rooms usually too warm. Specifically asked for it to stay there for the full stay. Room was set at 67°F throughout. No complaints.",
+      "structured": {},
+      "tags": [
+        "room temperature",
+        "67f",
+        "cool room",
+        "preference"
+      ],
+      "source": "staff_text",
+      "staff_id": null,
+      "timestamp": "2023-09-20T16:00:00",
+      "sentiment": "neutral"
+    },
+    "obs-marcus-hk-1": {
+      "id": "obs-marcus-hk-1",
+      "stay_id": "stay-marcus-hk-2023",
+      "guest_id": "guest-marcus-chen",
+      "property_id": "hong-kong",
+      "raw_text": "Mr. Chen had a detailed conversation with the concierge about Art Basel programming. He's a collector — specifically interested in Southeast Asian and East Asian contemporary. Mentioned he's been buying for about 12 years. Also ordered Côte de Nuits at dinner and spent time talking with the sommelier about specific producers.",
+      "structured": {},
+      "tags": [
+        "art",
+        "art basel",
+        "collector",
+        "contemporary art",
+        "wine",
+        "burgundy"
+      ],
+      "source": "staff_text",
+      "staff_id": null,
+      "timestamp": "2023-05-21T21:00:00",
+      "sentiment": "positive"
+    },
+    "obs-marcus-crillon-1": {
+      "id": "obs-marcus-crillon-1",
+      "stay_id": "stay-marcus-crillon-2024",
+      "guest_id": "guest-marcus-chen",
+      "property_id": "crillon",
+      "raw_text": "Anniversary stay with wife Sophie. Mr. Chen arranged a private dinner in advance but mentioned he wanted the evening to feel spontaneous for her — asked us not to reference the reservation. Sophie is a landscape architect. They both ordered from the natural wine section and asked our sommelier to tell them the story of each bottle.",
+      "structured": {},
+      "tags": [
+        "anniversary",
+        "wife",
+        "spontaneous",
+        "natural wine",
+        "landscape architect"
+      ],
+      "source": "staff_text",
+      "staff_id": null,
+      "timestamp": "2024-10-01T20:00:00",
+      "sentiment": "positive"
+    },
+    "obs-elena-crillon-1": {
+      "id": "obs-elena-crillon-1",
+      "stay_id": "stay-elena-crillon-2023",
+      "guest_id": "guest-elena-vasquez",
+      "property_id": "crillon",
+      "raw_text": "Ms. Vasquez asked the concierge for bookshop recommendations — specifically looking for a good French translation of a novel she mentioned (I didn't catch the title). She ended up at Galignani and came back with four books. Mentioned she runs a cultural foundation in Madrid focused on contemporary Spanish and Latin American art.",
+      "structured": {},
+      "tags": [
+        "books",
+        "bookshop",
+        "reading",
+        "madrid",
+        "cultural foundation",
+        "art"
+      ],
+      "source": "staff_text",
+      "staff_id": null,
+      "timestamp": "2023-09-11T16:00:00",
+      "sentiment": "positive"
+    },
+    "obs-elena-crillon-2": {
+      "id": "obs-elena-crillon-2",
+      "stay_id": "stay-elena-crillon-2023",
+      "guest_id": "guest-elena-vasquez",
+      "property_id": "crillon",
+      "raw_text": "Guest attended a private dinner at a gallery in Marais — she mentioned it was a curator she's known for years. Came back late and had a nightcap at Les Ambassadeurs bar. Seemed energized. Said Paris is the only city where she doesn't feel the need to sleep until the city does.",
+      "structured": {},
+      "tags": [
+        "gallery",
+        "art world",
+        "paris night",
+        "les ambassadeurs",
+        "social energy"
+      ],
+      "source": "staff_text",
+      "staff_id": null,
+      "timestamp": "2023-09-12T23:45:00",
+      "sentiment": "positive"
+    },
+    "obs-elena-carlyle-1": {
+      "id": "obs-elena-carlyle-1",
+      "stay_id": "stay-elena-carlyle-2024",
+      "guest_id": "guest-elena-vasquez",
+      "property_id": "carlyle",
+      "raw_text": "Ms. Vasquez is here for Frieze. She was buying for the foundation — mentioned she's looking at several works by Colombian and Mexican painters. Had a meeting at the hotel with a gallerist from Madrid who flew in. Very focused. Asked for a quiet table in a corner during both dinners.",
+      "structured": {},
+      "tags": [
+        "frieze",
+        "art fair",
+        "buying",
+        "colombia",
+        "mexico",
+        "gallerist",
+        "quiet table"
+      ],
+      "source": "staff_text",
+      "staff_id": null,
+      "timestamp": "2024-05-15T19:00:00",
+      "sentiment": "neutral"
+    },
+    "obs-james-carlyle-1": {
+      "id": "obs-james-carlyle-1",
+      "stay_id": "stay-james-carlyle-2024",
+      "guest_id": "guest-james-okafor",
+      "property_id": "carlyle",
+      "raw_text": "First time at the Carlyle. Mr. Okafor asked immediately about Bemelmans Bar and whether Café Carlyle had any live jazz this week. He seemed genuinely knowledgeable — mentioned Coltrane and Monk unprompted in the same sentence. Later said he went to school in New York and hasn't been back in seven years.",
+      "structured": {},
+      "tags": [
+        "jazz",
+        "bemelmans",
+        "café carlyle",
+        "coltrane",
+        "monk",
+        "new york history",
+        "first time"
+      ],
+      "source": "staff_text",
+      "staff_id": null,
+      "timestamp": "2024-02-12T18:00:00",
+      "sentiment": "positive"
+    },
+    "obs-yuki-fuschl-1": {
+      "id": "obs-yuki-fuschl-1",
+      "stay_id": "stay-yuki-fuschl-2023",
+      "guest_id": "guest-yuki-nakamura",
+      "property_id": "schloss-fuschl",
+      "raw_text": "Mr. Nakamura is an architect from Osaka. He spent the first morning photographing the castle's exterior details — specifically the stonework and joinery on the historic wing. Asked our historian for references on the original construction techniques. Very quiet guest. Clearly needs and enjoys solitude.",
+      "structured": {},
+      "tags": [
+        "architecture",
+        "photography",
+        "stonework",
+        "solitude",
+        "historian",
+        "quiet"
+      ],
+      "source": "staff_text",
+      "staff_id": null,
+      "timestamp": "2023-06-02T10:00:00",
+      "sentiment": "positive"
+    },
+    "obs-yuki-fuschl-2": {
+      "id": "obs-yuki-fuschl-2",
+      "stay_id": "stay-yuki-fuschl-2023",
+      "guest_id": "guest-yuki-nakamura",
+      "property_id": "schloss-fuschl",
+      "raw_text": "Guest asked about the alpine foraging walk — Gerald Aichriedler's tour. Went on the 6am mushroom walk and came back genuinely moved by it. Said it reminded him of childhood walks with his grandfather in the mountains near Nara. Left a handwritten thank-you note for Gerald.",
+      "structured": {},
+      "tags": [
+        "foraging",
+        "gerald",
+        "placemaker",
+        "mountains",
+        "nara",
+        "childhood memory",
+        "thank you note"
+      ],
+      "source": "staff_text",
+      "staff_id": null,
+      "timestamp": "2023-06-03T09:00:00",
+      "sentiment": "positive"
+    },
+    "obs-yuki-crillon-1": {
+      "id": "obs-yuki-crillon-1",
+      "stay_id": "stay-yuki-crillon-2024",
+      "guest_id": "guest-yuki-nakamura",
+      "property_id": "crillon",
+      "raw_text": "Mr. Nakamura specifically requested no television in the room. Also asked if there was a traditional Japanese breakfast option — we arranged an onigiri from a nearby Japanese grocer and a proper green tea setup. He was clearly delighted. Came back from the Pompidou retrospective and wanted to talk about the Tadao Ando exhibition.",
+      "structured": {},
+      "tags": [
+        "no television",
+        "japanese breakfast",
+        "tadao ando",
+        "pompidou",
+        "green tea",
+        "quiet"
+      ],
+      "source": "staff_text",
+      "staff_id": null,
+      "timestamp": "2024-04-10T20:00:00",
+      "sentiment": "positive"
+    }
+  },
+  "properties": {
+    "crillon": {
+      "id": "crillon",
+      "name": "Hôtel de Crillon, A Rosewood Hotel",
+      "city": "Paris",
+      "country": "France",
+      "region": "Île-de-France",
+      "character": "Place de la Concorde. The Crillon is not simply a hotel in Paris — it is a Parisian institution. The building opened in 1758, and its bones carry the weight of French history without being heavy about it. Today it is one of the most quietly confident addresses in the world. The Les Ambassadeurs bar is where Parisians actually come. The Brasserie d'Aumont is louder, the pool is intimate, and the suites face the obelisk. This is a hotel for guests who want Paris to come to them.",
+      "cultural_calendar": [
+        {
+          "name": "Paris Fashion Week",
+          "period": "Late September / Early October, Late January / Early February",
+          "notes": "The Crillon hosts a number of fashion-adjacent guests. The bar transforms. Reservations are tight."
+        },
+        {
+          "name": "Foire de Paris / Salon du Chocolat",
+          "period": "October–November",
+          "notes": "The concierge team maintains a list of specialist chocolatiers and pâtisseries worth visiting beyond the obvious."
+        },
+        {
+          "name": "Fête de la Musique",
+          "period": "June 21",
+          "notes": "Free concerts across the city. The hotel can arrange private rooftop listening with curated Champagne pairing."
+        },
+        {
+          "name": "Paris Jazz Festival",
+          "period": "June–July",
+          "notes": "Parc Floral de Paris. The concierge can arrange car service and picnic provisions from Fauchon."
+        }
+      ],
+      "signature_amenities": [
+        "Rooftop terrace with Eiffel Tower and obelisk views",
+        "Les Ambassadeurs bar (Parisian institution)",
+        "L'Écrin restaurant (Michelin-starred)",
+        "Private shopping service with Paris's leading fashion editors",
+        "Art de vivre — custom Parisian itinerary with a local cultural curator"
+      ],
+      "room_amenity_options": [
+        "Place de la Concorde view room",
+        "Frette linen turndown with lavender",
+        "Fresh flowers from Marché aux Fleurs",
+        "Custom Les Bains Guerbois bath amenities"
+      ],
+      "welcome_amenity_options": [
+        {
+          "id": "champagne-macarons",
+          "name": "Ruinart Blanc de Blancs and Ladurée macarons",
+          "description": "The classic Crillon welcome — delivered to the room chilled, with a handwritten card."
+        },
+        {
+          "id": "paris-library",
+          "name": "Curated Paris reading list",
+          "description": "Three books selected by the concierge for this guest's specific Paris trip — history, fiction, and one surprise."
+        },
+        {
+          "id": "wine-paris",
+          "name": "Burgundy welcome — chosen for the guest",
+          "description": "The sommelier selects a half-bottle from the cellar based on what they know of the guest's palate."
+        }
+      ],
+      "placemaker_ids": [
+        "pm-isabelle-martin",
+        "pm-pierre-lemaire",
+        "pm-sophie-dubois"
+      ]
+    },
+    "carlyle": {
+      "id": "carlyle",
+      "name": "The Carlyle, A Rosewood Hotel",
+      "city": "New York",
+      "country": "United States",
+      "region": "Upper East Side, Manhattan",
+      "character": "76th and Madison. The Carlyle is Manhattan's most literary, most musical, most quietly legendary hotel. Bemelmans Bar is the real New York. Café Carlyle has hosted Bobby Short for decades. The art deco suites have housed presidents, royalty, and artists without changing their character at all. The Carlyle is for guests who know New York and want to be inside it rather than near it.",
+      "cultural_calendar": [
+        {
+          "name": "Metropolitan Opera season",
+          "period": "September–May",
+          "notes": "The Carlyle is 20 minutes from Lincoln Center. Concierge maintains relationships with house managers for last-minute premium access."
+        },
+        {
+          "name": "Frieze New York",
+          "period": "May",
+          "notes": "Major art fair at the Shed. The hotel connects guests with gallery owners and collectors for private previews."
+        },
+        {
+          "name": "Central Park in autumn",
+          "period": "October–November",
+          "notes": "The Ramble is three blocks away. The concierge provides a printed map of the hidden garden paths known mostly to regulars."
+        }
+      ],
+      "signature_amenities": [
+        "Bemelmans Bar (original Ludwig Bemelmans murals)",
+        "Café Carlyle live music",
+        "The Carlyle Spa (intimate, appointment-only)",
+        "Personal shopping service with UES boutiques",
+        "Private rooftop access for long-stay guests"
+      ],
+      "room_amenity_options": [
+        "Central Park view suite",
+        "In-room Steinway piano (select suites)",
+        "New York Times and International Herald Tribune delivered to door",
+        "Custom bar setup with guest's preferred spirits"
+      ],
+      "welcome_amenity_options": [
+        {
+          "id": "bemelmans-cocktail",
+          "name": "Bemelmans signature cocktail in-room",
+          "description": "The bar's house cocktail, prepared by Bemelmans' head bartender and delivered chilled."
+        },
+        {
+          "id": "ny-book-selection",
+          "name": "New York reading selection",
+          "description": "Books selected from The Strand or Argosy — fiction set in New York, chosen for this guest."
+        },
+        {
+          "id": "carlyle-flowers",
+          "name": "Seasonal Upper East Side flowers",
+          "description": "From the florist on Lexington. Arranged in the room before arrival."
+        }
+      ],
+      "placemaker_ids": [
+        "pm-diana-ross-nyc",
+        "pm-james-whitfield",
+        "pm-yuki-tanaka-nyc"
+      ]
+    },
+    "schloss-fuschl": {
+      "id": "schloss-fuschl",
+      "name": "Rosewood Schloss Fuschl",
+      "city": "Hof bei Salzburg",
+      "country": "Austria",
+      "region": "Salzkammergut",
+      "character": "A 15th-century hunting castle perched above Lake Fuschl, twenty minutes from Salzburg. The Salzkammergut landscape is the character here — every room looks out at the Alps or the lake, and the stillness is profound. This is not a city hotel. It is a place where guests slow down, whether they intend to or not. The property has its own boat, its own lakeside Spa, and a deep connection to the Austrian countryside. Seasonal rhythms matter enormously here: the light in September is unlike any other month.",
+      "cultural_calendar": [
+        {
+          "name": "Salzburg Music Festival aftermath",
+          "period": "August–September",
+          "notes": "Many guests arrive from Salzburg Festival performances. A classical music thread runs through post-festival stays."
+        },
+        {
+          "name": "Alpine mushroom season",
+          "period": "September–October",
+          "notes": "Chef hosts foraging walks with local guides. The kitchen serves fresh-foraged dishes the same evening."
+        },
+        {
+          "name": "Lake swimming season",
+          "period": "June–September",
+          "notes": "Lake Fuschl is pristine and swimmable. The property's private dock is rarely crowded before 8am."
+        },
+        {
+          "name": "Advent in Salzburg",
+          "period": "December",
+          "notes": "Day trips to Salzburg Christmas markets. The castle itself is lit with traditional Austrian lanterns."
+        }
+      ],
+      "signature_amenities": [
+        "Private lakeside dock and rowboats",
+        "Heated alpine spa with lake-facing hydrotherapy pool",
+        "Fly fishing on the Fuschlsee",
+        "Private Salzburg city tour with castle historian",
+        "Château cellar wine experience"
+      ],
+      "room_amenity_options": [
+        "Alpine wool blanket from local weaver (Hallstatt)",
+        "Lake-view room (upgrade if available)",
+        "Heated bathroom floors preset",
+        "Austrian schnapps and Mozartkugeln on arrival",
+        "In-room fireplace lit on arrival (autumn/winter)"
+      ],
+      "welcome_amenity_options": [
+        {
+          "id": "austrian-breakfast-basket",
+          "name": "Austrian farmhouse basket",
+          "description": "Local honey, fresh Bauernbrot, Styrian pumpkin seed oil, hand-rolled butter. Room temperature on arrival."
+        },
+        {
+          "id": "alpine-wildflower-tea",
+          "name": "Hand-blended alpine tea service",
+          "description": "Foraged mountain herbs blended by the property's tea steward. Served with a small ceramic pot."
+        },
+        {
+          "id": "wine-welcome",
+          "name": "Austrian Grüner Veltliner welcome",
+          "description": "Half bottle of the property's house Grüner, with the estate's tasting notes card."
+        },
+        {
+          "id": "lake-rosé",
+          "name": "Chilled rosé at the dock",
+          "description": "For guests arriving in warm weather — a chilled Austrian rosé waiting at the private dock, with a note from the GM."
+        }
+      ],
+      "placemaker_ids": [
+        "pm-gerald-aichriedler",
+        "pm-maria-brandner",
+        "pm-josef-huber"
+      ]
+    },
+    "hong-kong": {
+      "id": "hong-kong",
+      "name": "Rosewood Hong Kong",
+      "city": "Hong Kong",
+      "country": "Hong Kong SAR",
+      "region": "Tsim Sha Tsui, Kowloon",
+      "character": "Victoria Harbour from Kowloon — one of the great urban views. Rosewood Hong Kong opened in 2019 and immediately became the city's most design-forward address. The building is dramatic but the service is warm. The Butterfly Room for afternoon tea is a ritual. Holt's Bar is a late-night institution. The property faces both the city skyline and the harbour, and the energy is distinctly Hong Kong — fast, cosmopolitan, deeply layered.",
+      "cultural_calendar": [
+        {
+          "name": "Art Basel Hong Kong",
+          "period": "March",
+          "notes": "The hotel becomes a hub for collectors and gallerists. Private art tours and gallery dinners available through concierge."
+        },
+        {
+          "name": "Mid-Autumn Festival",
+          "period": "September–October",
+          "notes": "Lantern walks in Victoria Park, mooncake gifting, harbour view lantern lighting. The hotel's version is spectacular."
+        },
+        {
+          "name": "Chinese New Year",
+          "period": "January–February",
+          "notes": "Firecracker ceremonies, lion dances, private mahjong evenings. The property creates specific programming for in-house guests."
+        }
+      ],
+      "signature_amenities": [
+        "Victoria Harbour-facing suites",
+        "The Butterfly Room afternoon tea",
+        "Holt's Bar — one of Hong Kong's best cocktail programs",
+        "Helicopter transfers (charter only)",
+        "Rosewood Sense Spa with Traditional Chinese Medicine options"
+      ],
+      "room_amenity_options": [
+        "Harbour-facing room",
+        "In-room Nespresso and Taiwanese oolong tea selection",
+        "Fresh dim sum delivery from Holt's Kitchen (AM only)",
+        "Airport transfer by Rolls-Royce (by request)"
+      ],
+      "welcome_amenity_options": [
+        {
+          "id": "hk-tea-ceremony",
+          "name": "In-room Pu-erh tea ceremony setup",
+          "description": "An aged Pu-erh and gaiwan set, with a handwritten card on the tea's provenance."
+        },
+        {
+          "id": "harbour-champagne",
+          "name": "Harbour-view Champagne",
+          "description": "A chilled bottle of the hotel's house Champagne with the harbour lights as the backdrop."
+        },
+        {
+          "id": "mooncake-welcome",
+          "name": "Rosewood mooncake selection",
+          "description": "Seasonal (Mid-Autumn) or year-round lotus paste mooncakes from the hotel's pastry kitchen."
+        }
+      ],
+      "placemaker_ids": [
+        "pm-grace-lam",
+        "pm-david-chan-hk",
+        "pm-mei-lin-wong"
+      ]
+    }
+  },
+  "placemakers": {
+    "pm-gerald-aichriedler": {
+      "id": "pm-gerald-aichriedler",
+      "property_id": "schloss-fuschl",
+      "name": "Gerald Aichriedler",
+      "role": "Alpine Guide & Forager",
+      "location": "Hof bei Salzburg, Austria",
+      "bio": "Gerald has guided the Salzkammergut mountains for 22 years. He grew up in the Fuschl valley and knows every trail, every seasonal mushroom patch, and every farmer who produces anything worth tasting. He speaks three languages and has the rare gift of slowing people down without their noticing. His morning mushroom walks in September are legendary among returning guests.",
+      "offerings": [
+        {
+          "name": "Dawn Alpine Walk",
+          "duration": "3 hours",
+          "description": "A guided sunrise hike above Lake Fuschl, ending with Austrian Jause (a farmhouse snack) at his family's alpine hut. Groups of 1–4 only.",
+          "best_for": "Early risers, nature lovers, anyone wanting a genuinely local experience",
+          "season": "April–October"
+        },
+        {
+          "name": "Mushroom Foraging Walk",
+          "duration": "2.5 hours",
+          "description": "September foraging in the forest above the castle. Gerald identifies, harvests, and hands the finds to the kitchen for that evening's menu. Includes a short lesson in mycology.",
+          "best_for": "Food-curious guests, those interested in the Austrian landscape",
+          "season": "September–October"
+        },
+        {
+          "name": "Fly Fishing on the Fuschlsee",
+          "duration": "Half day",
+          "description": "Private fly fishing tuition and guided session on the lake. Equipment provided. Beginners welcome — Gerald is extraordinarily patient.",
+          "best_for": "Guests seeking contemplative outdoor experiences, beginners and experienced anglers both",
+          "season": "May–September"
+        }
+      ],
+      "availability_windows": [
+        "6:00–10:00 AM (walks)",
+        "2:00–6:00 PM (fishing)"
+      ],
+      "ideal_guest_profiles": [
+        "Guests interested in hiking, nature, the Austrian landscape",
+        "Food-curious guests (foraging walks pair with chef's table)",
+        "Guests seeking mindful, unhurried outdoor experience",
+        "Photographers — the light is extraordinary at dawn"
+      ],
+      "photo_url": null,
+      "contact": "gerald@schloss-fuschl-placemakers.at"
+    },
+    "pm-maria-brandner": {
+      "id": "pm-maria-brandner",
+      "property_id": "schloss-fuschl",
+      "name": "Maria Brandner",
+      "role": "Salzburg Cultural Historian",
+      "location": "Salzburg, Austria",
+      "bio": "Maria spent 15 years as a curator at the Salzburg Museum before pivoting to private cultural guiding. She makes Mozart feel contemporary, Baroque architecture feel personal, and the city's layered history feel like a story being told specifically for you. She is the only guide the hotel recommends for guests who already 'know Salzburg.'",
+      "offerings": [
+        {
+          "name": "Salzburg After the Crowds",
+          "duration": "3 hours",
+          "description": "A private evening walking tour of Salzburg with Maria — starting at dusk. Focuses on the lesser-known medieval corners, the Jewish history, the Baroque gardens after closing. Ends at a wine bar she has used for 20 years.",
+          "best_for": "Returning visitors to Salzburg, culturally curious guests, those who find standard tours too surface-level",
+          "season": "Year-round"
+        },
+        {
+          "name": "Mozart Beyond the Kitsch",
+          "duration": "2 hours",
+          "description": "The Mozarteum archives, the composer's actual apartments (not the tourist version), and Maria's own analysis of what his letters reveal. For guests who already know the music.",
+          "best_for": "Classical music lovers, particularly those attending or having attended the Salzburg Festival",
+          "season": "Year-round"
+        }
+      ],
+      "availability_windows": [
+        "10:00 AM–1:00 PM",
+        "4:00–8:00 PM"
+      ],
+      "ideal_guest_profiles": [
+        "Classical music enthusiasts",
+        "Cultural travelers who find standard tours too generic",
+        "Guests arriving from or going to the Salzburg Festival",
+        "Repeat visitors to Austria who want to go deeper"
+      ],
+      "photo_url": null,
+      "contact": null
+    },
+    "pm-josef-huber": {
+      "id": "pm-josef-huber",
+      "property_id": "schloss-fuschl",
+      "name": "Josef Huber",
+      "role": "Winemaker & Cellar Master",
+      "location": "Wachau Valley / Schloss Fuschl cellar",
+      "bio": "Josef manages the hotel's cellar and curates a private collection of Austrian wines that most guests never see. His family has farmed Grüner Veltliner in the Wachau for three generations. He is laconic, precise, and extraordinarily knowledgeable. He will not recommend a wine he doesn't believe in.",
+      "offerings": [
+        {
+          "name": "Private Cellar Tasting",
+          "duration": "90 minutes",
+          "description": "A guided vertical tasting in the castle's 13th-century wine cellar. Six wines, three Austrian appellations, Josef's personal commentary. Not available to all guests — by introduction only.",
+          "best_for": "Wine-serious guests, those with a genuine interest in Austrian viticulture",
+          "season": "Year-round"
+        },
+        {
+          "name": "Wachau Valley Day Trip",
+          "duration": "Full day",
+          "description": "A private drive to the Wachau with Josef. Three family domaines not open to the public. Lunch at a vineyard where the chef is Josef's cousin. Return by 7pm for dinner.",
+          "best_for": "Wine enthusiasts willing to invest a full day",
+          "season": "May–October"
+        }
+      ],
+      "availability_windows": [
+        "Afternoons 3:00–6:00 PM (cellar)",
+        "Full day Wachau (by arrangement)"
+      ],
+      "ideal_guest_profiles": [
+        "Wine-serious guests — those who know Austrian wine or want to learn",
+        "Guests who have mentioned wine, rosé, or winery visits",
+        "Slow travelers interested in food and drink provenance"
+      ],
+      "photo_url": null,
+      "contact": null
+    },
+    "pm-isabelle-martin": {
+      "id": "pm-isabelle-martin",
+      "property_id": "crillon",
+      "name": "Isabelle Martin",
+      "role": "Parisian Art & Fashion Curator",
+      "location": "Paris, France",
+      "bio": "Isabelle spent a decade as a buyer for a major French maison before becoming the most sought-after private shopping guide in Paris. She knows which designers are worth knowing before Paris Fashion Week, which gallerists are showing work that matters, and which Saint-Germain bookshop has the better poetry section. She moves through Paris as if she owns it.",
+      "offerings": [
+        {
+          "name": "Private Paris Shopping — Beyond the Obvious",
+          "duration": "Half day",
+          "description": "No Champs-Élysées. Isabelle curates 4–5 stops based on the guest's actual tastes: designers, vintage, specialty bookshops, artisan workshops. She calls ahead; no waiting.",
+          "best_for": "Guests interested in design, fashion, or Paris's creative scene; guests who find shopping feels transactional without guidance",
+          "season": "Year-round"
+        },
+        {
+          "name": "Galerie Circuit — Rive Droite or Rive Gauche",
+          "duration": "3 hours",
+          "description": "A curated afternoon with 3–4 galleries where Isabelle knows the gallerists personally. Not tourist galleries — working contemporary spaces. Ends with a glass of Sancerre at a natural wine bar she adores.",
+          "best_for": "Art collectors, those curious about contemporary Paris art, anyone with a serious interest in visual culture",
+          "season": "Year-round (note: many galleries closed August)"
+        }
+      ],
+      "availability_windows": [
+        "10:00 AM–2:00 PM",
+        "2:00–6:00 PM"
+      ],
+      "ideal_guest_profiles": [
+        "Design and fashion-interested guests",
+        "Art collectors or those considering purchases",
+        "Guests who want Paris beyond the tourist circuit",
+        "Repeat Paris visitors looking for a different kind of experience"
+      ],
+      "photo_url": null,
+      "contact": null
+    },
+    "pm-pierre-lemaire": {
+      "id": "pm-pierre-lemaire",
+      "property_id": "crillon",
+      "name": "Pierre Lemaire",
+      "role": "Sommelier & Wine Historian",
+      "location": "Paris, France",
+      "bio": "Pierre is one of only twelve Master Sommeliers in France. He trained at Taillevent and spent seven years at a three-star Michelin table before the Crillon brought him in. He is the only person in the hotel who will tell you the truth about which wines on the list are overpriced. His private tastings in the Crillon cellar are known among serious wine people across Europe.",
+      "offerings": [
+        {
+          "name": "Crillon Cellar Experience",
+          "duration": "2 hours",
+          "description": "A private tasting in the hotel's historic cellar with Pierre. Six wines, two of which will not appear on any menu. He explains not just the wine but the history of each domaine.",
+          "best_for": "Wine-serious guests, those who have shown interest in wine during their stay or past stays",
+          "season": "Year-round"
+        },
+        {
+          "name": "Cave Exploration — Saint-Germain Natural Wine",
+          "duration": "3 hours",
+          "description": "An afternoon with Pierre exploring 3 natural wine caves in Saint-Germain. He has strong opinions. The conversation is as good as the wine.",
+          "best_for": "Wine adventurers, those interested in natural/biodynamic wines, guests who want a local Parisian afternoon",
+          "season": "Year-round"
+        }
+      ],
+      "availability_windows": [
+        "Afternoons from 3:00 PM"
+      ],
+      "ideal_guest_profiles": [
+        "Wine enthusiasts — particularly Burgundy and Rhône lovers",
+        "Guests who have mentioned wine or ordered thoughtfully at dinner",
+        "Those interested in French food culture broadly"
+      ],
+      "photo_url": null,
+      "contact": null
+    },
+    "pm-sophie-dubois": {
+      "id": "pm-sophie-dubois",
+      "property_id": "crillon",
+      "name": "Sophie Dubois",
+      "role": "Literary Paris Guide",
+      "location": "Paris, France",
+      "bio": "Sophie holds a PhD in French literature from the Sorbonne and moonlights as Paris's most idiosyncratic guide. She does not do the standard literary tour. She finds the café where Sartre actually worked, the bookshop where Hemingway bought his paper, and the garden where Proust walked. She is brilliant, slightly eccentric, and utterly worth following.",
+      "offerings": [
+        {
+          "name": "Paris Through Its Books",
+          "duration": "3 hours",
+          "description": "A walking literary tour of the Left Bank that moves chronologically through Paris's literary history, ending at Shakespeare & Company for a book recommendation from the owner.",
+          "best_for": "Avid readers, writers, those with a background in literature or the humanities",
+          "season": "Year-round"
+        }
+      ],
+      "availability_windows": [
+        "Mornings 9:00 AM–12:00 PM",
+        "Afternoons 2:00–5:00 PM"
+      ],
+      "ideal_guest_profiles": [
+        "Writers and readers",
+        "Guests who have mentioned books, literature, or the humanities",
+        "Academics or those in creative fields"
+      ],
+      "photo_url": null,
+      "contact": null
+    },
+    "pm-grace-lam": {
+      "id": "pm-grace-lam",
+      "property_id": "hong-kong",
+      "name": "Grace Lam",
+      "role": "Cantonese Culinary Guide",
+      "location": "Hong Kong",
+      "bio": "Grace grew up in Sham Shui Po and has spent 20 years documenting Hong Kong's food culture for international and local publications. She knows every dai pai dong worth sitting at, every tea house that hasn't changed since 1975, and every chef who is keeping traditional Cantonese technique alive. She is also a gifted teacher of the dim sum ritual.",
+      "offerings": [
+        {
+          "name": "Kowloon Breakfast Circuit",
+          "duration": "2.5 hours",
+          "description": "An early morning walk through the Kowloon wet market, followed by dim sum at a place Grace's grandmother taught her about. No tourist signage, no English menus. Grace translates everything.",
+          "best_for": "Food-curious guests, those interested in Hong Kong culture beyond the obvious, early risers",
+          "season": "Year-round"
+        },
+        {
+          "name": "Old Hong Kong — The Food That Remains",
+          "duration": "3 hours",
+          "description": "An afternoon visiting 4–5 shops and establishments that represent Hong Kong's disappearing food culture: a roast goose master, a tofu maker, an egg tart shop that has been open since 1963.",
+          "best_for": "Culturally curious guests, those on longer stays who want to go beneath the surface",
+          "season": "Year-round"
+        }
+      ],
+      "availability_windows": [
+        "7:00–10:00 AM (breakfast circuits)",
+        "2:00–5:00 PM (afternoon)"
+      ],
+      "ideal_guest_profiles": [
+        "Food-focused guests",
+        "Guests interested in Hong Kong culture and history",
+        "Japanese guests (Grace speaks Japanese)",
+        "Guests on return visits who want to go deeper"
+      ],
+      "photo_url": null,
+      "contact": null
+    },
+    "pm-david-chan-hk": {
+      "id": "pm-david-chan-hk",
+      "property_id": "hong-kong",
+      "name": "David Chan",
+      "role": "Contemporary Art Guide",
+      "location": "Hong Kong",
+      "bio": "David is one of Hong Kong's most active art advisors, with relationships spanning M+, the major auction houses, and several significant private collections. He works primarily with collectors but takes a handful of Rosewood guests each year who want to understand Hong Kong's art scene — not just Art Basel, but the permanent, remarkable collection at M+ and the emerging galleries in Wong Chuk Hang.",
+      "offerings": [
+        {
+          "name": "M+ Private Walk",
+          "duration": "2.5 hours",
+          "description": "A private guided walk through M+ with David — not a docent tour. He has opinions. He will show you what he thinks matters and why. Includes rooftop access for a harbour view.",
+          "best_for": "Art enthusiasts, collectors, those with a genuine interest in contemporary Asian art",
+          "season": "Year-round"
+        }
+      ],
+      "availability_windows": [
+        "Afternoons 1:00–4:00 PM"
+      ],
+      "ideal_guest_profiles": [
+        "Art collectors or those interested in contemporary art",
+        "Guests attending Art Basel Hong Kong",
+        "Those with a serious interest in Asian contemporary culture"
+      ],
+      "photo_url": null,
+      "contact": null
+    },
+    "pm-mei-lin-wong": {
+      "id": "pm-mei-lin-wong",
+      "property_id": "hong-kong",
+      "name": "Mei Lin Wong",
+      "role": "Tai Chi & Wellness Guide",
+      "location": "Kowloon, Hong Kong",
+      "bio": "Mei Lin has practiced Yang-style Tai Chi for 35 years and teaches a small group on the Tsim Sha Tsui waterfront each morning. She has taught Rosewood guests for seven years and has an extraordinary ability to adapt her teaching to absolute beginners without condescension. Her sunrise sessions with the harbour as a backdrop are genuinely transformative.",
+      "offerings": [
+        {
+          "name": "Sunrise Harbour Tai Chi",
+          "duration": "45 minutes",
+          "description": "A private or semi-private Tai Chi session on the Tsim Sha Tsui promenade at sunrise, with the harbour behind you. No experience required. Mei Lin brings tea.",
+          "best_for": "Guests seeking mindful movement, those interested in Chinese wellness traditions, jet-lagged guests who need to reset their body clock",
+          "season": "Year-round"
+        }
+      ],
+      "availability_windows": [
+        "6:00–8:00 AM"
+      ],
+      "ideal_guest_profiles": [
+        "Wellness-focused guests",
+        "Guests arriving from long-haul journeys (jet lag reset)",
+        "Early risers who want to experience the harbour at dawn",
+        "Those interested in Chinese culture and traditions"
+      ],
+      "photo_url": null,
+      "contact": null
+    },
+    "pm-diana-ross-nyc": {
+      "id": "pm-diana-ross-nyc",
+      "property_id": "carlyle",
+      "name": "Diana Ross",
+      "role": "Jazz & Cultural Historian",
+      "location": "New York, NY",
+      "bio": "No relation to the singer. Diana has written two books on the history of jazz in New York and spent a decade at the Jazz at Lincoln Center archives. She leads private jazz history walks through Harlem and the Village, and has personal relationships with several musicians who still perform at small New York venues. She is the person who got you into a session at Smalls Jazz Club on a Tuesday night.",
+      "offerings": [
+        {
+          "name": "Harlem Jazz Evening",
+          "duration": "3 hours",
+          "description": "A private evening walk through Harlem with Diana — history, architecture, and the music. Ends at a venue where Diana knows the bartender and sometimes the band.",
+          "best_for": "Jazz lovers, music enthusiasts, those interested in New York cultural history",
+          "season": "Year-round"
+        },
+        {
+          "name": "Village Vanguard Story",
+          "duration": "2 hours",
+          "description": "An afternoon walk through the West Village finishing with a private pre-show talk at the Village Vanguard (Diana's connection), followed by the evening performance.",
+          "best_for": "Jazz enthusiasts, those with an interest in New York's musical history",
+          "season": "Year-round"
+        }
+      ],
+      "availability_windows": [
+        "Afternoons 2:00 PM onward",
+        "Evenings 7:00 PM onward"
+      ],
+      "ideal_guest_profiles": [
+        "Jazz and music enthusiasts",
+        "Culturally curious guests interested in New York history",
+        "Guests who have attended or plan to attend Lincoln Center events"
+      ],
+      "photo_url": null,
+      "contact": null
+    },
+    "pm-james-whitfield": {
+      "id": "pm-james-whitfield",
+      "property_id": "carlyle",
+      "name": "James Whitfield",
+      "role": "Manhattan Food & Neighborhood Guide",
+      "location": "New York, NY",
+      "bio": "James grew up in the Bronx and has lived in every borough. He is one of New York's best restaurant critics, writing pseudonymously for a major publication. He guides privately for the Carlyle because he finds it more interesting than reviewing. He knows where to eat in New York the way a local eats — not the Michelin list.",
+      "offerings": [
+        {
+          "name": "New York as a Local Eats",
+          "duration": "3 hours",
+          "description": "James designs a 3-stop food itinerary based on the guest's actual interests. Could be Queens dim sum, a Chinatown pho situation, a 30-year-old Italian red-sauce joint in Carroll Gardens. Nothing is pretentious. Everything is specific.",
+          "best_for": "Food-curious guests, those tired of hotel-recommended restaurants, anyone willing to travel more than 10 blocks for extraordinary food",
+          "season": "Year-round"
+        }
+      ],
+      "availability_windows": [
+        "11:00 AM–2:00 PM",
+        "5:00–8:00 PM"
+      ],
+      "ideal_guest_profiles": [
+        "Food enthusiasts",
+        "Guests who have asked for restaurant recommendations beyond the standard hotel list",
+        "Those interested in New York's neighborhood culture"
+      ],
+      "photo_url": null,
+      "contact": null
+    },
+    "pm-yuki-tanaka-nyc": {
+      "id": "pm-yuki-tanaka-nyc",
+      "property_id": "carlyle",
+      "name": "Yuki Tanaka",
+      "role": "Japanese Culture & Community Guide",
+      "location": "New York, NY",
+      "bio": "Yuki moved from Kyoto to New York fifteen years ago and has spent much of that time documenting the Japanese cultural presence in the city — the galleries, the craft shops, the community spaces. She guides Japanese guests who want to feel at home in New York, and New Yorkers who want to understand Japanese craft and culture beyond sushi.",
+      "offerings": [
+        {
+          "name": "Japanese New York — A Cultural Walk",
+          "duration": "3 hours",
+          "description": "A walk through the Midtown and Chelsea spaces where Japanese culture is genuinely present: a lacquerware shop, a sake bar, a gallery showing work from Japan. Yuki speaks Japanese, Mandarin, and English.",
+          "best_for": "Japanese guests, those with a deep connection to Japanese culture, Japanophiles",
+          "season": "Year-round"
+        }
+      ],
+      "availability_windows": [
+        "10:00 AM–1:00 PM",
+        "2:00–5:00 PM"
+      ],
+      "ideal_guest_profiles": [
+        "Japanese guests (Yuki speaks Japanese fluently)",
+        "Those with ties to or deep interest in Japanese culture",
+        "Guests from Tokyo or Kyoto on their first New York stay"
+      ],
+      "photo_url": null,
+      "contact": null
+    }
+  },
+  "arrival_plans": {}
+}
