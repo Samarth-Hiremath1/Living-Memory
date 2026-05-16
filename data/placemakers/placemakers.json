@@ -1,0 +1,340 @@
+[
+  {
+    "id": "pm-gerald-aichriedler",
+    "property_id": "schloss-fuschl",
+    "name": "Gerald Aichriedler",
+    "role": "Alpine Guide & Forager",
+    "location": "Hof bei Salzburg, Austria",
+    "bio": "Gerald has guided the Salzkammergut mountains for 22 years. He grew up in the Fuschl valley and knows every trail, every seasonal mushroom patch, and every farmer who produces anything worth tasting. He speaks three languages and has the rare gift of slowing people down without their noticing. His morning mushroom walks in September are legendary among returning guests.",
+    "offerings": [
+      {
+        "name": "Dawn Alpine Walk",
+        "duration": "3 hours",
+        "description": "A guided sunrise hike above Lake Fuschl, ending with Austrian Jause (a farmhouse snack) at his family's alpine hut. Groups of 1–4 only.",
+        "best_for": "Early risers, nature lovers, anyone wanting a genuinely local experience",
+        "season": "April–October"
+      },
+      {
+        "name": "Mushroom Foraging Walk",
+        "duration": "2.5 hours",
+        "description": "September foraging in the forest above the castle. Gerald identifies, harvests, and hands the finds to the kitchen for that evening's menu. Includes a short lesson in mycology.",
+        "best_for": "Food-curious guests, those interested in the Austrian landscape",
+        "season": "September–October"
+      },
+      {
+        "name": "Fly Fishing on the Fuschlsee",
+        "duration": "Half day",
+        "description": "Private fly fishing tuition and guided session on the lake. Equipment provided. Beginners welcome — Gerald is extraordinarily patient.",
+        "best_for": "Guests seeking contemplative outdoor experiences, beginners and experienced anglers both",
+        "season": "May–September"
+      }
+    ],
+    "availability_windows": ["6:00–10:00 AM (walks)", "2:00–6:00 PM (fishing)"],
+    "ideal_guest_profiles": [
+      "Guests interested in hiking, nature, the Austrian landscape",
+      "Food-curious guests (foraging walks pair with chef's table)",
+      "Guests seeking mindful, unhurried outdoor experience",
+      "Photographers — the light is extraordinary at dawn"
+    ],
+    "contact": "gerald@schloss-fuschl-placemakers.at"
+  },
+  {
+    "id": "pm-maria-brandner",
+    "property_id": "schloss-fuschl",
+    "name": "Maria Brandner",
+    "role": "Salzburg Cultural Historian",
+    "location": "Salzburg, Austria",
+    "bio": "Maria spent 15 years as a curator at the Salzburg Museum before pivoting to private cultural guiding. She makes Mozart feel contemporary, Baroque architecture feel personal, and the city's layered history feel like a story being told specifically for you. She is the only guide the hotel recommends for guests who already 'know Salzburg.'",
+    "offerings": [
+      {
+        "name": "Salzburg After the Crowds",
+        "duration": "3 hours",
+        "description": "A private evening walking tour of Salzburg with Maria — starting at dusk. Focuses on the lesser-known medieval corners, the Jewish history, the Baroque gardens after closing. Ends at a wine bar she has used for 20 years.",
+        "best_for": "Returning visitors to Salzburg, culturally curious guests, those who find standard tours too surface-level",
+        "season": "Year-round"
+      },
+      {
+        "name": "Mozart Beyond the Kitsch",
+        "duration": "2 hours",
+        "description": "The Mozarteum archives, the composer's actual apartments (not the tourist version), and Maria's own analysis of what his letters reveal. For guests who already know the music.",
+        "best_for": "Classical music lovers, particularly those attending or having attended the Salzburg Festival",
+        "season": "Year-round"
+      }
+    ],
+    "availability_windows": ["10:00 AM–1:00 PM", "4:00–8:00 PM"],
+    "ideal_guest_profiles": [
+      "Classical music enthusiasts",
+      "Cultural travelers who find standard tours too generic",
+      "Guests arriving from or going to the Salzburg Festival",
+      "Repeat visitors to Austria who want to go deeper"
+    ]
+  },
+  {
+    "id": "pm-josef-huber",
+    "property_id": "schloss-fuschl",
+    "name": "Josef Huber",
+    "role": "Winemaker & Cellar Master",
+    "location": "Wachau Valley / Schloss Fuschl cellar",
+    "bio": "Josef manages the hotel's cellar and curates a private collection of Austrian wines that most guests never see. His family has farmed Grüner Veltliner in the Wachau for three generations. He is laconic, precise, and extraordinarily knowledgeable. He will not recommend a wine he doesn't believe in.",
+    "offerings": [
+      {
+        "name": "Private Cellar Tasting",
+        "duration": "90 minutes",
+        "description": "A guided vertical tasting in the castle's 13th-century wine cellar. Six wines, three Austrian appellations, Josef's personal commentary. Not available to all guests — by introduction only.",
+        "best_for": "Wine-serious guests, those with a genuine interest in Austrian viticulture",
+        "season": "Year-round"
+      },
+      {
+        "name": "Wachau Valley Day Trip",
+        "duration": "Full day",
+        "description": "A private drive to the Wachau with Josef. Three family domaines not open to the public. Lunch at a vineyard where the chef is Josef's cousin. Return by 7pm for dinner.",
+        "best_for": "Wine enthusiasts willing to invest a full day",
+        "season": "May–October"
+      }
+    ],
+    "availability_windows": ["Afternoons 3:00–6:00 PM (cellar)", "Full day Wachau (by arrangement)"],
+    "ideal_guest_profiles": [
+      "Wine-serious guests — those who know Austrian wine or want to learn",
+      "Guests who have mentioned wine, rosé, or winery visits",
+      "Slow travelers interested in food and drink provenance"
+    ]
+  },
+  {
+    "id": "pm-isabelle-martin",
+    "property_id": "crillon",
+    "name": "Isabelle Martin",
+    "role": "Parisian Art & Fashion Curator",
+    "location": "Paris, France",
+    "bio": "Isabelle spent a decade as a buyer for a major French maison before becoming the most sought-after private shopping guide in Paris. She knows which designers are worth knowing before Paris Fashion Week, which gallerists are showing work that matters, and which Saint-Germain bookshop has the better poetry section. She moves through Paris as if she owns it.",
+    "offerings": [
+      {
+        "name": "Private Paris Shopping — Beyond the Obvious",
+        "duration": "Half day",
+        "description": "No Champs-Élysées. Isabelle curates 4–5 stops based on the guest's actual tastes: designers, vintage, specialty bookshops, artisan workshops. She calls ahead; no waiting.",
+        "best_for": "Guests interested in design, fashion, or Paris's creative scene; guests who find shopping feels transactional without guidance",
+        "season": "Year-round"
+      },
+      {
+        "name": "Galerie Circuit — Rive Droite or Rive Gauche",
+        "duration": "3 hours",
+        "description": "A curated afternoon with 3–4 galleries where Isabelle knows the gallerists personally. Not tourist galleries — working contemporary spaces. Ends with a glass of Sancerre at a natural wine bar she adores.",
+        "best_for": "Art collectors, those curious about contemporary Paris art, anyone with a serious interest in visual culture",
+        "season": "Year-round (note: many galleries closed August)"
+      }
+    ],
+    "availability_windows": ["10:00 AM–2:00 PM", "2:00–6:00 PM"],
+    "ideal_guest_profiles": [
+      "Design and fashion-interested guests",
+      "Art collectors or those considering purchases",
+      "Guests who want Paris beyond the tourist circuit",
+      "Repeat Paris visitors looking for a different kind of experience"
+    ]
+  },
+  {
+    "id": "pm-pierre-lemaire",
+    "property_id": "crillon",
+    "name": "Pierre Lemaire",
+    "role": "Sommelier & Wine Historian",
+    "location": "Paris, France",
+    "bio": "Pierre is one of only twelve Master Sommeliers in France. He trained at Taillevent and spent seven years at a three-star Michelin table before the Crillon brought him in. He is the only person in the hotel who will tell you the truth about which wines on the list are overpriced. His private tastings in the Crillon cellar are known among serious wine people across Europe.",
+    "offerings": [
+      {
+        "name": "Crillon Cellar Experience",
+        "duration": "2 hours",
+        "description": "A private tasting in the hotel's historic cellar with Pierre. Six wines, two of which will not appear on any menu. He explains not just the wine but the history of each domaine.",
+        "best_for": "Wine-serious guests, those who have shown interest in wine during their stay or past stays",
+        "season": "Year-round"
+      },
+      {
+        "name": "Cave Exploration — Saint-Germain Natural Wine",
+        "duration": "3 hours",
+        "description": "An afternoon with Pierre exploring 3 natural wine caves in Saint-Germain. He has strong opinions. The conversation is as good as the wine.",
+        "best_for": "Wine adventurers, those interested in natural/biodynamic wines, guests who want a local Parisian afternoon",
+        "season": "Year-round"
+      }
+    ],
+    "availability_windows": ["Afternoons from 3:00 PM"],
+    "ideal_guest_profiles": [
+      "Wine enthusiasts — particularly Burgundy and Rhône lovers",
+      "Guests who have mentioned wine or ordered thoughtfully at dinner",
+      "Those interested in French food culture broadly"
+    ]
+  },
+  {
+    "id": "pm-sophie-dubois",
+    "property_id": "crillon",
+    "name": "Sophie Dubois",
+    "role": "Literary Paris Guide",
+    "location": "Paris, France",
+    "bio": "Sophie holds a PhD in French literature from the Sorbonne and moonlights as Paris's most idiosyncratic guide. She does not do the standard literary tour. She finds the café where Sartre actually worked, the bookshop where Hemingway bought his paper, and the garden where Proust walked. She is brilliant, slightly eccentric, and utterly worth following.",
+    "offerings": [
+      {
+        "name": "Paris Through Its Books",
+        "duration": "3 hours",
+        "description": "A walking literary tour of the Left Bank that moves chronologically through Paris's literary history, ending at Shakespeare & Company for a book recommendation from the owner.",
+        "best_for": "Avid readers, writers, those with a background in literature or the humanities",
+        "season": "Year-round"
+      }
+    ],
+    "availability_windows": ["Mornings 9:00 AM–12:00 PM", "Afternoons 2:00–5:00 PM"],
+    "ideal_guest_profiles": [
+      "Writers and readers",
+      "Guests who have mentioned books, literature, or the humanities",
+      "Academics or those in creative fields"
+    ]
+  },
+  {
+    "id": "pm-grace-lam",
+    "property_id": "hong-kong",
+    "name": "Grace Lam",
+    "role": "Cantonese Culinary Guide",
+    "location": "Hong Kong",
+    "bio": "Grace grew up in Sham Shui Po and has spent 20 years documenting Hong Kong's food culture for international and local publications. She knows every dai pai dong worth sitting at, every tea house that hasn't changed since 1975, and every chef who is keeping traditional Cantonese technique alive. She is also a gifted teacher of the dim sum ritual.",
+    "offerings": [
+      {
+        "name": "Kowloon Breakfast Circuit",
+        "duration": "2.5 hours",
+        "description": "An early morning walk through the Kowloon wet market, followed by dim sum at a place Grace's grandmother taught her about. No tourist signage, no English menus. Grace translates everything.",
+        "best_for": "Food-curious guests, those interested in Hong Kong culture beyond the obvious, early risers",
+        "season": "Year-round"
+      },
+      {
+        "name": "Old Hong Kong — The Food That Remains",
+        "duration": "3 hours",
+        "description": "An afternoon visiting 4–5 shops and establishments that represent Hong Kong's disappearing food culture: a roast goose master, a tofu maker, an egg tart shop that has been open since 1963.",
+        "best_for": "Culturally curious guests, those on longer stays who want to go beneath the surface",
+        "season": "Year-round"
+      }
+    ],
+    "availability_windows": ["7:00–10:00 AM (breakfast circuits)", "2:00–5:00 PM (afternoon)"],
+    "ideal_guest_profiles": [
+      "Food-focused guests",
+      "Guests interested in Hong Kong culture and history",
+      "Japanese guests (Grace speaks Japanese)",
+      "Guests on return visits who want to go deeper"
+    ]
+  },
+  {
+    "id": "pm-david-chan-hk",
+    "property_id": "hong-kong",
+    "name": "David Chan",
+    "role": "Contemporary Art Guide",
+    "location": "Hong Kong",
+    "bio": "David is one of Hong Kong's most active art advisors, with relationships spanning M+, the major auction houses, and several significant private collections. He works primarily with collectors but takes a handful of Rosewood guests each year who want to understand Hong Kong's art scene — not just Art Basel, but the permanent, remarkable collection at M+ and the emerging galleries in Wong Chuk Hang.",
+    "offerings": [
+      {
+        "name": "M+ Private Walk",
+        "duration": "2.5 hours",
+        "description": "A private guided walk through M+ with David — not a docent tour. He has opinions. He will show you what he thinks matters and why. Includes rooftop access for a harbour view.",
+        "best_for": "Art enthusiasts, collectors, those with a genuine interest in contemporary Asian art",
+        "season": "Year-round"
+      }
+    ],
+    "availability_windows": ["Afternoons 1:00–4:00 PM"],
+    "ideal_guest_profiles": [
+      "Art collectors or those interested in contemporary art",
+      "Guests attending Art Basel Hong Kong",
+      "Those with a serious interest in Asian contemporary culture"
+    ]
+  },
+  {
+    "id": "pm-mei-lin-wong",
+    "property_id": "hong-kong",
+    "name": "Mei Lin Wong",
+    "role": "Tai Chi & Wellness Guide",
+    "location": "Kowloon, Hong Kong",
+    "bio": "Mei Lin has practiced Yang-style Tai Chi for 35 years and teaches a small group on the Tsim Sha Tsui waterfront each morning. She has taught Rosewood guests for seven years and has an extraordinary ability to adapt her teaching to absolute beginners without condescension. Her sunrise sessions with the harbour as a backdrop are genuinely transformative.",
+    "offerings": [
+      {
+        "name": "Sunrise Harbour Tai Chi",
+        "duration": "45 minutes",
+        "description": "A private or semi-private Tai Chi session on the Tsim Sha Tsui promenade at sunrise, with the harbour behind you. No experience required. Mei Lin brings tea.",
+        "best_for": "Guests seeking mindful movement, those interested in Chinese wellness traditions, jet-lagged guests who need to reset their body clock",
+        "season": "Year-round"
+      }
+    ],
+    "availability_windows": ["6:00–8:00 AM"],
+    "ideal_guest_profiles": [
+      "Wellness-focused guests",
+      "Guests arriving from long-haul journeys (jet lag reset)",
+      "Early risers who want to experience the harbour at dawn",
+      "Those interested in Chinese culture and traditions"
+    ]
+  },
+  {
+    "id": "pm-diana-ross-nyc",
+    "property_id": "carlyle",
+    "name": "Diana Ross",
+    "role": "Jazz & Cultural Historian",
+    "location": "New York, NY",
+    "bio": "No relation to the singer. Diana has written two books on the history of jazz in New York and spent a decade at the Jazz at Lincoln Center archives. She leads private jazz history walks through Harlem and the Village, and has personal relationships with several musicians who still perform at small New York venues. She is the person who got you into a session at Smalls Jazz Club on a Tuesday night.",
+    "offerings": [
+      {
+        "name": "Harlem Jazz Evening",
+        "duration": "3 hours",
+        "description": "A private evening walk through Harlem with Diana — history, architecture, and the music. Ends at a venue where Diana knows the bartender and sometimes the band.",
+        "best_for": "Jazz lovers, music enthusiasts, those interested in New York cultural history",
+        "season": "Year-round"
+      },
+      {
+        "name": "Village Vanguard Story",
+        "duration": "2 hours",
+        "description": "An afternoon walk through the West Village finishing with a private pre-show talk at the Village Vanguard (Diana's connection), followed by the evening performance.",
+        "best_for": "Jazz enthusiasts, those with an interest in New York's musical history",
+        "season": "Year-round"
+      }
+    ],
+    "availability_windows": ["Afternoons 2:00 PM onward", "Evenings 7:00 PM onward"],
+    "ideal_guest_profiles": [
+      "Jazz and music enthusiasts",
+      "Culturally curious guests interested in New York history",
+      "Guests who have attended or plan to attend Lincoln Center events"
+    ]
+  },
+  {
+    "id": "pm-james-whitfield",
+    "property_id": "carlyle",
+    "name": "James Whitfield",
+    "role": "Manhattan Food & Neighborhood Guide",
+    "location": "New York, NY",
+    "bio": "James grew up in the Bronx and has lived in every borough. He is one of New York's best restaurant critics, writing pseudonymously for a major publication. He guides privately for the Carlyle because he finds it more interesting than reviewing. He knows where to eat in New York the way a local eats — not the Michelin list.",
+    "offerings": [
+      {
+        "name": "New York as a Local Eats",
+        "duration": "3 hours",
+        "description": "James designs a 3-stop food itinerary based on the guest's actual interests. Could be Queens dim sum, a Chinatown pho situation, a 30-year-old Italian red-sauce joint in Carroll Gardens. Nothing is pretentious. Everything is specific.",
+        "best_for": "Food-curious guests, those tired of hotel-recommended restaurants, anyone willing to travel more than 10 blocks for extraordinary food",
+        "season": "Year-round"
+      }
+    ],
+    "availability_windows": ["11:00 AM–2:00 PM", "5:00–8:00 PM"],
+    "ideal_guest_profiles": [
+      "Food enthusiasts",
+      "Guests who have asked for restaurant recommendations beyond the standard hotel list",
+      "Those interested in New York's neighborhood culture"
+    ]
+  },
+  {
+    "id": "pm-yuki-tanaka-nyc",
+    "property_id": "carlyle",
+    "name": "Yuki Tanaka",
+    "role": "Japanese Culture & Community Guide",
+    "location": "New York, NY",
+    "bio": "Yuki moved from Kyoto to New York fifteen years ago and has spent much of that time documenting the Japanese cultural presence in the city — the galleries, the craft shops, the community spaces. She guides Japanese guests who want to feel at home in New York, and New Yorkers who want to understand Japanese craft and culture beyond sushi.",
+    "offerings": [
+      {
+        "name": "Japanese New York — A Cultural Walk",
+        "duration": "3 hours",
+        "description": "A walk through the Midtown and Chelsea spaces where Japanese culture is genuinely present: a lacquerware shop, a sake bar, a gallery showing work from Japan. Yuki speaks Japanese, Mandarin, and English.",
+        "best_for": "Japanese guests, those with a deep connection to Japanese culture, Japanophiles",
+        "season": "Year-round"
+      }
+    ],
+    "availability_windows": ["10:00 AM–1:00 PM", "2:00–5:00 PM"],
+    "ideal_guest_profiles": [
+      "Japanese guests (Yuki speaks Japanese fluently)",
+      "Those with ties to or deep interest in Japanese culture",
+      "Guests from Tokyo or Kyoto on their first New York stay"
+    ]
+  }
+]

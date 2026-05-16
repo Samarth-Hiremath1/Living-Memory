@@ -1,0 +1,56 @@
+{
+  "id": "carlyle",
+  "name": "The Carlyle, A Rosewood Hotel",
+  "city": "New York",
+  "country": "United States",
+  "region": "Upper East Side, Manhattan",
+  "character": "76th and Madison. The Carlyle is Manhattan's most literary, most musical, most quietly legendary hotel. Bemelmans Bar is the real New York. Café Carlyle has hosted Bobby Short for decades. The art deco suites have housed presidents, royalty, and artists without changing their character at all. The Carlyle is for guests who know New York and want to be inside it rather than near it.",
+  "cultural_calendar": [
+    {
+      "name": "Metropolitan Opera season",
+      "period": "September–May",
+      "notes": "The Carlyle is 20 minutes from Lincoln Center. Concierge maintains relationships with house managers for last-minute premium access."
+    },
+    {
+      "name": "Frieze New York",
+      "period": "May",
+      "notes": "Major art fair at the Shed. The hotel connects guests with gallery owners and collectors for private previews."
+    },
+    {
+      "name": "Central Park in autumn",
+      "period": "October–November",
+      "notes": "The Ramble is three blocks away. The concierge provides a printed map of the hidden garden paths known mostly to regulars."
+    }
+  ],
+  "signature_amenities": [
+    "Bemelmans Bar (original Ludwig Bemelmans murals)",
+    "Café Carlyle live music",
+    "The Carlyle Spa (intimate, appointment-only)",
+    "Personal shopping service with UES boutiques",
+    "Private rooftop access for long-stay guests"
+  ],
+  "room_amenity_options": [
+    "Central Park view suite",
+    "In-room Steinway piano (select suites)",
+    "New York Times and International Herald Tribune delivered to door",
+    "Custom bar setup with guest's preferred spirits"
+  ],
+  "welcome_amenity_options": [
+    {
+      "id": "bemelmans-cocktail",
+      "name": "Bemelmans signature cocktail in-room",
+      "description": "The bar's house cocktail, prepared by Bemelmans' head bartender and delivered chilled."
+    },
+    {
+      "id": "ny-book-selection",
+      "name": "New York reading selection",
+      "description": "Books selected from The Strand or Argosy — fiction set in New York, chosen for this guest."
+    },
+    {
+      "id": "carlyle-flowers",
+      "name": "Seasonal Upper East Side flowers",
+      "description": "From the florist on Lexington. Arranged in the room before arrival."
+    }
+  ],
+  "placemaker_ids": ["pm-diana-ross-nyc", "pm-james-whitfield", "pm-yuki-tanaka-nyc"]
+}

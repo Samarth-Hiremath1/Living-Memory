@@ -1,0 +1,406 @@
+{
+  "guests": [
+    {
+      "id": "guest-anna-lindqvist",
+      "name": "Anna Lindqvist",
+      "email": "anna.lindqvist@archilab.jp",
+      "phone": "+81-3-5555-0192",
+      "nationality": "Swedish",
+      "languages": ["English", "Swedish", "Japanese"],
+      "home_city": "Tokyo",
+      "consent_level": "living_memory",
+      "stays": ["stay-anna-hk-2023", "stay-anna-carlyle-2023", "stay-anna-fuschl-2024"],
+      "preferences": {
+        "room_temperature_f": 67,
+        "interests": ["mountain hiking", "alpine landscapes", "architectural photography", "natural wine", "Japanese craft"],
+        "dietary": ["pescatarian"],
+        "pace": "unhurried",
+        "view_preference": "nature or water"
+      },
+      "property_aliases": {
+        "hong-kong": "RWHK-2023-AL",
+        "carlyle": "CAR-2023-0891"
+      },
+      "created_at": "2023-03-15T00:00:00"
+    },
+    {
+      "id": "guest-marcus-chen",
+      "name": "Marcus Chen",
+      "email": "m.chen@ventures.sg",
+      "phone": "+65-9111-4872",
+      "nationality": "Singaporean",
+      "languages": ["English", "Mandarin", "Cantonese"],
+      "home_city": "Singapore",
+      "consent_level": "remembered",
+      "stays": ["stay-marcus-hk-2023", "stay-marcus-crillon-2024"],
+      "preferences": {
+        "room_temperature_f": 72,
+        "interests": ["contemporary art", "Burgundy wine", "architecture", "jazz"],
+        "dietary": [],
+        "pace": "efficient",
+        "view_preference": "city"
+      },
+      "property_aliases": {
+        "hong-kong": "RWHK-2023-MC"
+      },
+      "created_at": "2023-05-20T00:00:00"
+    },
+    {
+      "id": "guest-elena-vasquez",
+      "name": "Elena Vasquez",
+      "email": "elena@vasquez-foundation.org",
+      "phone": "+34-91-555-0231",
+      "nationality": "Spanish",
+      "languages": ["Spanish", "English", "French"],
+      "home_city": "Madrid",
+      "consent_level": "living_memory",
+      "stays": ["stay-elena-crillon-2023", "stay-elena-carlyle-2024"],
+      "preferences": {
+        "room_temperature_f": 70,
+        "interests": ["contemporary art", "literature", "wine", "opera"],
+        "dietary": ["vegetarian"],
+        "pace": "cultural",
+        "view_preference": "historic"
+      },
+      "property_aliases": {
+        "crillon": "CRL-2023-EV"
+      },
+      "created_at": "2023-09-10T00:00:00"
+    },
+    {
+      "id": "guest-james-okafor",
+      "name": "James Okafor",
+      "email": "jokafor@thebridge.fund",
+      "phone": "+44-20-7946-0182",
+      "nationality": "British-Nigerian",
+      "languages": ["English", "Yoruba"],
+      "home_city": "London",
+      "consent_level": "standard",
+      "stays": ["stay-james-carlyle-2024"],
+      "preferences": {
+        "room_temperature_f": 72,
+        "interests": ["jazz", "African contemporary art", "food culture"],
+        "dietary": [],
+        "pace": "social",
+        "view_preference": "city"
+      },
+      "property_aliases": {},
+      "created_at": "2024-01-08T00:00:00"
+    },
+    {
+      "id": "guest-yuki-nakamura",
+      "name": "Yuki Nakamura",
+      "email": "y.nakamura@kenchiku.co.jp",
+      "phone": "+81-6-4396-5521",
+      "nationality": "Japanese",
+      "languages": ["Japanese", "English"],
+      "home_city": "Osaka",
+      "consent_level": "living_memory",
+      "stays": ["stay-yuki-fuschl-2023", "stay-yuki-crillon-2024"],
+      "preferences": {
+        "room_temperature_f": 68,
+        "interests": ["architecture", "craftsmanship", "natural wine", "silence", "alpine landscapes"],
+        "dietary": ["no red meat"],
+        "pace": "contemplative",
+        "view_preference": "nature"
+      },
+      "property_aliases": {
+        "schloss-fuschl": "SF-2023-YN"
+      },
+      "created_at": "2023-06-01T00:00:00"
+    }
+  ],
+  "stays": [
+    {
+      "id": "stay-anna-hk-2023",
+      "guest_id": "guest-anna-lindqvist",
+      "property_id": "hong-kong",
+      "check_in": "2023-03-15",
+      "check_out": "2023-03-19",
+      "room_type": "Harbour Suite",
+      "party_size": 1,
+      "occasions": ["business"],
+      "observations": ["obs-anna-hk-1", "obs-anna-hk-2"],
+      "notes": "First stay with Rosewood. Arrived via Tokyo. Art Basel Hong Kong."
+    },
+    {
+      "id": "stay-anna-carlyle-2023",
+      "guest_id": "guest-anna-lindqvist",
+      "property_id": "carlyle",
+      "check_in": "2023-09-20",
+      "check_out": "2023-09-24",
+      "room_type": "Central Park View Suite",
+      "party_size": 1,
+      "occasions": [],
+      "observations": ["obs-anna-carlyle-1", "obs-anna-carlyle-2", "obs-anna-carlyle-3"],
+      "notes": "Architecture conference at MoMA."
+    },
+    {
+      "id": "stay-anna-fuschl-2024",
+      "guest_id": "guest-anna-lindqvist",
+      "property_id": "schloss-fuschl",
+      "check_in": "2024-09-15",
+      "check_out": "2024-09-20",
+      "room_type": "Lake View Suite",
+      "party_size": 1,
+      "occasions": [],
+      "flight_number": "JL43",
+      "observations": [],
+      "notes": "Current stay. Flying from Tokyo Narita."
+    },
+    {
+      "id": "stay-marcus-hk-2023",
+      "guest_id": "guest-marcus-chen",
+      "property_id": "hong-kong",
+      "check_in": "2023-05-20",
+      "check_out": "2023-05-23",
+      "room_type": "Harbour View Room",
+      "party_size": 1,
+      "occasions": ["business"],
+      "observations": ["obs-marcus-hk-1"],
+      "notes": "Investor meetings in Central."
+    },
+    {
+      "id": "stay-marcus-crillon-2024",
+      "guest_id": "guest-marcus-chen",
+      "property_id": "crillon",
+      "check_in": "2024-10-01",
+      "check_out": "2024-10-05",
+      "room_type": "Place de la Concorde Suite",
+      "party_size": 2,
+      "occasions": ["anniversary"],
+      "observations": ["obs-marcus-crillon-1"],
+      "notes": "10th wedding anniversary with wife Sophie."
+    },
+    {
+      "id": "stay-elena-crillon-2023",
+      "guest_id": "guest-elena-vasquez",
+      "property_id": "crillon",
+      "check_in": "2023-09-10",
+      "check_out": "2023-09-14",
+      "room_type": "Junior Suite",
+      "party_size": 1,
+      "occasions": ["leisure"],
+      "observations": ["obs-elena-crillon-1", "obs-elena-crillon-2"],
+      "notes": "Annual Paris visit for autumn."
+    },
+    {
+      "id": "stay-elena-carlyle-2024",
+      "guest_id": "guest-elena-vasquez",
+      "property_id": "carlyle",
+      "check_in": "2024-05-15",
+      "check_out": "2024-05-18",
+      "room_type": "Classic Room",
+      "party_size": 1,
+      "occasions": ["frieze"],
+      "observations": ["obs-elena-carlyle-1"],
+      "notes": "Frieze New York — foundation acquisitions."
+    },
+    {
+      "id": "stay-james-carlyle-2024",
+      "guest_id": "guest-james-okafor",
+      "property_id": "carlyle",
+      "check_in": "2024-02-12",
+      "check_out": "2024-02-15",
+      "room_type": "Central Park View Room",
+      "party_size": 1,
+      "occasions": ["business"],
+      "observations": ["obs-james-carlyle-1"],
+      "notes": "First stay with Rosewood."
+    },
+    {
+      "id": "stay-yuki-fuschl-2023",
+      "guest_id": "guest-yuki-nakamura",
+      "property_id": "schloss-fuschl",
+      "check_in": "2023-06-01",
+      "check_out": "2023-06-05",
+      "room_type": "Alpine Suite",
+      "party_size": 1,
+      "occasions": [],
+      "observations": ["obs-yuki-fuschl-1", "obs-yuki-fuschl-2"],
+      "notes": "Research trip — Austrian vernacular architecture."
+    },
+    {
+      "id": "stay-yuki-crillon-2024",
+      "guest_id": "guest-yuki-nakamura",
+      "property_id": "crillon",
+      "check_in": "2024-04-10",
+      "check_out": "2024-04-13",
+      "room_type": "Superior Room",
+      "party_size": 1,
+      "occasions": [],
+      "observations": ["obs-yuki-crillon-1"],
+      "notes": "Visiting the Pompidou retrospective."
+    }
+  ],
+  "observations": [
+    {
+      "id": "obs-anna-hk-1",
+      "stay_id": "stay-anna-hk-2023",
+      "guest_id": "guest-anna-lindqvist",
+      "property_id": "hong-kong",
+      "raw_text": "Guest asked about quiet breakfast spots away from the main dining room. Mentioned she prefers to start the day slowly and doesn't enjoy crowds in the morning. Recommended the harbour terrace at 7am.",
+      "structured": {},
+      "tags": ["breakfast", "quiet", "morning routine", "solitude"],
+      "source": "staff_text",
+      "timestamp": "2023-03-16T07:30:00",
+      "sentiment": "positive"
+    },
+    {
+      "id": "obs-anna-hk-2",
+      "stay_id": "stay-anna-hk-2023",
+      "guest_id": "guest-anna-lindqvist",
+      "property_id": "hong-kong",
+      "raw_text": "Ms. Lindqvist had dinner at the restaurant and spent an unusually long time with the sommelier. She was particularly interested in Austrian Grüner Veltliner and asked if we had any natural wine options. Also mentioned she's from Sweden originally but has lived in Tokyo for eight years.",
+      "structured": {},
+      "tags": ["wine", "austrian wine", "grüner veltliner", "natural wine", "tokyo", "swedish"],
+      "source": "staff_text",
+      "timestamp": "2023-03-17T22:00:00",
+      "sentiment": "positive"
+    },
+    {
+      "id": "obs-anna-carlyle-1",
+      "stay_id": "stay-anna-carlyle-2023",
+      "guest_id": "guest-anna-lindqvist",
+      "property_id": "carlyle",
+      "raw_text": "Guest arrived from an architecture conference and was visibly excited about a panel she attended on brutalist residential buildings. Asked if we had any architecture books in the library related to New York's mid-century period.",
+      "structured": {},
+      "tags": ["architecture", "brutalism", "mid-century", "conference", "books"],
+      "source": "staff_text",
+      "timestamp": "2023-09-20T18:00:00",
+      "sentiment": "positive"
+    },
+    {
+      "id": "obs-anna-carlyle-2",
+      "stay_id": "stay-anna-carlyle-2023",
+      "guest_id": "guest-anna-lindqvist",
+      "property_id": "carlyle",
+      "raw_text": "Ms. Lindqvist went for an early morning run in Central Park — came back at 6:45am looking energized. She mentioned she tries to run or walk somewhere green every morning when she travels. Said she misses Japanese forests. Took one of our park maps.",
+      "structured": {},
+      "tags": ["running", "morning", "nature", "central park", "japanese forests", "active"],
+      "source": "staff_text",
+      "timestamp": "2023-09-21T07:15:00",
+      "sentiment": "positive"
+    },
+    {
+      "id": "obs-anna-carlyle-3",
+      "stay_id": "stay-anna-carlyle-2023",
+      "guest_id": "guest-anna-lindqvist",
+      "property_id": "carlyle",
+      "raw_text": "Guest checked in with room temperature at 67°F — said she finds hotel rooms usually too warm. Specifically asked for it to stay there for the full stay. Room was set at 67°F throughout. No complaints.",
+      "structured": {},
+      "tags": ["room temperature", "67f", "cool room", "preference"],
+      "source": "staff_text",
+      "timestamp": "2023-09-20T16:00:00",
+      "sentiment": "neutral"
+    },
+    {
+      "id": "obs-marcus-hk-1",
+      "stay_id": "stay-marcus-hk-2023",
+      "guest_id": "guest-marcus-chen",
+      "property_id": "hong-kong",
+      "raw_text": "Mr. Chen had a detailed conversation with the concierge about Art Basel programming. He's a collector — specifically interested in Southeast Asian and East Asian contemporary. Mentioned he's been buying for about 12 years. Also ordered Côte de Nuits at dinner and spent time talking with the sommelier about specific producers.",
+      "structured": {},
+      "tags": ["art", "art basel", "collector", "contemporary art", "wine", "burgundy"],
+      "source": "staff_text",
+      "timestamp": "2023-05-21T21:00:00",
+      "sentiment": "positive"
+    },
+    {
+      "id": "obs-marcus-crillon-1",
+      "stay_id": "stay-marcus-crillon-2024",
+      "guest_id": "guest-marcus-chen",
+      "property_id": "crillon",
+      "raw_text": "Anniversary stay with wife Sophie. Mr. Chen arranged a private dinner in advance but mentioned he wanted the evening to feel spontaneous for her — asked us not to reference the reservation. Sophie is a landscape architect. They both ordered from the natural wine section and asked our sommelier to tell them the story of each bottle.",
+      "structured": {},
+      "tags": ["anniversary", "wife", "spontaneous", "natural wine", "landscape architect"],
+      "source": "staff_text",
+      "timestamp": "2024-10-01T20:00:00",
+      "sentiment": "positive"
+    },
+    {
+      "id": "obs-elena-crillon-1",
+      "stay_id": "stay-elena-crillon-2023",
+      "guest_id": "guest-elena-vasquez",
+      "property_id": "crillon",
+      "raw_text": "Ms. Vasquez asked the concierge for bookshop recommendations — specifically looking for a good French translation of a novel she mentioned (I didn't catch the title). She ended up at Galignani and came back with four books. Mentioned she runs a cultural foundation in Madrid focused on contemporary Spanish and Latin American art.",
+      "structured": {},
+      "tags": ["books", "bookshop", "reading", "madrid", "cultural foundation", "art"],
+      "source": "staff_text",
+      "timestamp": "2023-09-11T16:00:00",
+      "sentiment": "positive"
+    },
+    {
+      "id": "obs-elena-crillon-2",
+      "stay_id": "stay-elena-crillon-2023",
+      "guest_id": "guest-elena-vasquez",
+      "property_id": "crillon",
+      "raw_text": "Guest attended a private dinner at a gallery in Marais — she mentioned it was a curator she's known for years. Came back late and had a nightcap at Les Ambassadeurs bar. Seemed energized. Said Paris is the only city where she doesn't feel the need to sleep until the city does.",
+      "structured": {},
+      "tags": ["gallery", "art world", "paris night", "les ambassadeurs", "social energy"],
+      "source": "staff_text",
+      "timestamp": "2023-09-12T23:45:00",
+      "sentiment": "positive"
+    },
+    {
+      "id": "obs-elena-carlyle-1",
+      "stay_id": "stay-elena-carlyle-2024",
+      "guest_id": "guest-elena-vasquez",
+      "property_id": "carlyle",
+      "raw_text": "Ms. Vasquez is here for Frieze. She was buying for the foundation — mentioned she's looking at several works by Colombian and Mexican painters. Had a meeting at the hotel with a gallerist from Madrid who flew in. Very focused. Asked for a quiet table in a corner during both dinners.",
+      "structured": {},
+      "tags": ["frieze", "art fair", "buying", "colombia", "mexico", "gallerist", "quiet table"],
+      "source": "staff_text",
+      "timestamp": "2024-05-15T19:00:00",
+      "sentiment": "neutral"
+    },
+    {
+      "id": "obs-james-carlyle-1",
+      "stay_id": "stay-james-carlyle-2024",
+      "guest_id": "guest-james-okafor",
+      "property_id": "carlyle",
+      "raw_text": "First time at the Carlyle. Mr. Okafor asked immediately about Bemelmans Bar and whether Café Carlyle had any live jazz this week. He seemed genuinely knowledgeable — mentioned Coltrane and Monk unprompted in the same sentence. Later said he went to school in New York and hasn't been back in seven years.",
+      "structured": {},
+      "tags": ["jazz", "bemelmans", "café carlyle", "coltrane", "monk", "new york history", "first time"],
+      "source": "staff_text",
+      "timestamp": "2024-02-12T18:00:00",
+      "sentiment": "positive"
+    },
+    {
+      "id": "obs-yuki-fuschl-1",
+      "stay_id": "stay-yuki-fuschl-2023",
+      "guest_id": "guest-yuki-nakamura",
+      "property_id": "schloss-fuschl",
+      "raw_text": "Mr. Nakamura is an architect from Osaka. He spent the first morning photographing the castle's exterior details — specifically the stonework and joinery on the historic wing. Asked our historian for references on the original construction techniques. Very quiet guest. Clearly needs and enjoys solitude.",
+      "structured": {},
+      "tags": ["architecture", "photography", "stonework", "solitude", "historian", "quiet"],
+      "source": "staff_text",
+      "timestamp": "2023-06-02T10:00:00",
+      "sentiment": "positive"
+    },
+    {
+      "id": "obs-yuki-fuschl-2",
+      "stay_id": "stay-yuki-fuschl-2023",
+      "guest_id": "guest-yuki-nakamura",
+      "property_id": "schloss-fuschl",
+      "raw_text": "Guest asked about the alpine foraging walk — Gerald Aichriedler's tour. Went on the 6am mushroom walk and came back genuinely moved by it. Said it reminded him of childhood walks with his grandfather in the mountains near Nara. Left a handwritten thank-you note for Gerald.",
+      "structured": {},
+      "tags": ["foraging", "gerald", "placemaker", "mountains", "nara", "childhood memory", "thank you note"],
+      "source": "staff_text",
+      "timestamp": "2023-06-03T09:00:00",
+      "sentiment": "positive"
+    },
+    {
+      "id": "obs-yuki-crillon-1",
+      "stay_id": "stay-yuki-crillon-2024",
+      "guest_id": "guest-yuki-nakamura",
+      "property_id": "crillon",
+      "raw_text": "Mr. Nakamura specifically requested no television in the room. Also asked if there was a traditional Japanese breakfast option — we arranged an onigiri from a nearby Japanese grocer and a proper green tea setup. He was clearly delighted. Came back from the Pompidou retrospective and wanted to talk about the Tadao Ando exhibition.",
+      "structured": {},
+      "tags": ["no television", "japanese breakfast", "tadao ando", "pompidou", "green tea", "quiet"],
+      "source": "staff_text",
+      "timestamp": "2024-04-10T20:00:00",
+      "sentiment": "positive"
+    }
+  ]
+}

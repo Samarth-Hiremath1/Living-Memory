@@ -1,0 +1,61 @@
+{
+  "id": "crillon",
+  "name": "Hôtel de Crillon, A Rosewood Hotel",
+  "city": "Paris",
+  "country": "France",
+  "region": "Île-de-France",
+  "character": "Place de la Concorde. The Crillon is not simply a hotel in Paris — it is a Parisian institution. The building opened in 1758, and its bones carry the weight of French history without being heavy about it. Today it is one of the most quietly confident addresses in the world. The Les Ambassadeurs bar is where Parisians actually come. The Brasserie d'Aumont is louder, the pool is intimate, and the suites face the obelisk. This is a hotel for guests who want Paris to come to them.",
+  "cultural_calendar": [
+    {
+      "name": "Paris Fashion Week",
+      "period": "Late September / Early October, Late January / Early February",
+      "notes": "The Crillon hosts a number of fashion-adjacent guests. The bar transforms. Reservations are tight."
+    },
+    {
+      "name": "Foire de Paris / Salon du Chocolat",
+      "period": "October–November",
+      "notes": "The concierge team maintains a list of specialist chocolatiers and pâtisseries worth visiting beyond the obvious."
+    },
+    {
+      "name": "Fête de la Musique",
+      "period": "June 21",
+      "notes": "Free concerts across the city. The hotel can arrange private rooftop listening with curated Champagne pairing."
+    },
+    {
+      "name": "Paris Jazz Festival",
+      "period": "June–July",
+      "notes": "Parc Floral de Paris. The concierge can arrange car service and picnic provisions from Fauchon."
+    }
+  ],
+  "signature_amenities": [
+    "Rooftop terrace with Eiffel Tower and obelisk views",
+    "Les Ambassadeurs bar (Parisian institution)",
+    "L'Écrin restaurant (Michelin-starred)",
+    "Private shopping service with Paris's leading fashion editors",
+    "Art de vivre — custom Parisian itinerary with a local cultural curator"
+  ],
+  "room_amenity_options": [
+    "Place de la Concorde view room",
+    "Frette linen turndown with lavender",
+    "Fresh flowers from Marché aux Fleurs",
+    "Custom Les Bains Guerbois bath amenities"
+  ],
+  "welcome_amenity_options": [
+    {
+      "id": "champagne-macarons",
+      "name": "Ruinart Blanc de Blancs and Ladurée macarons",
+      "description": "The classic Crillon welcome — delivered to the room chilled, with a handwritten card."
+    },
+    {
+      "id": "paris-library",
+      "name": "Curated Paris reading list",
+      "description": "Three books selected by the concierge for this guest's specific Paris trip — history, fiction, and one surprise."
+    },
+    {
+      "id": "wine-paris",
+      "name": "Burgundy welcome — chosen for the guest",
+      "description": "The sommelier selects a half-bottle from the cellar based on what they know of the guest's palate."
+    }
+  ],
+  "placemaker_ids": ["pm-isabelle-martin", "pm-pierre-lemaire", "pm-sophie-dubois"]
+}

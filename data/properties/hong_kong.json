@@ -1,0 +1,56 @@
+{
+  "id": "hong-kong",
+  "name": "Rosewood Hong Kong",
+  "city": "Hong Kong",
+  "country": "Hong Kong SAR",
+  "region": "Tsim Sha Tsui, Kowloon",
+  "character": "Victoria Harbour from Kowloon — one of the great urban views. Rosewood Hong Kong opened in 2019 and immediately became the city's most design-forward address. The building is dramatic but the service is warm. The Butterfly Room for afternoon tea is a ritual. Holt's Bar is a late-night institution. The property faces both the city skyline and the harbour, and the energy is distinctly Hong Kong — fast, cosmopolitan, deeply layered.",
+  "cultural_calendar": [
+    {
+      "name": "Art Basel Hong Kong",
+      "period": "March",
+      "notes": "The hotel becomes a hub for collectors and gallerists. Private art tours and gallery dinners available through concierge."
+    },
+    {
+      "name": "Mid-Autumn Festival",
+      "period": "September–October",
+      "notes": "Lantern walks in Victoria Park, mooncake gifting, harbour view lantern lighting. The hotel's version is spectacular."
+    },
+    {
+      "name": "Chinese New Year",
+      "period": "January–February",
+      "notes": "Firecracker ceremonies, lion dances, private mahjong evenings. The property creates specific programming for in-house guests."
+    }
+  ],
+  "signature_amenities": [
+    "Victoria Harbour-facing suites",
+    "The Butterfly Room afternoon tea",
+    "Holt's Bar — one of Hong Kong's best cocktail programs",
+    "Helicopter transfers (charter only)",
+    "Rosewood Sense Spa with Traditional Chinese Medicine options"
+  ],
+  "room_amenity_options": [
+    "Harbour-facing room",
+    "In-room Nespresso and Taiwanese oolong tea selection",
+    "Fresh dim sum delivery from Holt's Kitchen (AM only)",
+    "Airport transfer by Rolls-Royce (by request)"
+  ],
+  "welcome_amenity_options": [
+    {
+      "id": "hk-tea-ceremony",
+      "name": "In-room Pu-erh tea ceremony setup",
+      "description": "An aged Pu-erh and gaiwan set, with a handwritten card on the tea's provenance."
+    },
+    {
+      "id": "harbour-champagne",
+      "name": "Harbour-view Champagne",
+      "description": "A chilled bottle of the hotel's house Champagne with the harbour lights as the backdrop."
+    },
+    {
+      "id": "mooncake-welcome",
+      "name": "Rosewood mooncake selection",
+      "description": "Seasonal (Mid-Autumn) or year-round lotus paste mooncakes from the hotel's pastry kitchen."
+    }
+  ],
+  "placemaker_ids": ["pm-grace-lam", "pm-david-chan-hk", "pm-mei-lin-wong"]
+}
