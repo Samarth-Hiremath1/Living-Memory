@@ -37,7 +37,7 @@
         "carlyle": "CAR-2023-0891"
       },
       "created_at": "2023-03-15T00:00:00",
-      "updated_at": "2026-05-16T22:53:43.537537"
+      "updated_at": "2026-05-16T23:03:17.493869"
     },
     "guest-marcus-chen": {
       "id": "guest-marcus-chen",
@@ -73,7 +73,7 @@
         "hong-kong": "RWHK-2023-MC"
       },
       "created_at": "2023-05-20T00:00:00",
-      "updated_at": "2026-05-16T22:53:43.537694"
+      "updated_at": "2026-05-16T23:03:17.494031"
     },
     "guest-elena-vasquez": {
       "id": "guest-elena-vasquez",
@@ -111,7 +111,7 @@
         "crillon": "CRL-2023-EV"
       },
       "created_at": "2023-09-10T00:00:00",
-      "updated_at": "2026-05-16T22:53:43.537699"
+      "updated_at": "2026-05-16T23:03:17.494042"
     },
     "guest-harrison-family": {
       "id": "guest-harrison-family",
@@ -133,7 +133,8 @@
           "family activities",
           "outdoor dining",
           "swimming",
-          "local history"
+          "local history",
+          "hiking"
         ],
         "dietary": [
           "one child has nut allergy"
@@ -143,7 +144,7 @@
       },
       "property_aliases": {},
       "created_at": "2026-01-10T00:00:00",
-      "updated_at": "2026-05-16T22:53:43.537710"
+      "updated_at": "2026-05-16T23:03:17.494050"
     },
     "guest-james-okafor": {
       "id": "guest-james-okafor",
@@ -173,7 +174,7 @@
       },
       "property_aliases": {},
       "created_at": "2024-01-08T00:00:00",
-      "updated_at": "2026-05-16T22:53:43.537713"
+      "updated_at": "2026-05-16T23:03:17.494053"
     },
     "guest-yuki-nakamura": {
       "id": "guest-yuki-nakamura",
@@ -210,16 +211,17 @@
         "sand-hill": "SF-2023-YN"
       },
       "created_at": "2023-06-01T00:00:00",
-      "updated_at": "2026-05-16T22:53:43.537716"
+      "updated_at": "2026-05-16T23:03:17.494057"
     },
     "guest-samarth-hiremath": {
       "id": "guest-samarth-hiremath",
       "name": "Samarth Hiremath",
-      "email": "samhiremath1@gmail.com",
+      "email": "samhiremath@ucdavis.edu",
       "phone": "+1-415-555-0294",
-      "nationality": "American",
+      "nationality": "Indian-American",
       "languages": [
-        "English"
+        "English",
+        "Hindi"
       ],
       "home_city": "San Francisco",
       "consent_level": "living_memory",
@@ -227,22 +229,38 @@
         "stay-samarth-sandhill-2026"
       ],
       "preferences": {
-        "room_temperature_f": 70,
+        "room_temperature_f": 66,
         "interests": [
-          "hiking",
-          "viewpoints",
-          "trail running",
+          "golden hour",
+          "startups",
+          "Indian cuisine",
           "photography",
+          "hiking",
+          "technology",
+          "trail running",
+          "viewpoints",
           "Bay Area outdoors",
-          "technology"
+          "trying new cuisines",
+          "food"
         ],
-        "dietary": [],
-        "pace": "active",
-        "view_preference": "nature or valley"
+        "dietary": [
+          "vegetarian-friendly",
+          "spicy food",
+          "vegetarian",
+          "loves spicy food",
+          "enjoys Indian cuisine"
+        ],
+        "pace": "unhurried",
+        "view_preference": "nature or valley",
+        "wake_up": "early riser, typically up by 6am",
+        "activity_interests": [
+          "hiking",
+          "photography"
+        ]
       },
       "property_aliases": {},
       "created_at": "2026-05-16T00:00:00",
-      "updated_at": "2026-05-16T22:53:43.537703"
+      "updated_at": "2026-05-16T23:09:24.059884"
     }
   },
   "stays": {
@@ -480,7 +498,8 @@
       "party_size": 4,
       "occasions": [],
       "observations": [
-        "obs-harrison-sandhill-1"
+        "obs-harrison-sandhill-1",
+        "1c649c5d-92d5-4e4f-a357-95da353778fa"
       ],
       "flight_number": null,
       "notes": null
@@ -498,7 +517,12 @@
       "occasions": [],
       "observations": [
         "obs-samarth-1",
-        "obs-samarth-2"
+        "obs-samarth-2",
+        "obs-samarth-3",
+        "obs-samarth-4",
+        "bbabe3eb-e108-478b-959e-0dc6dbcb0d6c",
+        "aca63b67-0e45-4f10-83b2-128bb28cb5a3",
+        "2d9f028a-85c4-48ea-8ca5-9da8fa1792f8"
       ],
       "flight_number": null,
       "notes": null
@@ -1235,6 +1259,207 @@
       "staff_id": null,
       "timestamp": "2026-05-16T22:42:01.780574",
       "sentiment": "positive"
+    },
+    "cc0665df-3ace-4e1e-ba48-44f88fb9109c": {
+      "id": "cc0665df-3ace-4e1e-ba48-44f88fb9109c",
+      "stay_id": "stay-anna-sandhill-2026",
+      "guest_id": "guest-anna-lindqvist",
+      "property_id": "sand-hill",
+      "raw_text": "Anna asked about outdoor runs near the property — specifically trail running, not road",
+      "structured": {
+        "summary": "Anna inquired about trail running opportunities near the property.",
+        "tags": [
+          "trail running",
+          "outdoor",
+          "running",
+          "fitness"
+        ],
+        "interests_revealed": [
+          "trail running"
+        ],
+        "sensitivities": [],
+        "occasions": [],
+        "action_items": [
+          {
+            "department": "concierge",
+            "action": "Provide Anna with information about nearby trail running routes and difficulty levels",
+            "urgency": "today"
+          }
+        ],
+        "sentiment": "positive",
+        "guest_identifier": "Anna"
+      },
+      "tags": [
+        "trail running",
+        "outdoor",
+        "running",
+        "fitness"
+      ],
+      "source": "staff_text",
+      "staff_id": null,
+      "timestamp": "2026-05-16T22:56:32.365036",
+      "sentiment": "positive"
+    },
+    "obs-samarth-3": {
+      "id": "obs-samarth-3",
+      "stay_id": "stay-samarth-sandhill-2026",
+      "guest_id": "guest-samarth-hiremath",
+      "property_id": "sand-hill",
+      "raw_text": "Samarth mentioned he loves trying new cuisines and asked whether Madera does any South Asian-inspired dishes or seasonal specials beyond the usual California menu. Also said he regularly cooks Indian food at home and appreciated that Reylon sources locally.",
+      "structured": {},
+      "tags": [
+        "food",
+        "indian cuisine",
+        "madera",
+        "reylon",
+        "curious",
+        "culinary interest"
+      ],
+      "source": "staff_text",
+      "staff_id": null,
+      "timestamp": "2026-05-16T13:00:00",
+      "sentiment": "positive"
+    },
+    "obs-samarth-4": {
+      "id": "obs-samarth-4",
+      "stay_id": "stay-samarth-sandhill-2026",
+      "guest_id": "guest-samarth-hiremath",
+      "property_id": "sand-hill",
+      "raw_text": "Guest mentioned he works in tech and is between projects — this is a creative reset trip. He's interested in photography and said the golden hour light over the Santa Cruz Mountains from the property is exactly the kind of shot he's been looking for. Asked about the best vantage points on the property at sunset.",
+      "structured": {},
+      "tags": [
+        "photography",
+        "golden hour",
+        "santa cruz mountains",
+        "tech",
+        "creative reset",
+        "sunset"
+      ],
+      "source": "staff_text",
+      "staff_id": null,
+      "timestamp": "2026-05-16T15:30:00",
+      "sentiment": "positive"
+    },
+    "bbabe3eb-e108-478b-959e-0dc6dbcb0d6c": {
+      "id": "bbabe3eb-e108-478b-959e-0dc6dbcb0d6c",
+      "stay_id": "stay-samarth-sandhill-2026",
+      "guest_id": "guest-samarth-hiremath",
+      "property_id": "sand-hill",
+      "raw_text": "Prefers quiet bungalow with fireplace lit on arrival; requested cold-pressed juices and greens as welcome amenity.",
+      "structured": {},
+      "tags": [
+        "welcome_call"
+      ],
+      "source": "welcome_call",
+      "staff_id": null,
+      "timestamp": "2026-05-16T23:09:24.063519",
+      "sentiment": "positive"
+    },
+    "1c649c5d-92d5-4e4f-a357-95da353778fa": {
+      "id": "1c649c5d-92d5-4e4f-a357-95da353778fa",
+      "stay_id": "stay-harrison-sandhill-2026",
+      "guest_id": "guest-harrison-family",
+      "property_id": "sand-hill",
+      "raw_text": "They would like to go on a hike",
+      "structured": {
+        "summary": "Guest expressed interest in going on a hike.",
+        "tags": [
+          "hiking",
+          "activity",
+          "outdoor"
+        ],
+        "interests_revealed": [
+          "hiking"
+        ],
+        "sensitivities": [],
+        "occasions": [],
+        "action_items": [
+          {
+            "department": "concierge",
+            "action": "Provide hiking recommendations and assistance with planning",
+            "urgency": "today"
+          }
+        ],
+        "sentiment": "positive",
+        "guest_identifier": null
+      },
+      "tags": [
+        "hiking",
+        "activity",
+        "outdoor"
+      ],
+      "source": "staff_text",
+      "staff_id": null,
+      "timestamp": "2026-05-16T23:22:23.560980",
+      "sentiment": "positive"
+    },
+    "aca63b67-0e45-4f10-83b2-128bb28cb5a3": {
+      "id": "aca63b67-0e45-4f10-83b2-128bb28cb5a3",
+      "stay_id": "stay-samarth-sandhill-2026",
+      "guest_id": "guest-samarth-hiremath",
+      "property_id": "sand-hill",
+      "raw_text": "he wants to go on a hike",
+      "structured": {
+        "summary": "Guest expressed interest in going on a hike.",
+        "tags": [
+          "hiking",
+          "outdoor",
+          "activity"
+        ],
+        "interests_revealed": [
+          "hiking"
+        ],
+        "sensitivities": [],
+        "occasions": [],
+        "action_items": [
+          {
+            "department": "concierge",
+            "action": "Discuss hiking options and arrange hike if guest would like assistance",
+            "urgency": "today"
+          }
+        ],
+        "sentiment": "positive",
+        "guest_identifier": null
+      },
+      "tags": [
+        "hiking",
+        "outdoor",
+        "activity"
+      ],
+      "source": "staff_text",
+      "staff_id": null,
+      "timestamp": "2026-05-16T23:23:20.411627",
+      "sentiment": "positive"
+    },
+    "2d9f028a-85c4-48ea-8ca5-9da8fa1792f8": {
+      "id": "2d9f028a-85c4-48ea-8ca5-9da8fa1792f8",
+      "stay_id": "stay-samarth-sandhill-2026",
+      "guest_id": "guest-samarth-hiremath",
+      "property_id": "sand-hill",
+      "raw_text": "loves food",
+      "structured": {
+        "summary": "Guest expressed enthusiasm for food.",
+        "tags": [
+          "food",
+          "cuisine"
+        ],
+        "interests_revealed": [
+          "food"
+        ],
+        "sensitivities": [],
+        "occasions": [],
+        "action_items": [],
+        "sentiment": "positive",
+        "guest_identifier": null
+      },
+      "tags": [
+        "food",
+        "cuisine"
+      ],
+      "source": "staff_text",
+      "staff_id": null,
+      "timestamp": "2026-05-16T23:24:00.714175",
+      "sentiment": "positive"
     }
   },
   "properties": {
@@ -1900,5 +2125,138 @@
       "contact": null
     }
   },
-  "arrival_plans": {}
+  "arrival_plans": {
+    "f7fc6ff8-bddf-4797-8df9-f47657af945e": {
+      "id": "f7fc6ff8-bddf-4797-8df9-f47657af945e",
+      "guest_id": "guest-anna-lindqvist",
+      "stay_id": "stay-anna-sandhill-2026",
+      "property_id": "sand-hill",
+      "generated_at": "2026-05-16T22:56:20.504478",
+      "room_temperature_f": 67,
+      "welcome_amenity": "recovery-basket",
+      "moments_to_create": [
+        "Place a handwritten note in the bungalow with three trail options within 20 minutes of the property — Anna will want to move tomorrow morning, and knowing her options tonight will help",
+        "Ask David Park to leave a personal card introducing himself and mentioning a small-production Grüner he just brought in — she'll appreciate the gesture even before they meet",
+        "Ensure the Garden Bungalow is in a quiet corner away from any early-morning kitchen or housekeeping noise — she's landing exhausted and needs undisturbed sleep",
+        "Queue up a light breakfast option for 7am delivery to her terrace tomorrow — she won't want the dining room, but she will be up early"
+      ],
+      "itinerary": [
+        {
+          "time": "Tomorrow morning, 7:00am",
+          "suggestion": "Quiet terrace breakfast in the bungalow — cold-pressed greens, Equator coffee, Manresa sourdough. Let her ease into the day alone before exploring the property."
+        },
+        {
+          "time": "Tomorrow mid-morning, 9:30am",
+          "suggestion": "A walk through the oak groves or a trail recommendation she can take at her own pace. The Dish Loop at Stanford is 25 minutes away and has the kind of elevation and views she'll recognize from Marin."
+        },
+        {
+          "time": "Day 2, late afternoon around 4:30pm",
+          "suggestion": "Introduce David Park for a private tasting in the cellar — focus on natural wines and Old World techniques. This is when she'll be settled and ready to engage."
+        }
+      ],
+      "placemaker_intro": "David Park, Wine Director. He curates beyond California's usual suspects and can speak about natural winemaking and Austrian Grüner with the kind of depth Anna will actually want to have a conversation about. Recommend the Sand Hill Cellar Tasting on day 2.",
+      "flight_status": null,
+      "jet_lag_note": "Nine-hour time difference from Frankfurt — she'll be running on fumes tonight. A calm, private arrival and a quiet room are everything right now.",
+      "raw_dossier": "# Anna Lindqvist — Arrival Dossier\n**Arriving**: May 16, 2026 at 12:39pm (SFO) | **Property**: Rosewood Sand Hill | **Stay**: 4 nights\n\n## Who she is\nAnna has lived in San Francisco for eight years but grew up in Sweden. She's the kind of guest who starts her mornings early and intentionally — a quiet breakfast by 7am, a run before most people wake up, or a trail walk she's already mapped out the night before. She's deeply curious about wine, especially natural and Old World producers, and will happily spend an evening with a sommelier exploring Austrian Grüner Veltliner. She's just flown in from Frankfurt, so she'll be tired tonight, but by tomorrow morning she'll be looking for movement and green space.\n\n## Moments to create today\n- Place a handwritten note in the bungalow with three trail options within 20 minutes of the property — Anna will want to move tomorrow morning, and knowing her options tonight will help\n- Ask David Park to leave a personal card introducing himself and mentioning a small-production Grüner he just brought in — she'll appreciate the gesture even before they meet\n- Ensure the Garden Bungalow is in a quiet corner away from any early-morning kitchen or housekeeping noise — she's landing exhausted and needs undisturbed sleep\n- Queue up a light breakfast option for 7am delivery to her terrace tomorrow — she won't want the dining room, but she will be up early\n\n## First 24 hours\n**Tomorrow morning, 7:00am** — Quiet terrace breakfast in the bungalow. Cold-pressed greens, Equator coffee, Manresa sourdough. Let her ease into the day alone before exploring the property.\n\n**Tomorrow mid-morning, 9:30am** — A walk through the oak groves or a trail recommendation she can take at her own pace. The Dish Loop at Stanford is 25 minutes away and has the kind of elevation and views she'll recognize from Marin.\n\n**Day 2, late afternoon around 4:30pm** — Introduce David Park for a private tasting in the cellar. Focus on natural wines and Old World techniques. This is when she'll be settled and ready to engage.\n\n## Room setup\n- Temperature: 67°F (this matters to her — confirm it's holding)\n- Welcome amenity: Recovery basket (cold-pressed greens, magnesium water, dark chocolate, handwritten note)\n- Bungalow placement: Quiet corner, away from early-morning activity\n- Terrace setup: Ready for private breakfast tomorrow at 7am\n\n## Someone to introduce\nDavid Park, Wine Director. He curates beyond California's usual suspects and can speak about natural winemaking and Austrian Grüner with the kind of depth Anna will actually want to have a conversation about. Recommend the Sand Hill Cellar Tasting on day 2, once she's settled and adjusted to the time zone.\n\n## Keep in mind\nNine-hour time difference from Frankfurt — she'll be running on fumes tonight. A calm, private arrival and a quiet room are everything right now. She runs warm in hotel rooms, so 67°F isn't negotiable. By tomorrow she'll be energized and looking for trails, but today she just needs space to land."
+    },
+    "900d9568-ed73-44f3-9354-96ae98919bf2": {
+      "id": "900d9568-ed73-44f3-9354-96ae98919bf2",
+      "guest_id": "guest-samarth-hiremath",
+      "stay_id": "stay-samarth-sandhill-2026",
+      "property_id": "sand-hill",
+      "generated_at": "2026-05-16T23:04:23.421530",
+      "room_temperature_f": 68,
+      "welcome_amenity": "valley-essentials",
+      "moments_to_create": [
+        "Print a simple trail map with the Dish Loop marked (5.5 miles, best light at 6:15am this time of year) and leave it on his terrace table with a note about sunrise timing",
+        "Ask Reylon to handwrite which farm each item in the welcome basket came from — the sourdough story, the stone fruit orchard, the coffee roaster",
+        "Have the concierge pre-program three golden hour spots within 20 minutes of the property into a loaner iPhone (with a charger): Windy Hill Preserve overlook, the oak grove behind the meditation garden, and the Filoli Gates at 5:45pm",
+        "Queue up a quiet corner table at Madera for tomorrow night — one where he can see the kitchen if he wants, with a server who knows the sourcing stories cold"
+      ],
+      "itinerary": [
+        {
+          "time": "Late afternoon, day 1 (around 5:30pm)",
+          "suggestion": "Walk the property's oak grove behind the meditation garden — the light through the branches is at its warmest, and he'll get a feel for the terrain before tomorrow's run"
+        },
+        {
+          "time": "Dawn, day 2 (6am departure)",
+          "suggestion": "The Dish Loop trail at Stanford (5.5 miles, rolling hills, valley views at the top) — he'll recognize the rhythm from his Marin runs, but the light here is different, softer"
+        },
+        {
+          "time": "Morning, day 2 or 3",
+          "suggestion": "Reylon's Coastside Farm Visit — drive over the mountains at first light, walk the Half Moon Bay fields where the hotel sources produce, understand the full story behind what's on his plate"
+        }
+      ],
+      "placemaker_intro": "Reylon Agustin — Reylon runs a half-day farm visit over the mountains to the Half Moon Bay coastside — the exact intersection of Samarth's interests. You leave at dawn (catching that Santa Cruz light), walk the fields Reylon sources from, and get the full provenance story he's curious about. It's part trail exploration, part food education, entirely grounded in how this kitchen actually works.",
+      "flight_status": null,
+      "jet_lag_note": null,
+      "raw_dossier": "# Samarth Hiremath — Arrival Dossier\n**Arriving**: May 16, 2026 | **Property**: Rosewood Sand Hill | **Stay**: 3 nights\n\n## Who he is\nSamarth lives in San Francisco and uses travel as creative reset time between tech projects. He's an active morning person — trail runs at dawn in Marin, then chasing specific light for photography during golden hour — and he's genuinely curious about where food comes from. Not performatively; he wants to understand technique and sourcing in a way that aligns with how he moves through the world. His last visit here, he found exactly the light he'd been searching for in the Santa Cruz Mountains.\n\n## Moments to create today\n- Print a simple trail map with the Dish Loop marked (5.5 miles, best light at 6:15am this time of year) and leave it on his terrace table with a note about sunrise timing\n- Ask Reylon to handwrite which farm each item in the welcome basket came from — the sourdough story, the stone fruit orchard, the coffee roaster\n- Have the concierge pre-program three golden hour spots within 20 minutes of the property into a loaner iPhone (with a charger): Windy Hill Preserve overlook, the oak grove behind the meditation garden, and the Filoli Gates at 5:45pm\n- Queue up a quiet corner table at Madera for tomorrow night — one where he can see the kitchen if he wants, with a server who knows the sourcing stories cold\n\n## First 24 hours\n**Late afternoon today (around 5:30pm)**: Suggest a walk through the property's oak grove behind the meditation garden. The light through the branches will be at its warmest, and he'll get a feel for the terrain before tomorrow's run.\n\n**Dawn tomorrow (6am departure)**: The Dish Loop trail at Stanford — 5.5 miles, rolling hills, valley views at the top. He'll recognize the rhythm from his Marin runs, but the light here is different. Softer.\n\n**Morning, day 2 or 3**: Reylon's Coastside Farm Visit. Drive over the mountains at first light, walk the Half Moon Bay fields where we source produce, understand the full story behind what's on his plate.\n\n## Room setup\n- **Temperature**: 68°F\n- **Welcome amenity**: Valley essentials basket (Manresa Bread sourdough, Mariposa shortbread, Equator coffee, Half Moon Bay stone fruit) — with Reylon's handwritten provenance notes\n- **Terrace**: Trail map and sunrise note left on the outdoor table\n- **Tech**: Loaner iPhone with golden hour spots pre-programmed, charger included\n\n## Someone to introduce\n**Reylon Agustin**, Executive Chef at Madera. Reylon runs a half-day farm visit over the mountains to the Half Moon Bay coastside — the exact intersection of Samarth's interests. You leave at dawn (catching that Santa Cruz light), walk the fields Reylon sources from, and get the full provenance story. It's part trail exploration, part food education, entirely grounded in how this kitchen actually works. Suggest it for day 2 or 3, so he has a full day for the drive and farm walk.\n\n## Keep in mind\nSamarth's here to reset creatively, not to be entertained. Give him the tools (the trails, the light, the stories behind the food), then let him find his own rhythm. He'll appreciate specificity over curation — the exact sunrise time, the actual farm name, the real technique. Don't over-program. He knows what he's looking for."
+    },
+    "d86267ac-a08f-4cba-a8c0-db31f8ad1731": {
+      "id": "d86267ac-a08f-4cba-a8c0-db31f8ad1731",
+      "guest_id": "guest-elena-vasquez",
+      "stay_id": "stay-elena-sandhill-2026",
+      "property_id": "sand-hill",
+      "generated_at": "2026-05-16T23:18:06.715575",
+      "room_temperature_f": 68,
+      "welcome_amenity": "garden-tea",
+      "moments_to_create": [
+        "Have a corner table reserved for her at Madera each evening — she'll want to dine alone with reading material or take quiet calls",
+        "Brief her personally on Books Inc. in Palo Alto and Kepler's in Menlo Park — both are thirty-minute drives but she'll use them",
+        "Offer a 4pm tea service on her terrace the first afternoon — the ritual matters to her and it's a natural working pause",
+        "Leave a handwritten note about Stanford's Cantor Arts Center (15 min away) — Latin American collection, intimate scale, and she can disappear there between meetings"
+      ],
+      "itinerary": [
+        {
+          "time": "4:00pm Saturday",
+          "suggestion": "First-afternoon tea service on the terrace — she'll appreciate the ritual and the quiet transition into the stay"
+        },
+        {
+          "time": "Sunday morning",
+          "suggestion": "Cantor Arts Center opens at 11am — intimate museum with a strong Latin American collection, 15 minutes away, and she can go at her own pace"
+        },
+        {
+          "time": "Evening ritual",
+          "suggestion": "Corner table at Madera each night — space to work, read, or take calls without the center-room energy"
+        }
+      ],
+      "placemaker_intro": null,
+      "flight_status": null,
+      "jet_lag_note": "No flight data available, but she's arriving from Madrid — if she flew direct, she's carrying nine hours and will likely want a quiet first evening rather than stimulation.",
+      "raw_dossier": "# Elena Vasquez — Arrival Dossier\n**Arriving**: May 16, 2026 | **Property**: Rosewood Sand Hill | **Stay**: 5 nights\n\n## Who she is\nElena runs an art foundation in Madrid and travels for the work — not leisure. She's actively acquiring contemporary Spanish and Latin American art, particularly Colombian and Mexican painters, and her stays are working bases: calls, meetings, focused time. She's intellectually restless in the best way — fluent in French literature, energized by gallery openings and curator relationships, and the kind of person who will disappear into a bookshop for hours. Paris is the only city where she stays up for the city itself; everywhere else, she's here to work and think clearly.\n\n## Moments to create today\n- Have a corner table reserved for her at Madera each evening — she'll want to dine alone with reading material or take quiet calls\n- Brief her personally on Books Inc. in Palo Alto and Kepler's in Menlo Park — both are thirty-minute drives but she'll use them\n- Offer a 4pm tea service on her terrace the first afternoon — the ritual matters to her and it's a natural working pause\n- Leave a handwritten note about Stanford's Cantor Arts Center (15 min away) — Latin American collection, intimate scale, and she can disappear there between meetings\n\n## First 24 hours\n**Saturday, 4:00pm** — First-afternoon tea service on the terrace. She values the 4pm ritual and it's a graceful working pause after settling in.\n\n**Sunday morning** — Cantor Arts Center opens at 11am. Fifteen minutes away, intimate scale, strong Latin American collection. She can go at her own pace and it's the kind of place that feeds her professional thinking.\n\n**Evening ritual** — Corner table at Madera each night. She prefers private dining settings over busy restaurant centers, and she'll want space to work, read, or take calls without the center-room energy.\n\n## Room setup\n- Temperature: 68°F\n- Welcome amenity: Hand-blended California herbal tea from the meditation garden — quiet, restorative, and ideal after a long flight\n- Executive Suite with terrace access for working calls and meetings\n\n## Someone to introduce\nNone at this time. Elena's professional world — contemporary art, curatorial relationships, gallery acquisition — doesn't overlap with our current PlaceMaker offerings. A warm personal briefing from the concierge on local cultural institutions will serve her better than a domain-mismatched introduction.\n\n## Keep in mind\nShe's arriving from Madrid — if she flew direct, she's carrying nine hours and will likely want a quiet first evening rather than stimulation. She needs undisturbed space for work calls and meetings during her stay, and she comes alive in one-on-one conversations rather than big social settings. The bookshop briefing and Cantor note will signal that we understand what energizes her."
+    },
+    "df6691b2-d8bb-4bd5-bf51-5f0f317b8ef3": {
+      "id": "df6691b2-d8bb-4bd5-bf51-5f0f317b8ef3",
+      "guest_id": "guest-marcus-chen",
+      "stay_id": "stay-marcus-sandhill-2026",
+      "property_id": "sand-hill",
+      "generated_at": "2026-05-16T23:25:18.859769",
+      "room_temperature_f": 70,
+      "welcome_amenity": "napa-flight",
+      "moments_to_create": [
+        "Have the sommelier select three Napa wines with strong producer stories — small estates, family-run, ideally biodynamic — and write a short note about each winemaker's philosophy to accompany the welcome flight",
+        "Set up the poolside cabana with fresh towels, chilled still water, and a light reading basket (New Yorker, Monocle, a local art gallery guide) so Marcus can ease into a full poolside afternoon without needing to ask",
+        "Introduce David Park casually over dinner tonight at Madera — not a formal meeting, just a warm 'David will be joining us for a glass' so the Private Napa Day conversation can unfold naturally tomorrow",
+        "Coordinate with the front desk to have a small carafe of cold-pressed green juice waiting in the room on arrival — quiet hydration support without making a production of it"
+      ],
+      "itinerary": [
+        {
+          "time": "Arrival afternoon (May 16, post check-in)",
+          "suggestion": "Full poolside afternoon. No agenda. The cabana is his — staff will check in once to refresh water and offer light bites, then leave him to settle in."
+        },
+        {
+          "time": "Tonight, 7:30pm",
+          "suggestion": "Dinner at Madera. Sommelier will guide him through the natural wine program, and David Park will join for a glass around 8:30pm to introduce the idea of a private Napa day tomorrow."
+        },
+        {
+          "time": "Tomorrow morning (May 17)",
+          "suggestion": "Late breakfast, then depart mid-morning with David for a curated Napa visit — two small producers, lunch at a family estate, back by late afternoon so Marcus still has pool time before dinner."
+        }
+      ],
+      "placemaker_intro": "David Park — our wine curator who works exclusively with small Napa and Sonoma estates. David knows the families behind the wines, not just the labels. Marcus will appreciate the depth of conversation; this is someone who can talk terroir philosophy and biodynamic farming the way Marcus talks about Southeast Asian contemporary art.",
+      "flight_status": null,
+      "jet_lag_note": "No jet lag — he's traveling domestically. But after any flight, Marcus tends to dehydrate. Quiet hydration on arrival (juice, still water) will help him settle in faster.",
+      "raw_dossier": "# Marcus Chen — Arrival Dossier\n**Arriving**: May 16, 2026 | **Property**: Rosewood Sand Hill | **Stay**: 2 nights\n\n## Who he is\nMarcus is a thoughtful planner who has spent twelve years building a Southeast and East Asian contemporary art collection. He's someone who values deep expertise and genuine conversation — whether he's discussing a new artist with a gallery owner or learning the story behind a natural wine from the winemaker. He doesn't rush through experiences; he takes time to understand provenance, philosophy, and craft. He's also someone who loves creating surprise moments for his wife Sophie, but wants them to feel effortless and natural, never staged.\n\n## Moments to create today\n- Have the sommelier select three Napa wines with strong producer stories — small estates, family-run, ideally biodynamic — and write a short note about each winemaker's philosophy to accompany the welcome flight\n- Set up the poolside cabana with fresh towels, chilled still water, and a light reading basket (New Yorker, Monocle, a local art gallery guide) so Marcus can ease into a full poolside afternoon without needing to ask\n- Introduce David Park casually over dinner tonight at Madera — not a formal meeting, just a warm 'David will be joining us for a glass' so the Private Napa Day conversation can unfold naturally tomorrow\n- Coordinate with the front desk to have a small carafe of cold-pressed green juice waiting in the room on arrival — quiet hydration support without making a production of it\n\n## First 24 hours\n**Arrival afternoon (May 16, post check-in)**  \nFull poolside afternoon. No agenda. The cabana is his — staff will check in once to refresh water and offer light bites, then leave him to settle in.\n\n**Tonight, 7:30pm**  \nDinner at Madera. Sommelier will guide him through the natural wine program, and David Park will join for a glass around 8:30pm to introduce the idea of a private Napa day tomorrow.\n\n**Tomorrow morning (May 17)**  \nLate breakfast, then depart mid-morning with David for a curated Napa visit — two small producers, lunch at a family estate, back by late afternoon so Marcus still has pool time before dinner.\n\n## Room setup\n- Temperature: 70°F\n- Welcome amenity: Napa Valley welcome flight (three wines with producer notes)\n- Cold-pressed green juice in room on arrival\n- Poolside cabana pre-set with reading materials and refreshments\n\n## Someone to introduce\nDavid Park — our wine curator who works exclusively with small Napa and Sonoma estates. David knows the families behind the wines, not just the labels. Marcus will appreciate the depth of conversation; this is someone who can talk terroir philosophy and biodynamic farming the way Marcus talks about Southeast Asian contemporary art. Introduce them casually at dinner tonight so the Napa day tomorrow feels like a natural next step, not a sales pitch.\n\n## Keep in mind\nMarcus values understated elegance. If something is coordinated for him, it should feel organic — never like he's being managed. He also tends to dehydrate after flights, so quiet hydration touchpoints (juice on arrival, still water by the pool) will help him settle in without drawing attention to it. He's here to slow down and think clearly. Give him space to do that."
+    }
+  }
 }

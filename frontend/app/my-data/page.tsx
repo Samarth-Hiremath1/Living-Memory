@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation"
 
 const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
 
-type ConsentLevel = "standard" | "remembered" | "living_memory"
+type ConsentLevel = "standard" | "living_memory"
 
 interface Guest {
   id: string
@@ -26,14 +26,13 @@ interface Observation {
 }
 
 const CONSENT_LABELS: Record<ConsentLevel, string> = {
-  standard: "Standard — used this stay only",
-  remembered: "Remembered — saved for future stays at Sand Hill",
-  living_memory: "Living Memory — travels across all Rosewood properties",
+  standard: "Standard — used this stay only, not retained after checkout",
+  living_memory: "Living Memory — travels with you across all Rosewood properties worldwide",
 }
 
 function MyDataPageInner() {
   const searchParams = useSearchParams()
-  const guestIdParam = searchParams.get("guest_id") || "guest-anna-lindqvist"
+  const guestIdParam = searchParams.get("guest_id") || "guest-samarth-hiremath"
 
   const [guest, setGuest] = useState<Guest | null>(null)
   const [observations, setObservations] = useState<Observation[]>([])
@@ -205,7 +204,7 @@ function MyDataPageInner() {
         <section className="bg-white rounded-xl border border-stone-100 p-6 space-y-4">
           <p className="text-xs uppercase tracking-widest text-stone-400">Memory Preference</p>
           <div className="space-y-2">
-            {(["standard", "remembered", "living_memory"] as ConsentLevel[]).map((level) => (
+            {(["standard", "living_memory"] as ConsentLevel[]).map((level) => (
               <label key={level} className="flex items-start gap-3 cursor-pointer">
                 <input
                   type="radio"

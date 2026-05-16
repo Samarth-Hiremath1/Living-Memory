@@ -35,4 +35,4 @@ def transcribe_audio(audio_bytes: bytes, mime_type: str = "audio/webm") -> str |
 
 
 def _mock_transcription() -> str:
-    return "Anna at table 6 just asked about mountain hikes for tomorrow morning."
+    return "The guest asked about trail running options near the property and good spots for sunrise photography."

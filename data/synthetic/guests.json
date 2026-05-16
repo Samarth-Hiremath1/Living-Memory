@@ -70,19 +70,20 @@
     {
       "id": "guest-samarth-hiremath",
       "name": "Samarth Hiremath",
-      "email": "samhiremath1@gmail.com",
+      "email": "samhiremath@ucdavis.edu",
       "phone": "+1-415-555-0294",
-      "nationality": "American",
-      "languages": ["English"],
+      "nationality": "Indian-American",
+      "languages": ["English", "Hindi"],
       "home_city": "San Francisco",
       "consent_level": "living_memory",
       "stays": ["stay-samarth-sandhill-2026"],
       "preferences": {
-        "room_temperature_f": 70,
-        "interests": ["hiking", "viewpoints", "trail running", "photography", "Bay Area outdoors", "technology"],
-        "dietary": [],
-        "pace": "active",
-        "view_preference": "nature or valley"
+        "room_temperature_f": 72,
+        "interests": ["trail running", "hiking", "viewpoints", "photography", "Indian cuisine", "trying new cuisines", "technology", "Bay Area outdoors", "startups"],
+        "dietary": ["vegetarian-friendly", "loves spicy food", "enjoys Indian cuisine"],
+        "pace": "active morning, exploratory afternoon",
+        "view_preference": "nature or valley",
+        "wake_up": "early riser, typically up by 6am"
       },
       "property_aliases": {},
       "created_at": "2026-05-16T00:00:00"
@@ -308,7 +309,7 @@
       "check_out": "2026-05-19",
       "room_type": "Garden Bungalow",
       "party_size": 1,
-      "observations": ["obs-samarth-1", "obs-samarth-2"]
+      "observations": ["obs-samarth-1", "obs-samarth-2", "obs-samarth-3", "obs-samarth-4"]
     }
   ],
   "observations": [
@@ -562,6 +563,30 @@
       "tags": ["trail run", "photography", "sunrise", "active", "morning"],
       "source": "staff_text",
       "timestamp": "2026-05-16T11:00:00",
+      "sentiment": "positive"
+    },
+    {
+      "id": "obs-samarth-3",
+      "stay_id": "stay-samarth-sandhill-2026",
+      "guest_id": "guest-samarth-hiremath",
+      "property_id": "sand-hill",
+      "raw_text": "Samarth mentioned he loves trying new cuisines and asked whether Madera does any South Asian-inspired dishes or seasonal specials beyond the usual California menu. Also said he regularly cooks Indian food at home and appreciated that Reylon sources locally.",
+      "structured": {},
+      "tags": ["food", "indian cuisine", "madera", "reylon", "curious", "culinary interest"],
+      "source": "staff_text",
+      "timestamp": "2026-05-16T13:00:00",
+      "sentiment": "positive"
+    },
+    {
+      "id": "obs-samarth-4",
+      "stay_id": "stay-samarth-sandhill-2026",
+      "guest_id": "guest-samarth-hiremath",
+      "property_id": "sand-hill",
+      "raw_text": "Guest mentioned he works in tech and is between projects — this is a creative reset trip. He's interested in photography and said the golden hour light over the Santa Cruz Mountains from the property is exactly the kind of shot he's been looking for. Asked about the best vantage points on the property at sunset.",
+      "structured": {},
+      "tags": ["photography", "golden hour", "santa cruz mountains", "tech", "creative reset", "sunset"],
+      "source": "staff_text",
+      "timestamp": "2026-05-16T15:30:00",
       "sentiment": "positive"
     }
   ]

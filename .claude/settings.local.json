@@ -10,7 +10,11 @@
       "Bash(python -c \"from src.voice.ambassador import CONCIERGE_SYSTEM_PROMPT; print\\(CONCIERGE_SYSTEM_PROMPT\\)\")",
       "Bash(python -c \"from src.voice.ambassador import AMBASSADOR_SYSTEM_PROMPT; print\\(AMBASSADOR_SYSTEM_PROMPT\\)\")",
       "Bash(npx --prefix frontend tsc --noEmit)",
-      "Bash(curl -s -X POST http://localhost:8000/arrivals/generate-plan -H 'Content-Type: application/json' -d '{\"guest_id\":\"guest-anna-lindqvist\",\"stay_id\":\"stay-anna-sandhill-2026\",\"welcome_transcript\":null}')"
+      "Bash(curl -s -X POST http://localhost:8000/arrivals/generate-plan -H 'Content-Type: application/json' -d '{\"guest_id\":\"guest-anna-lindqvist\",\"stay_id\":\"stay-anna-sandhill-2026\",\"welcome_transcript\":null}')",
+      "Bash(brew cleanup *)",
+      "Bash(pip3 cache *)",
+      "Bash(curl -s -X POST http://localhost:8000/voice/process-welcome-call -H 'Content-Type: application/json' -d '{ *)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\('Summary:'\\); [print\\(' -', b\\) for b in d.get\\('summary', []\\)]\")"
     ]
   }
 }

@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState, useRef, ReactNode } from "react"
+import { useEffect, useState, useRef, ReactNode, useCallback } from "react"
 
 const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
 
@@ -41,6 +41,54 @@ interface InhouseGuest {
 
 // Full demo roster — all 5 current Sand Hill guests
 const DEMO_GUESTS: InhouseGuest[] = [
+  {
+    guest: {
+      id: "guest-samarth-hiremath",
+      name: "Samarth Hiremath",
+      nationality: "Indian-American",
+      home_city: "San Francisco",
+      consent_level: "living_memory",
+    },
+    stay: {
+      id: "stay-samarth-sandhill-2026",
+      check_in: new Date().toISOString().split("T")[0],
+      room_type: "Garden Bungalow",
+    },
+    recent_observations: [
+      {
+        id: "obs-samarth-1",
+        raw_text: "Samarth asked about the best hiking trails nearby — specifically looking for routes with good viewpoints over the valley. Mentioned he runs trails in Marin on weekends.",
+        tags: ["hiking", "trails", "viewpoints", "marin", "active"],
+        timestamp: new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString(),
+        source: "staff_text",
+        sentiment: "positive",
+      },
+      {
+        id: "obs-samarth-2",
+        raw_text: "Guest asked if we could arrange an early morning trail run before breakfast. Also curious about photography spots at sunrise on the property.",
+        tags: ["trail run", "photography", "sunrise", "morning"],
+        timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
+        source: "staff_text",
+        sentiment: "positive",
+      },
+      {
+        id: "obs-samarth-3",
+        raw_text: "Samarth asked whether Madera does South Asian-inspired dishes or seasonal specials. Said he cooks Indian food at home and appreciated that Reylon sources locally.",
+        tags: ["food", "indian cuisine", "madera", "culinary interest"],
+        timestamp: new Date(Date.now() - 60 * 60 * 1000).toISOString(),
+        source: "staff_text",
+        sentiment: "positive",
+      },
+    ],
+    plan: {
+      moments_to_create: [
+        "Map out a 5–6 mile trail loop with valley viewpoints — Natalie knows the best routes for early risers",
+        "Identify the best sunrise photography vantage point on the property and leave a handwritten note",
+        "Ask Reylon if he can suggest a farm-to-table dish with spice — note Samarth's love of bold flavors",
+        "Set up early 6am breakfast option for the terrace on trail-run mornings",
+      ],
+    },
+  },
   {
     guest: {
       id: "guest-anna-lindqvist",
@@ -230,9 +278,10 @@ const DEMO_GUESTS: InhouseGuest[] = [
   },
 ]
 
-const ANNA_DEFAULT_ACTION_ITEMS: ActionItem[] = [
-  { text: "Reserve oak grove trail walk for Anna — contact Natalie Cheng", done: false },
-  { text: "Ask David Park to select a natural wine from the Loire for room arrival", done: false },
+const SAMARTH_DEFAULT_ACTION_ITEMS: ActionItem[] = [
+  { text: "[Concierge] Map out 5–6 mile trail loop with valley viewpoints for early morning run", done: false },
+  { text: "[Concierge] Identify best sunrise photography spot — leave handwritten note in bungalow", done: false },
+  { text: "[F&B] Ask Reylon about bold-flavor dish for Samarth — loves spice, curious about Indian-inspired California food", done: false },
 ]
 
 function SentimentDot({ sentiment }: { sentiment?: string | null }) {
@@ -310,56 +359,11 @@ function VoiceCapture({
   const [submitting, setSubmitting] = useState(false)
   const [textInput, setTextInput] = useState("")
   const [error, setError] = useState("")
-  const mediaRef = useRef<MediaRecorder | null>(null)
-  const chunksRef = useRef<Blob[]>([])
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const recognitionRef = useRef<any>(null)
 
-  async function startRecording() {
-    setError("")
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
-      const mr = new MediaRecorder(stream)
-      chunksRef.current = []
-      mr.ondataavailable = (e) => chunksRef.current.push(e.data)
-      mr.onstop = async () => {
-        const blob = new Blob(chunksRef.current, { type: "audio/webm" })
-        await submitVoice(blob)
-        stream.getTracks().forEach((t) => t.stop())
-      }
-      mediaRef.current = mr
-      mr.start()
-      setRecording(true)
-    } catch {
-      setError("Microphone access denied — use text input below.")
-    }
-  }
-
-  function stopRecording() {
-    mediaRef.current?.stop()
-    setRecording(false)
-  }
-
-  async function submitVoice(blob: Blob) {
-    setSubmitting(true)
-    const form = new FormData()
-    form.append("audio", blob, "observation.webm")
-    form.append("stay_id", stayId)
-    form.append("guest_id", guestId)
-    form.append("property_id", propertyId)
-    try {
-      const res = await fetch(`${API}/observations/voice`, { method: "POST", body: form })
-      if (!res.ok) throw new Error("API error")
-      const data = await res.json()
-      setTranscript(data.transcript || "")
-      if (data.observation) onNewObservation(data.observation, data.action_items || [])
-    } catch {
-      setError("Could not process voice. Try text input.")
-    } finally {
-      setSubmitting(false)
-    }
-  }
-
-  async function submitText() {
-    if (!textInput.trim()) return
+  const submitTextObservation = useCallback(async (text: string) => {
+    if (!text.trim()) return
     setSubmitting(true)
     setError("")
     try {
@@ -367,7 +371,7 @@ function VoiceCapture({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          raw_text: textInput,
+          raw_text: text,
           stay_id: stayId,
           guest_id: guestId,
           property_id: propertyId,
@@ -377,13 +381,55 @@ function VoiceCapture({
       const data = await res.json()
       if (data.observation) {
         onNewObservation(data.observation, data.action_items || [])
-        setTextInput("")
       }
     } catch {
       setError("Could not save observation — check backend connection.")
     } finally {
       setSubmitting(false)
     }
+  }, [guestId, stayId, propertyId, onNewObservation])
+
+  function startRecording() {
+    setError("")
+    setTranscript("")
+    // Use browser Web Speech API — real transcription, no backend needed
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition
+    if (!SR) {
+      setError("Voice recognition not supported in this browser — use the text input below.")
+      return
+    }
+    const recognition = new SR()
+    recognition.continuous = false
+    recognition.interimResults = false
+    recognition.lang = "en-US"
+    recognitionRef.current = recognition
+
+    recognition.onresult = (event: { results: { [x: string]: { [x: string]: { transcript: string } } } }) => {
+      const text = event.results[0][0].transcript
+      setTranscript(text)
+      setRecording(false)
+      submitTextObservation(text)
+    }
+    recognition.onerror = () => {
+      setError("Could not capture voice. Try the text input below.")
+      setRecording(false)
+    }
+    recognition.onend = () => setRecording(false)
+    recognition.start()
+    setRecording(true)
+  }
+
+  function stopRecording() {
+    recognitionRef.current?.stop()
+    setRecording(false)
+  }
+
+  async function submitText() {
+    if (!textInput.trim()) return
+    await submitTextObservation(textInput.trim())
+    setTextInput("")
+    setTranscript("")
   }
 
   return (
@@ -401,15 +447,15 @@ function VoiceCapture({
         } disabled:opacity-40`}
       >
         {recording
-          ? "● Recording — release to send"
+          ? "● Listening — release when done"
           : submitting
-          ? "Processing..."
+          ? "Saving..."
           : "Hold to speak an observation"}
       </button>
 
       {transcript && (
         <p className="text-xs text-stone-500 italic bg-stone-50 rounded-lg px-3 py-2">
-          Transcribed: &ldquo;{transcript}&rdquo;
+          Heard: &ldquo;{transcript}&rdquo;
         </p>
       )}
 
@@ -435,7 +481,7 @@ function VoiceCapture({
       </div>
 
       <p className="text-xs text-stone-400">
-        Observations are parsed by Claude and saved to the guest&apos;s memory graph instantly.
+        Voice uses your browser&apos;s built-in speech recognition. Observations are parsed by Claude instantly.
       </p>
     </div>
   )
@@ -444,7 +490,7 @@ function VoiceCapture({
 function GuestPanel({ data }: { data: InhouseGuest }) {
   const [observations, setObservations] = useState<Observation[]>(data.recent_observations)
   const [actionItems, setActionItems] = useState<ActionItem[]>(
-    data.guest?.id === "guest-anna-lindqvist" ? ANNA_DEFAULT_ACTION_ITEMS : []
+    data.guest?.id === "guest-samarth-hiremath" ? SAMARTH_DEFAULT_ACTION_ITEMS : []
   )
   const [newActionText, setNewActionText] = useState("")
   const moments = (data.plan?.moments_to_create as string[]) || []
@@ -585,12 +631,10 @@ function GuestPanel({ data }: { data: InhouseGuest }) {
 function ConsentPill({ level }: { level: string }) {
   const styles: Record<string, string> = {
     standard: "bg-stone-100 text-stone-500",
-    remembered: "bg-blue-50 text-blue-500",
     living_memory: "bg-rosewood-50 text-rosewood-600",
   }
   const labels: Record<string, string> = {
     standard: "Standard",
-    remembered: "Remembered",
     living_memory: "Living Memory",
   }
   return (

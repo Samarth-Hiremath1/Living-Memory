@@ -39,6 +39,10 @@ interface Arrival {
 
 // Cross-property memory — hardcoded for demo
 const CROSS_PROPERTY_MEMORY: Record<string, Array<{ property: string; dates: string; note: string }>> = {
+  "guest-samarth-hiremath": [
+    { property: "Rosewood Miramar Beach", dates: "Aug 2024", note: "Weekend stay — trail run along the bluffs each morning at 6am, asked about coastal photography spots at golden hour." },
+    { property: "Rosewood Bangkok", dates: "Dec 2024", note: "Tech conference trip — explored street food markets with curiosity, requested vegetarian-friendly and spicy options throughout. Early riser." },
+  ],
   "guest-anna-lindqvist": [
     { property: "Rosewood Hong Kong", dates: "Mar 2023", note: "Art Basel HK — quiet breakfast preference noted, natural wine interest emerged." },
     { property: "The Carlyle, New York", dates: "Sep 2023", note: "Architecture conference at MoMA — early morning runs in Central Park, room at 67°F." },
@@ -56,7 +60,6 @@ const CROSS_PROPERTY_MEMORY: Record<string, Array<{ property: string; dates: str
 function ConsentBadge({ level }: { level: string }) {
   const colors: Record<string, string> = {
     standard: "bg-stone-100 text-stone-500",
-    remembered: "bg-blue-50 text-blue-500",
     living_memory: "bg-rosewood-50 text-rosewood-600",
   }
   const labels: Record<string, string> = {
@@ -389,18 +392,18 @@ export default function ManagerPage() {
   const DEMO_ARRIVALS: Arrival[] = [
     {
       guest: {
-        id: "guest-anna-lindqvist",
-        name: "Anna Lindqvist",
-        nationality: "Swedish",
+        id: "guest-samarth-hiremath",
+        name: "Samarth Hiremath",
+        nationality: "Indian-American",
         home_city: "San Francisco",
         consent_level: "living_memory",
       },
       stay: {
-        id: "stay-anna-sandhill-2026",
+        id: "stay-samarth-sandhill-2026",
         check_in: new Date().toISOString().split("T")[0],
         check_out: null,
         room_type: "Garden Bungalow",
-        flight_number: "LH454",
+        flight_number: null,
         occasions: [],
       },
       plan: null,

@@ -44,7 +44,7 @@ export default function GuestPage() {
   const [demoThinking, setDemoThinking] = useState(false)
 
   useEffect(() => {
-    fetch(`${API}/voice/concierge-url?guest_name=Anna+Lindqvist&property_name=Rosewood+Sand+Hill`)
+    fetch(`${API}/voice/concierge-url?guest_name=Samarth+Hiremath&property_name=Rosewood+Sand+Hill`)
       .then((r) => r.json())
       .then((d) => setSignedUrl(d.signed_url || null))
       .catch(() => {})
@@ -162,7 +162,7 @@ export default function GuestPage() {
         {phase === "idle" && (
           <div className="space-y-8">
             <div className="space-y-2">
-              <h2 className="font-serif text-2xl text-stone-800">Good afternoon, Anna.</h2>
+              <h2 className="font-serif text-2xl text-stone-800">Good afternoon, Samarth.</h2>
               <p className="text-stone-500 text-sm leading-relaxed">
                 Our concierge knows every corner of Sand Hill and the surrounding area — and has real relationships
                 with the people who make it special. Ask anything, or call us directly.
@@ -329,7 +329,7 @@ export default function GuestPage() {
       <footer className="border-t border-stone-100 bg-white px-8 py-4">
         <div className="max-w-2xl mx-auto text-center">
           <a
-            href="/my-data?guest_id=guest-anna-lindqvist"
+            href="/my-data?guest_id=guest-samarth-hiremath"
             className="text-xs text-stone-400 hover:text-stone-600 underline transition-colors"
           >
             See everything we know about you →

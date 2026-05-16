@@ -13,9 +13,8 @@ def new_id() -> str:
 
 
 class ConsentLevel(str, Enum):
-    STANDARD = "standard"            # This stay only — no history stored
-    REMEMBERED = "remembered"        # Preferences saved across stays at this property
-    LIVING_MEMORY = "living_memory"  # Full cross-property AI memory
+    STANDARD = "standard"            # This stay only — no history stored after checkout
+    LIVING_MEMORY = "living_memory"  # Full cross-property AI memory, travels with guest
 
 
 class ObservationSource(str, Enum):

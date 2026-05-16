@@ -5,8 +5,8 @@ import { useSearchParams } from "next/navigation"
 
 const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
 
-type Phase = "pre" | "connecting" | "conversation" | "done"
-type ConsentLevel = "standard" | "remembered" | "living_memory"
+type Phase = "pre" | "connecting" | "conversation" | "form" | "done"
+type ConsentLevel = "standard" | "living_memory"
 
 interface TranscriptLine {
   speaker: "ambassador" | "guest"
@@ -16,11 +16,7 @@ interface TranscriptLine {
 const CONSENT_DETAILS: Record<ConsentLevel, { label: string; description: string }> = {
   standard: {
     label: "Standard",
-    description: "Your preferences are used only for this stay. Nothing is remembered afterward.",
-  },
-  remembered: {
-    label: "Remembered",
-    description: "Your preferences are saved for future stays at Rosewood Sand Hill. We'll recognize you when you return.",
+    description: "Your preferences are used only for this stay. Nothing is retained after checkout.",
   },
   living_memory: {
     label: "Living Memory",
@@ -43,12 +39,268 @@ const DEMO_SUMMARY = [
   "Quiet, unhurried pace throughout stay",
 ]
 
-// Default demo data (Anna)
-const DEMO_GUEST_ID = "guest-anna-lindqvist"
-const DEMO_STAY_ID = "stay-anna-sandhill-2026"
-const DEMO_GUEST_NAME = "Anna"
+// Default demo data (Samarth)
+const DEMO_GUEST_ID = "guest-samarth-hiremath"
+const DEMO_STAY_ID = "stay-samarth-sandhill-2026"
+const DEMO_GUEST_NAME = "Samarth"
 const DEMO_ROOM_TYPE = "Garden Bungalow"
-const DEMO_CHECK_IN = "September 15"
+const DEMO_CHECK_IN = "May 16"
+
+// ── Onboarding Form ─────────────────────────────────────────────────────────
+
+interface FormData {
+  arrivalTime: string
+  tempPreference: string
+  welcomeAmenity: string
+  lookingForward: string
+  dietary: string
+  occasion: string
+  otherRequests: string
+}
+
+function OnboardingForm({
+  guestFirstName,
+  guestId,
+  stayId,
+  consentLevel,
+  onComplete,
+  onBack,
+}: {
+  guestFirstName: string
+  guestId: string
+  stayId: string
+  consentLevel: ConsentLevel
+  onComplete: (summary: string[]) => void
+  onBack: () => void
+}) {
+  const [form, setForm] = useState<FormData>({
+    arrivalTime: "",
+    tempPreference: "",
+    welcomeAmenity: "",
+    lookingForward: "",
+    dietary: "",
+    occasion: "",
+    otherRequests: "",
+  })
+  const [submitting, setSubmitting] = useState(false)
+
+  function set(field: keyof FormData, value: string) {
+    setForm((prev) => ({ ...prev, [field]: value }))
+  }
+
+  function isAnythingFilled() {
+    return Object.values(form).some((v) => v.trim().length > 0)
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    setSubmitting(true)
+
+    // Build natural-language summary to pass through the welcome-call processor
+    const lines: string[] = []
+    if (form.arrivalTime) lines.push(`Guest expects to arrive at ${form.arrivalTime}.`)
+    if (form.tempPreference) lines.push(`Room temperature preference: ${form.tempPreference}.`)
+    if (form.welcomeAmenity) lines.push(`Welcome amenity requested: ${form.welcomeAmenity}.`)
+    if (form.lookingForward) lines.push(`Looking forward to: ${form.lookingForward}.`)
+    if (form.dietary) lines.push(`Dietary notes: ${form.dietary}.`)
+    if (form.occasion) lines.push(`Occasion: ${form.occasion}.`)
+    if (form.otherRequests) lines.push(`Other requests: ${form.otherRequests}.`)
+
+    const transcript = `${guestFirstName} completed the pre-arrival form:\n${lines.join("\n")}`
+
+    try {
+      // Save consent level
+      await fetch(`${API}/guests/${guestId}/consent`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ consent_level: consentLevel }),
+      })
+
+      // Process through existing welcome-call pipeline
+      const res = await fetch(`${API}/voice/process-welcome-call`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ transcript, guest_id: guestId, stay_id: stayId }),
+      })
+
+      if (res.ok) {
+        const data = await res.json()
+        if (data.summary && data.summary.length > 0) {
+          onComplete(data.summary)
+          return
+        }
+      }
+    } catch {
+      // fall through to built summary
+    }
+
+    // Build a local summary if API failed
+    const localSummary: string[] = []
+    if (form.arrivalTime) localSummary.push(`Arriving around ${form.arrivalTime}`)
+    if (form.tempPreference) localSummary.push(`Room temperature: ${form.tempPreference}`)
+    if (form.welcomeAmenity) localSummary.push(`Welcome amenity: ${form.welcomeAmenity}`)
+    if (form.lookingForward) localSummary.push(form.lookingForward)
+    if (form.dietary) localSummary.push(`Dietary: ${form.dietary}`)
+    if (form.occasion) localSummary.push(`Occasion: ${form.occasion}`)
+    if (form.otherRequests) localSummary.push(form.otherRequests)
+    onComplete(localSummary.length > 0 ? localSummary : ["Preferences saved — we&apos;ll have everything ready."])
+  }
+
+  const inputClass = "w-full bg-stone-800 border border-stone-700 text-stone-100 placeholder-stone-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-rosewood-500 transition-colors"
+  const labelClass = "block text-xs uppercase tracking-widest text-stone-400 mb-2"
+
+  return (
+    <div className="w-full text-left space-y-6">
+      <div className="flex items-center gap-4">
+        <button onClick={onBack} className="text-stone-500 hover:text-stone-300 transition-colors text-sm">← Back</button>
+        <div>
+          <h2 className="font-serif text-2xl text-stone-100">A few quick questions</h2>
+          <p className="text-xs text-stone-500 mt-0.5">So we can have everything just right when you walk in, {guestFirstName}.</p>
+        </div>
+      </div>
+
+      <form onSubmit={handleSubmit} className="space-y-5">
+
+        {/* Arrival time */}
+        <div>
+          <label className={labelClass}>What time do you expect to arrive?</label>
+          <input
+            type="text"
+            value={form.arrivalTime}
+            onChange={(e) => set("arrivalTime", e.target.value)}
+            placeholder="e.g. around 3pm, late afternoon, after 6..."
+            className={inputClass}
+          />
+        </div>
+
+        {/* Room temperature */}
+        <div>
+          <label className={labelClass}>Do you tend to sleep warm or cool?</label>
+          <div className="grid grid-cols-3 gap-2">
+            {["Cool (65–68°F)", "Moderate (69–71°F)", "Warm (72°F+)"].map((opt) => (
+              <button
+                key={opt}
+                type="button"
+                onClick={() => set("tempPreference", opt)}
+                className={`py-2.5 px-3 rounded-xl text-xs font-medium transition-colors ${
+                  form.tempPreference === opt
+                    ? "bg-rosewood-600 text-white"
+                    : "bg-stone-800 border border-stone-700 text-stone-400 hover:border-stone-500"
+                }`}
+              >
+                {opt}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Welcome amenity */}
+        <div>
+          <label className={labelClass}>Is there anything you&apos;d love waiting in your room?</label>
+          <div className="grid grid-cols-2 gap-2 mb-2">
+            {[
+              "Cold-pressed juices & greens",
+              "Local wine selection",
+              "Tea & adaptogens",
+              "Fresh fruit & Manresa bread",
+            ].map((opt) => (
+              <button
+                key={opt}
+                type="button"
+                onClick={() => set("welcomeAmenity", opt)}
+                className={`py-2 px-3 rounded-xl text-xs text-left transition-colors ${
+                  form.welcomeAmenity === opt
+                    ? "bg-rosewood-600 text-white"
+                    : "bg-stone-800 border border-stone-700 text-stone-400 hover:border-stone-500"
+                }`}
+              >
+                {opt}
+              </button>
+            ))}
+          </div>
+          <input
+            type="text"
+            value={["Cold-pressed juices & greens","Local wine selection","Tea & adaptogens","Fresh fruit & Manresa bread"].includes(form.welcomeAmenity) ? "" : form.welcomeAmenity}
+            onChange={(e) => set("welcomeAmenity", e.target.value)}
+            placeholder="Or describe something specific..."
+            className={inputClass}
+          />
+        </div>
+
+        {/* Looking forward to */}
+        <div>
+          <label className={labelClass}>What are you most looking forward to?</label>
+          <textarea
+            value={form.lookingForward}
+            onChange={(e) => set("lookingForward", e.target.value)}
+            placeholder="Hiking, a quiet morning, trying Madera, the spa, exploring the trails..."
+            rows={2}
+            className={`${inputClass} resize-none`}
+          />
+        </div>
+
+        {/* Dietary */}
+        <div>
+          <label className={labelClass}>Any dietary preferences we should know?</label>
+          <input
+            type="text"
+            value={form.dietary}
+            onChange={(e) => set("dietary", e.target.value)}
+            placeholder="Vegetarian, allergies, loves spicy food, no shellfish..."
+            className={inputClass}
+          />
+        </div>
+
+        {/* Occasion */}
+        <div>
+          <label className={labelClass}>Is this trip a special occasion? <span className="text-stone-600 normal-case not-italic">(optional)</span></label>
+          <div className="flex flex-wrap gap-2">
+            {["Birthday", "Anniversary", "Work retreat", "Creative reset", "Just needed a break"].map((opt) => (
+              <button
+                key={opt}
+                type="button"
+                onClick={() => set("occasion", form.occasion === opt ? "" : opt)}
+                className={`py-1.5 px-3 rounded-full text-xs transition-colors ${
+                  form.occasion === opt
+                    ? "bg-rosewood-600 text-white"
+                    : "bg-stone-800 border border-stone-700 text-stone-400 hover:border-stone-500"
+                }`}
+              >
+                {opt}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Other */}
+        <div>
+          <label className={labelClass}>Anything else you&apos;d like us to know?</label>
+          <textarea
+            value={form.otherRequests}
+            onChange={(e) => set("otherRequests", e.target.value)}
+            placeholder="Early checkout, a quiet bungalow, the fireplace lit on arrival..."
+            rows={2}
+            className={`${inputClass} resize-none`}
+          />
+        </div>
+
+        <button
+          type="submit"
+          disabled={submitting || !isAnythingFilled()}
+          className="w-full py-4 rounded-2xl bg-rosewood-600 hover:bg-rosewood-700 text-white text-sm font-medium transition-all disabled:opacity-40"
+        >
+          {submitting ? "Saving your preferences..." : "We'll have everything ready →"}
+        </button>
+
+        <p className="text-xs text-stone-600 text-center">
+          All fields are optional — share only what feels comfortable.
+        </p>
+      </form>
+    </div>
+  )
+}
+
+// ── Main page ────────────────────────────────────────────────────────────────
 
 function WelcomePageInner() {
   const searchParams = useSearchParams()
@@ -96,7 +348,7 @@ function WelcomePageInner() {
           const d = new Date(stay.check_in + "T12:00:00")
           setCheckInDisplay(d.toLocaleDateString("en-US", { month: "long", day: "numeric" }))
         }
-        if (guest.consent_level && ["standard", "remembered", "living_memory"].includes(guest.consent_level)) {
+        if (guest.consent_level && ["standard", "living_memory"].includes(guest.consent_level)) {
           setConsentLevel(guest.consent_level as ConsentLevel)
         }
       } catch {
@@ -330,21 +582,51 @@ function WelcomePageInner() {
 
             <div className="space-y-4">
               <p className="text-stone-400 text-sm leading-relaxed">
-                Before you arrive, we&apos;d love a brief moment with you. One of our team will ask a few questions
-                — nothing formal, just a conversation — so we can have everything just right when you walk in.
+                Before you arrive, we&apos;d love to know a little about what would make your stay perfect.
+                Choose whichever feels right.
               </p>
+
+              {/* Option 1: Voice conversation */}
               <button
                 onClick={startConversation}
-                className="group inline-flex items-center gap-3 bg-rosewood-600 hover:bg-rosewood-700 text-white rounded-full px-8 py-4 text-sm font-medium transition-all"
+                className="group w-full flex items-center justify-between bg-rosewood-600 hover:bg-rosewood-700 text-white rounded-2xl px-6 py-5 transition-all text-left"
               >
-                <span className="w-2 h-2 rounded-full bg-white/60 group-hover:bg-white transition-colors" />
-                Have a moment with us?
+                <div>
+                  <p className="font-semibold text-sm">Speak with our Ambassador</p>
+                  <p className="text-xs text-rosewood-200 mt-0.5">A warm 2-minute conversation — nothing formal</p>
+                </div>
+                <span className="text-xl opacity-80">🎙</span>
               </button>
+
+              {/* Option 2: Quick form */}
+              <button
+                onClick={() => setPhase("form")}
+                className="group w-full flex items-center justify-between bg-stone-800 hover:bg-stone-700 border border-stone-700 text-white rounded-2xl px-6 py-5 transition-all text-left"
+              >
+                <div>
+                  <p className="font-semibold text-sm text-stone-200">Fill in a quick form</p>
+                  <p className="text-xs text-stone-400 mt-0.5">Arrival time, room preferences, what you&apos;re looking forward to</p>
+                </div>
+                <span className="text-xl opacity-60">✏️</span>
+              </button>
+
               <p className="text-xs text-stone-600">
-                Optional · About 2 minutes · Your preferences are saved according to your memory setting above.
+                Both are optional · Your preferences are saved according to your memory setting above.
               </p>
             </div>
           </>
+        )}
+
+        {/* Onboarding Form */}
+        {phase === "form" && (
+          <OnboardingForm
+            guestFirstName={guestFirstName}
+            guestId={guestId}
+            stayId={stayId}
+            consentLevel={consentLevel}
+            onComplete={(summary) => { setCaptured(summary); setPhase("done") }}
+            onBack={() => setPhase("pre")}
+          />
         )}
 
         {/* Connecting */}
