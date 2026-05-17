@@ -1,11 +1,12 @@
 "use client"
 
-import { useState, useEffect, Suspense } from "react"
+import { useState, useEffect, useRef, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 
 const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
 
-type Phase = "pre" | "connecting" | "conversation" | "form" | "done"
+// "processing" = conversation ended, waiting for API to extract preferences
+type Phase = "pre" | "connecting" | "conversation" | "processing" | "form" | "done"
 type ConsentLevel = "standard" | "living_memory"
 
 interface TranscriptLine {
@@ -24,11 +25,11 @@ const CONSENT_DETAILS: Record<ConsentLevel, { label: string; description: string
   },
 }
 
-// Only the ambassador's side — user provides their own responses in demo mode
+// Demo ambassador lines — used when ElevenLabs is not configured
 const DEMO_AMBASSADOR_LINES = [
   "How lovely to reach you before your arrival. I'm calling from Rosewood Sand Hill — we're so looking forward to having you with us. Are you coming straight to us from the city, or have you been on the road a while?",
   "That sounds like quite a journey. Is there something you've been imagining about your time with us this weekend?",
-  "Natalie at our spa has a session designed exactly for long-haul arrivals — I'll make sure she knows you're coming. The trail through the oak grove is genuinely peaceful this time of year. Is there anything else that would make your arrival feel just right?",
+  "Natalie at our spa has a session designed exactly for long-haul arrivals — I'll make sure she knows you're coming. The trail through the oak grove is genuinely peaceful this time of year. Do you tend to sleep warm or do you prefer the room a bit cool? And is there anything you'd love waiting for you?",
   "We'll have everything ready for you. We're genuinely looking forward to having you. Safe travels.",
 ]
 
@@ -39,12 +40,12 @@ const DEMO_SUMMARY = [
   "Quiet, unhurried pace throughout stay",
 ]
 
-// Default demo data (Samarth)
-const DEMO_GUEST_ID = "guest-samarth-hiremath"
-const DEMO_STAY_ID = "stay-samarth-sandhill-2026"
-const DEMO_GUEST_NAME = "Samarth"
+// Generic defaults — no guest pre-loaded until URL param or button click
+const DEMO_GUEST_ID = ""
+const DEMO_STAY_ID = ""
+const DEMO_GUEST_NAME = "there"
 const DEMO_ROOM_TYPE = "Garden Bungalow"
-const DEMO_CHECK_IN = "May 16"
+const DEMO_CHECK_IN = new Date().toLocaleDateString("en-US", { month: "long", day: "numeric" })
 
 // ── Onboarding Form ─────────────────────────────────────────────────────────
 
@@ -96,7 +97,7 @@ function OnboardingForm({
     e.preventDefault()
     setSubmitting(true)
 
-    // Build natural-language summary to pass through the welcome-call processor
+    // Build natural-language transcript to pass through the welcome-call processor
     const lines: string[] = []
     if (form.arrivalTime) lines.push(`Guest expects to arrive at ${form.arrivalTime}.`)
     if (form.tempPreference) lines.push(`Room temperature preference: ${form.tempPreference}.`)
@@ -109,14 +110,16 @@ function OnboardingForm({
     const transcript = `${guestFirstName} completed the pre-arrival form:\n${lines.join("\n")}`
 
     try {
-      // Save consent level
-      await fetch(`${API}/guests/${guestId}/consent`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ consent_level: consentLevel }),
-      })
+      // Save consent level if guest is known
+      if (guestId) {
+        await fetch(`${API}/guests/${guestId}/consent`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ consent_level: consentLevel }),
+        })
+      }
 
-      // Process through existing welcome-call pipeline
+      // Process through welcome-call pipeline
       const res = await fetch(`${API}/voice/process-welcome-call`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -131,10 +134,10 @@ function OnboardingForm({
         }
       }
     } catch {
-      // fall through to built summary
+      // Fall through to local summary
     }
 
-    // Build a local summary if API failed
+    // Local summary if API failed or returned nothing
     const localSummary: string[] = []
     if (form.arrivalTime) localSummary.push(`Arriving around ${form.arrivalTime}`)
     if (form.tempPreference) localSummary.push(`Room temperature: ${form.tempPreference}`)
@@ -143,7 +146,7 @@ function OnboardingForm({
     if (form.dietary) localSummary.push(`Dietary: ${form.dietary}`)
     if (form.occasion) localSummary.push(`Occasion: ${form.occasion}`)
     if (form.otherRequests) localSummary.push(form.otherRequests)
-    onComplete(localSummary.length > 0 ? localSummary : ["Preferences saved — we&apos;ll have everything ready."])
+    onComplete(localSummary.length > 0 ? localSummary : ["Preferences saved — we'll have everything ready."])
   }
 
   const inputClass = "w-full bg-stone-800 border border-stone-700 text-stone-100 placeholder-stone-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-rosewood-500 transition-colors"
@@ -155,7 +158,7 @@ function OnboardingForm({
         <button onClick={onBack} className="text-stone-500 hover:text-stone-300 transition-colors text-sm">← Back</button>
         <div>
           <h2 className="font-serif text-2xl text-stone-100">A few quick questions</h2>
-          <p className="text-xs text-stone-500 mt-0.5">So we can have everything just right when you walk in, {guestFirstName}.</p>
+          <p className="text-xs text-stone-500 mt-0.5">So we can have everything just right when you walk in{guestFirstName !== "there" ? `, ${guestFirstName}` : ""}.</p>
         </div>
       </div>
 
@@ -308,28 +311,31 @@ function WelcomePageInner() {
 
   const [phase, setPhase] = useState<Phase>("pre")
   const [transcript, setTranscript] = useState<TranscriptLine[]>([])
-  const [signedUrl, setSignedUrl] = useState<string | null>(null)
   const [consentLevel, setConsentLevel] = useState<ConsentLevel>("living_memory")
   const [showConsentDetail, setShowConsentDetail] = useState(false)
   const [captured, setCaptured] = useState<string[]>([])
-  const [fullTranscript, setFullTranscript] = useState<string>("")
   const [forgotten, setForgotten] = useState(false)
   const [forgetting, setForgetting] = useState(false)
+
   // Demo mode interactive state
   const [demoStep, setDemoStep] = useState(0)
   const [demoInput, setDemoInput] = useState("")
-  const [demoWaiting, setDemoWaiting] = useState(false) // true = waiting for user to type
+  const [demoWaiting, setDemoWaiting] = useState(false)
 
-  // Dynamic guest/stay data
+  // Guest/stay data — populated from URL param or left as generic defaults
   const [guestId, setGuestId] = useState(DEMO_GUEST_ID)
   const [stayId, setStayId] = useState(DEMO_STAY_ID)
   const [guestFirstName, setGuestFirstName] = useState(DEMO_GUEST_NAME)
   const [roomType, setRoomType] = useState(DEMO_ROOM_TYPE)
   const [checkInDisplay, setCheckInDisplay] = useState(DEMO_CHECK_IN)
 
-  // Feature 2: Load stay and guest from URL param
+  // Stable ref for guestFirstName — avoids stale closures in async callbacks
+  const guestFirstNameRef = useRef(guestFirstName)
+  useEffect(() => { guestFirstNameRef.current = guestFirstName }, [guestFirstName])
+
+  // Load stay + guest from URL param on mount
   useEffect(() => {
-    if (!stayIdParam) return // fall back to demo data
+    if (!stayIdParam) return
 
     async function loadStayAndGuest() {
       try {
@@ -352,37 +358,38 @@ function WelcomePageInner() {
           setConsentLevel(guest.consent_level as ConsentLevel)
         }
       } catch {
-        // silent fallback to demo
+        // Silent fallback to demo defaults
       }
     }
 
     loadStayAndGuest()
   }, [stayIdParam])
 
-  useEffect(() => {
-    fetch(`${API}/voice/ambassador-url?guest_name=${encodeURIComponent(guestFirstName)}&property_name=Rosewood+Sand+Hill`)
-      .then((r) => r.json())
-      .then((d) => setSignedUrl(d.signed_url || null))
-      .catch(() => {})
-  }, [guestFirstName])
+  // Process transcript via API — saves preferences to guest, returns summary bullets
+  async function processTranscriptWithAPI(rawTranscript: string, resolvedGuestId?: string, resolvedStayId?: string) {
+    const effectiveGuestId = resolvedGuestId ?? guestId
+    const effectiveStayId = resolvedStayId ?? stayId
 
-  async function processTranscriptWithAPI(rawTranscript: string) {
     try {
-      await fetch(`${API}/guests/${guestId}/consent`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ consent_level: consentLevel }),
-      })
+      // Persist consent level if guest is known
+      if (effectiveGuestId) {
+        await fetch(`${API}/guests/${effectiveGuestId}/consent`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ consent_level: consentLevel }),
+        })
+      }
 
       const res = await fetch(`${API}/voice/process-welcome-call`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           transcript: rawTranscript,
-          guest_id: guestId,
-          stay_id: stayId,
+          guest_id: effectiveGuestId,
+          stay_id: effectiveStayId,
         }),
       })
+
       if (res.ok) {
         const data = await res.json()
         if (data.summary && data.summary.length > 0) {
@@ -391,8 +398,9 @@ function WelcomePageInner() {
         }
       }
     } catch {
-      // Silent fallback
+      // Fall through to demo summary
     }
+
     setCaptured(DEMO_SUMMARY)
   }
 
@@ -400,37 +408,85 @@ function WelcomePageInner() {
     setPhase("connecting")
     setTranscript([])
 
-    if (signedUrl) {
-      try {
-        const { Conversation } = await import("@elevenlabs/client")
-        setPhase("conversation")
-        const lines: TranscriptLine[] = []
+    try {
+      // Always fetch a fresh signed URL at click time — includes stay context
+      const params = new URLSearchParams({ property_name: "Rosewood Sand Hill" })
+      if (stayId) params.set("stay_id", stayId)
+      if (guestFirstName && guestFirstName !== "there") params.set("guest_name", guestFirstName)
 
-        const conv = await Conversation.startSession({
-          signedUrl,
-          onMessage: ({ message, source }: { message: string; source: string }) => {
-            const line: TranscriptLine = {
-              speaker: source === "ai" ? "ambassador" : "guest",
-              text: message,
-            }
-            lines.push(line)
-            setTranscript((prev) => [...prev, line])
-          },
-          onDisconnect: async () => {
-            const raw = lines
-              .map((l) => `${l.speaker === "ambassador" ? "Ambassador" : guestFirstName}: ${l.text}`)
-              .join("\n")
-            setFullTranscript(raw)
-            await processTranscriptWithAPI(raw)
-            setPhase("done")
-          },
-        })
+      const urlRes = await fetch(`${API}/voice/ambassador-url?${params.toString()}`)
+      const urlData = urlRes.ok ? await urlRes.json() : {}
 
-        setTimeout(() => conv.endSession(), 180000)
-      } catch {
+      const freshSignedUrl: string | null = urlData.signed_url || null
+      const firstMessage: string | null = urlData.first_message || null
+      // If the backend resolved a guest from stay_id, use those IDs
+      const resolvedGuestId: string = urlData.guest_id || guestId
+      const resolvedStayId: string = urlData.stay_id || stayId
+      const resolvedGuestName: string = urlData.guest_name || guestFirstName
+
+      if (freshSignedUrl) {
+        await startElevenLabsConversation(freshSignedUrl, firstMessage, resolvedGuestId, resolvedStayId, resolvedGuestName)
+      } else {
         runDemoMode()
       }
-    } else {
+    } catch {
+      runDemoMode()
+    }
+  }
+
+  async function startElevenLabsConversation(
+    url: string,
+    firstMessage: string | null,
+    resolvedGuestId: string,
+    resolvedStayId: string,
+    resolvedGuestName: string,
+  ) {
+    try {
+      const { Conversation } = await import("@elevenlabs/client")
+      setPhase("conversation")
+
+      // Local array — avoids closure issues; transcript state is for display only
+      const lines: TranscriptLine[] = []
+
+      const sessionOptions: Record<string, unknown> = {
+        signedUrl: url,
+        onMessage: ({ message, source }: { message: string; source: string }) => {
+          const line: TranscriptLine = {
+            speaker: source === "ai" ? "ambassador" : "guest",
+            text: message,
+          }
+          lines.push(line)
+          setTranscript((prev) => [...prev, line])
+        },
+        onDisconnect: async () => {
+          const name = guestFirstNameRef.current
+          const raw = lines
+            .map((l) => `${l.speaker === "ambassador" ? "Ambassador" : name}: ${l.text}`)
+            .join("\n")
+
+          // Show processing phase while we extract preferences
+          setPhase("processing")
+          await processTranscriptWithAPI(raw, resolvedGuestId, resolvedStayId)
+          setPhase("done")
+        },
+      }
+
+      // Inject personalized first message if available (requires signed URL permission)
+      if (firstMessage) {
+        sessionOptions.overrides = {
+          agent: { firstMessage },
+        }
+      }
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const conv = await (Conversation as any).startSession(sessionOptions)
+
+      // Auto-end after 3 minutes
+      setTimeout(() => {
+        try { conv.endSession() } catch { /* ignore */ }
+      }, 180_000)
+    } catch {
+      // ElevenLabs SDK failed — fall back to demo mode
       runDemoMode()
     }
   }
@@ -439,12 +495,11 @@ function WelcomePageInner() {
     setPhase("conversation")
     setDemoStep(0)
     setDemoWaiting(false)
-    // Show first ambassador line after a short delay
     setTimeout(() => {
       setTranscript([{ speaker: "ambassador", text: DEMO_AMBASSADOR_LINES[0] }])
       setDemoStep(1)
       setDemoWaiting(true)
-    }, 1000)
+    }, 900)
   }
 
   function submitDemoResponse() {
@@ -453,21 +508,21 @@ function WelcomePageInner() {
     setDemoInput("")
     setDemoWaiting(false)
 
-    // Add user's real response
     setTranscript((prev) => [...prev, { speaker: "guest", text: userText }])
 
     const nextStep = demoStep
     if (nextStep >= DEMO_AMBASSADOR_LINES.length) {
-      // No more ambassador lines — end conversation
-      const lines = [...transcript, { speaker: "guest" as const, text: userText }]
-      const raw = lines.map((l) => `${l.speaker === "ambassador" ? "Ambassador" : guestFirstName}: ${l.text}`).join("\n")
-      setFullTranscript(raw)
-      processTranscriptWithAPI(raw)
-      setTimeout(() => setPhase("done"), 800)
+      // Conversation complete
+      setTranscript((prev) => {
+        const name = guestFirstNameRef.current
+        const raw = prev.map((l) => `${l.speaker === "ambassador" ? "Ambassador" : name}: ${l.text}`).join("\n")
+        setPhase("processing")
+        processTranscriptWithAPI(raw).then(() => setPhase("done"))
+        return prev
+      })
       return
     }
 
-    // Show next ambassador line after a natural pause
     setTimeout(() => {
       const ambassadorText = DEMO_AMBASSADOR_LINES[nextStep]
       setTranscript((prev) => [...prev, { speaker: "ambassador", text: ambassadorText }])
@@ -475,36 +530,32 @@ function WelcomePageInner() {
 
       const isLast = nextStep === DEMO_AMBASSADOR_LINES.length - 1
       if (isLast) {
-        // Final ambassador line — build transcript and end
         setTimeout(() => {
           setTranscript((prev) => {
-            const raw = prev.map((l) => `${l.speaker === "ambassador" ? "Ambassador" : guestFirstName}: ${l.text}`).join("\n")
-            setFullTranscript(raw)
-            processTranscriptWithAPI(raw)
+            const name = guestFirstNameRef.current
+            const raw = prev.map((l) => `${l.speaker === "ambassador" ? "Ambassador" : name}: ${l.text}`).join("\n")
+            setPhase("processing")
+            processTranscriptWithAPI(raw).then(() => setPhase("done"))
             return prev
           })
-          setTimeout(() => setPhase("done"), 1200)
-        }, 600)
+        }, 800)
       } else {
         setDemoWaiting(true)
       }
     }, 1200 + Math.random() * 600)
   }
 
-  // Feature 2 (Forget Me): call DELETE /guests/{guestId}/forget
   async function handleForgetMe() {
     setForgetting(true)
     try {
-      await fetch(`${API}/guests/${guestId}/forget`, { method: "DELETE" })
+      if (guestId) await fetch(`${API}/guests/${guestId}/forget`, { method: "DELETE" })
     } catch {
-      // silent — show confirmation regardless
+      // silent
     } finally {
       setForgetting(false)
       setForgotten(true)
     }
   }
-
-  void fullTranscript // suppress unused warning
 
   return (
     <div className="min-h-screen bg-stone-900 flex flex-col items-center justify-center px-6">
@@ -571,7 +622,10 @@ function WelcomePageInner() {
                 Rosewood Sand Hill · Menlo Park, California
               </p>
               <h1 className="text-4xl font-serif text-stone-100">
-                We&apos;re looking forward<br />to having you, {guestFirstName}.
+                {guestFirstName === "there"
+                  ? <>We&apos;re looking forward<br />to having you.</>
+                  : <>We&apos;re looking forward<br />to having you, {guestFirstName}.</>
+                }
               </h1>
               <p className="text-stone-400 font-serif text-lg italic">
                 {checkInDisplay} · {roomType}
@@ -582,36 +636,26 @@ function WelcomePageInner() {
 
             <div className="space-y-4">
               <p className="text-stone-400 text-sm leading-relaxed">
-                Before you arrive, we&apos;d love to know a little about what would make your stay perfect.
-                Choose whichever feels right.
+                Before you arrive, we&apos;d love a brief moment with you. One of our team will ask a few questions
+                — nothing formal, just a conversation — so we can have everything just right when you walk in.
               </p>
-
-              {/* Option 1: Voice conversation */}
-              <button
-                onClick={startConversation}
-                className="group w-full flex items-center justify-between bg-rosewood-600 hover:bg-rosewood-700 text-white rounded-2xl px-6 py-5 transition-all text-left"
-              >
-                <div>
-                  <p className="font-semibold text-sm">Speak with our Ambassador</p>
-                  <p className="text-xs text-rosewood-200 mt-0.5">A warm 2-minute conversation — nothing formal</p>
-                </div>
-                <span className="text-xl opacity-80">🎙</span>
-              </button>
-
-              {/* Option 2: Quick form */}
-              <button
-                onClick={() => setPhase("form")}
-                className="group w-full flex items-center justify-between bg-stone-800 hover:bg-stone-700 border border-stone-700 text-white rounded-2xl px-6 py-5 transition-all text-left"
-              >
-                <div>
-                  <p className="font-semibold text-sm text-stone-200">Fill in a quick form</p>
-                  <p className="text-xs text-stone-400 mt-0.5">Arrival time, room preferences, what you&apos;re looking forward to</p>
-                </div>
-                <span className="text-xl opacity-60">✏️</span>
-              </button>
-
+              <div className="flex flex-col items-center gap-3">
+                <button
+                  onClick={startConversation}
+                  className="group inline-flex items-center gap-3 bg-rosewood-600 hover:bg-rosewood-700 text-white rounded-full px-8 py-4 text-sm font-medium transition-all"
+                >
+                  <span className="w-2 h-2 rounded-full bg-white/60 group-hover:bg-white transition-colors" />
+                  Have a moment with us?
+                </button>
+                <button
+                  onClick={() => setPhase("form")}
+                  className="text-xs text-stone-500 hover:text-stone-300 underline underline-offset-2 transition-colors"
+                >
+                  Or fill out a quick optional survey →
+                </button>
+              </div>
               <p className="text-xs text-stone-600">
-                Both are optional · Your preferences are saved according to your memory setting above.
+                Optional · About 2 minutes · Your preferences are saved according to your memory setting above.
               </p>
             </div>
           </>
@@ -651,11 +695,11 @@ function WelcomePageInner() {
             <div className="flex items-center justify-center gap-3 mb-2">
               <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
               <p className="text-stone-400 text-sm">
-                {signedUrl ? "Speaking with Rosewood Ambassador" : "Rosewood Ambassador · demo mode"}
+                Rosewood Ambassador{demoWaiting || transcript.length === 0 ? " · demo mode" : ""}
               </p>
             </div>
 
-            <div className="space-y-3 text-left max-h-64 overflow-y-auto">
+            <div className="space-y-3 text-left max-h-72 overflow-y-auto">
               {transcript.map((line, i) => (
                 <div
                   key={i}
@@ -679,8 +723,8 @@ function WelcomePageInner() {
               )}
             </div>
 
-            {/* Demo mode: user types their own response */}
-            {!signedUrl && demoWaiting && (
+            {/* Demo mode: user types their response */}
+            {demoWaiting && (
               <div className="flex gap-2">
                 <input
                   autoFocus
@@ -700,8 +744,8 @@ function WelcomePageInner() {
               </div>
             )}
 
-            {/* Demo mode: ambassador is "thinking" */}
-            {!signedUrl && !demoWaiting && transcript.length > 0 && (
+            {/* Ambassador is "thinking" */}
+            {!demoWaiting && transcript.length > 0 && (
               <div className="flex justify-start">
                 <div className="bg-stone-800 rounded-2xl px-4 py-3 rounded-tl-sm">
                   <div className="flex gap-1">
@@ -716,12 +760,31 @@ function WelcomePageInner() {
           </div>
         )}
 
+        {/* Processing — extracting preferences after conversation ends */}
+        {phase === "processing" && (
+          <div className="space-y-4">
+            <div className="flex justify-center gap-1">
+              {[0, 1, 2].map((i) => (
+                <div
+                  key={i}
+                  className="w-2 h-2 rounded-full bg-rosewood-400/60 animate-bounce"
+                  style={{ animationDelay: `${i * 0.2}s` }}
+                />
+              ))}
+            </div>
+            <p className="text-stone-400 font-serif">Noting everything down for your arrival...</p>
+            <p className="text-xs text-stone-600">Just a moment while we personalise your stay.</p>
+          </div>
+        )}
+
         {/* Done */}
         {phase === "done" && (
           <div className="space-y-6">
             <div className="space-y-2">
               <div className="text-4xl font-serif text-stone-300">✦</div>
-              <h2 className="text-2xl font-serif text-stone-100">Safe travels, {guestFirstName}.</h2>
+              <h2 className="text-2xl font-serif text-stone-100">
+                {guestFirstName === "there" ? "Safe travels." : `Safe travels, ${guestFirstName}.`}
+              </h2>
               <p className="text-stone-400 font-serif italic">
                 We&apos;ll have everything ready when you arrive at Sand Hill.
               </p>
@@ -748,15 +811,16 @@ function WelcomePageInner() {
               </button>
             </div>
 
-            {/* Feature 9: Link to audit/transparency page */}
-            <div className="text-center">
-              <a
-                href={`/my-data?guest_id=${guestId}`}
-                className="text-xs text-stone-500 hover:text-stone-300 underline transition-colors"
-              >
-                See everything we know about you →
-              </a>
-            </div>
+            {guestId && (
+              <div className="text-center">
+                <a
+                  href={`/my-data?guest_id=${guestId}`}
+                  className="text-xs text-stone-500 hover:text-stone-300 underline transition-colors"
+                >
+                  See everything we know about you →
+                </a>
+              </div>
+            )}
           </div>
         )}
       </div>

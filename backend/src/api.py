@@ -294,15 +294,49 @@ async def get_flight(flight_number: str) -> dict:
 # ── Voice — Welcome Ambassador (Agent 1) ──────────────────────────────────────
 
 @app.get("/voice/ambassador-url")
-async def get_ambassador_url(guest_name: str = "Guest", property_name: str = "Rosewood Sand Hill") -> dict:
-    """Get a signed URL for the pre-arrival Welcome Ambassador conversation."""
+async def get_ambassador_url(
+    guest_name: str = "Guest",
+    property_name: str = "Rosewood Sand Hill",
+    stay_id: str | None = None,
+) -> dict:
+    """
+    Get a signed URL for the pre-arrival Welcome Ambassador conversation.
+    If stay_id is provided, loads guest context and returns a personalized greeting.
+    """
+    # Resolve guest context from stay_id if available
+    guest = None
+    resolved_stay = None
+    if stay_id:
+        resolved_stay = graph.get_stay(stay_id)
+        if resolved_stay:
+            guest = graph.get_guest(resolved_stay.guest_id)
+            if guest:
+                guest_name = guest.name.split(" ")[0] or guest.name
+
     url = get_signed_url(
         guest_name=guest_name,
         property_name=property_name,
         agent_id=settings.elevenlabs_agent_id,
     )
     config = get_ambassador_config()
-    return {"signed_url": url, "config": config}
+
+    # Build personalized first message so the ambassador greets by name
+    first_message: str | None = None
+    if guest and guest_name not in ("Guest", "there"):
+        first_message = (
+            f"Hello {guest_name}, how lovely to reach you before your arrival. "
+            "I'm calling from Rosewood Sand Hill — we're so looking forward to having you with us. "
+            "Are you coming straight to us, or have you been traveling a while?"
+        )
+
+    return {
+        "signed_url": url,
+        "config": config,
+        "guest_name": guest_name,
+        "guest_id": guest.id if guest else None,
+        "stay_id": resolved_stay.id if resolved_stay else None,
+        "first_message": first_message,
+    }
 
 
 class WelcomeProcessRequest(BaseModel):
@@ -340,12 +374,30 @@ async def process_welcome_call(body: WelcomeProcessRequest) -> dict:
         graph.upsert_guest(guest)
 
     if stay and guest:
-        # Record as an observation so manager dashboard and concierge see it
-        note_text = preferences.get("notes") or "Welcome conversation completed."
+        # Build a rich observation text from extracted preferences
+        parts: list[str] = []
+        if preferences.get("arrival_time"):
+            parts.append(f"Arriving around {preferences['arrival_time']}.")
+        if preferences.get("arrival_mood"):
+            parts.append(f"Mood on arrival: {preferences['arrival_mood']}.")
+        if preferences.get("pace"):
+            parts.append(f"Trip pace: {preferences['pace']}.")
+        if preferences.get("welcome_amenity"):
+            parts.append(f"Room welcome amenity: {preferences['welcome_amenity']}.")
+        if preferences.get("room_temperature_f"):
+            parts.append(f"Room temperature: {preferences['room_temperature_f']}°F.")
+        if preferences.get("special_occasion") and preferences["special_occasion"] not in (None, "null"):
+            parts.append(f"Special occasion: {preferences['special_occasion']}.")
+        if preferences.get("placemaker_match") and preferences["placemaker_match"] not in (None, "null"):
+            parts.append(f"Suggested placemaker: {preferences['placemaker_match']}.")
+        if preferences.get("notes"):
+            parts.append(preferences["notes"])
+        note_text = " ".join(parts) if parts else "Welcome conversation completed — preferences captured."
+
         tags = ["welcome_call"]
         if preferences.get("arrival_mood"):
             tags.append(preferences["arrival_mood"])
-        if preferences.get("placemaker_match"):
+        if preferences.get("placemaker_match") and preferences["placemaker_match"] not in (None, "null"):
             tags.append("placemaker_suggested")
 
         obs = Observation(

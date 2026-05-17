@@ -126,7 +126,7 @@ const DEMO_GUESTS: InhouseGuest[] = [
       name: "Marcus Chen",
       nationality: "Singaporean",
       home_city: "Singapore",
-      consent_level: "living_memory",
+      consent_level: "standard",
     },
     stay: {
       id: "stay-marcus-sandhill-2026",
@@ -352,7 +352,7 @@ function VoiceCapture({
   guestId: string
   stayId: string
   propertyId: string
-  onNewObservation: (obs: Observation, actionItems?: string[]) => void
+  onNewObservation: (obs: Observation | null, actionItems?: string[]) => void
 }) {
   const [recording, setRecording] = useState(false)
   const [transcript, setTranscript] = useState("")
@@ -361,11 +361,27 @@ function VoiceCapture({
   const [error, setError] = useState("")
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const recognitionRef = useRef<any>(null)
+  // Stable ref so the callback never goes stale across re-renders
+  const onNewObservationRef = useRef(onNewObservation)
+  onNewObservationRef.current = onNewObservation
 
   const submitTextObservation = useCallback(async (text: string) => {
     if (!text.trim()) return
     setSubmitting(true)
     setError("")
+
+    // ── Optimistic insert: show observation immediately ──────────────────────
+    const optimistic: Observation = {
+      id: `optimistic-${Date.now()}`,
+      raw_text: text,
+      tags: [],
+      timestamp: new Date().toISOString(),
+      source: "staff_text",
+      sentiment: "neutral",
+    }
+    onNewObservationRef.current(optimistic, [])
+
+    // ── Background API call: get tags, sentiment, action items ───────────────
     try {
       const res = await fetch(`${API}/observations`, {
         method: "POST",
@@ -379,15 +395,16 @@ function VoiceCapture({
       })
       if (!res.ok) throw new Error("API error")
       const data = await res.json()
-      if (data.observation) {
-        onNewObservation(data.observation, data.action_items || [])
+      // Only add action items — the observation is already shown optimistically
+      if (data.action_items && data.action_items.length > 0) {
+        onNewObservationRef.current(null, data.action_items)
       }
     } catch {
-      setError("Could not save observation — check backend connection.")
+      setError("Saved locally — could not reach backend.")
     } finally {
       setSubmitting(false)
     }
-  }, [guestId, stayId, propertyId, onNewObservation])
+  }, [guestId, stayId, propertyId])
 
   function startRecording() {
     setError("")
@@ -492,10 +509,13 @@ function GuestPanel({ data }: { data: InhouseGuest }) {
   const [actionItems, setActionItems] = useState<ActionItem[]>(
     data.guest?.id === "guest-samarth-hiremath" ? SAMARTH_DEFAULT_ACTION_ITEMS : []
   )
+  // Separate ref to prevent stale closure issues in useCallback
+  const addObservationRef = useRef<(obs: Observation | null, items?: string[]) => void>(() => {})
   const [newActionText, setNewActionText] = useState("")
   const moments = (data.plan?.moments_to_create as string[]) || []
 
-  function addObservation(obs: Observation, newActionItems?: string[]) {
+  // obs may be null when we only want to append action items (e.g. after optimistic insert)
+  function addObservation(obs: Observation | null, newActionItems?: string[]) {
     if (obs) setObservations((prev) => [obs, ...prev])
     if (newActionItems && newActionItems.length > 0) {
       setActionItems((prev) => [
@@ -504,6 +524,8 @@ function GuestPanel({ data }: { data: InhouseGuest }) {
       ])
     }
   }
+  // Keep ref in sync so VoiceCapture's useCallback never goes stale
+  addObservationRef.current = addObservation
 
   function toggleActionItem(index: number) {
     setActionItems((prev) =>
@@ -620,7 +642,7 @@ function GuestPanel({ data }: { data: InhouseGuest }) {
             guestId={data.guest?.id || ""}
             stayId={data.stay.id}
             propertyId="sand-hill"
-            onNewObservation={addObservation}
+            onNewObservation={(...args) => addObservationRef.current(...args)}
           />
         </div>
       </div>

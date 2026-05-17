@@ -14,7 +14,11 @@
       "Bash(brew cleanup *)",
       "Bash(pip3 cache *)",
       "Bash(curl -s -X POST http://localhost:8000/voice/process-welcome-call -H 'Content-Type: application/json' -d '{ *)",
-      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\('Summary:'\\); [print\\(' -', b\\) for b in d.get\\('summary', []\\)]\")"
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\('Summary:'\\); [print\\(' -', b\\) for b in d.get\\('summary', []\\)]\")",
+      "Bash(pkill -f \"uvicorn\")",
+      "Bash(python -c \"from src.api import app; print\\('Backend imports OK'\\)\")",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\('arrival_plans:', list\\(d.get\\('arrival_plans',{}\\).keys\\(\\)\\)\\)\")",
+      "Bash(python3 -c ' *)"
     ]
   }
 }

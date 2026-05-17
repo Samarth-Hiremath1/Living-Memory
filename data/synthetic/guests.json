@@ -31,7 +31,7 @@
       "nationality": "Singaporean",
       "languages": ["English", "Mandarin", "Cantonese"],
       "home_city": "Singapore",
-      "consent_level": "living_memory",
+      "consent_level": "standard",
       "stays": ["stay-marcus-hk-2023", "stay-marcus-crillon-2024", "stay-marcus-sandhill-2026"],
       "preferences": {
         "room_temperature_f": 72,
