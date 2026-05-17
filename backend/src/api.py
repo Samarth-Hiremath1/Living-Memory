@@ -23,6 +23,7 @@ from .voice.ambassador import get_signed_url, get_ambassador_config, get_concier
 from .voice.stt import transcribe_audio
 from .voice.briefing_tts import dossier_to_audio
 from .agents.welcome_summarizer import summarize_welcome_transcript, extract_preferences_from_transcript
+from .agents.mcp_agent import run_mcp_agent, MCP_TOOLS
 
 app = FastAPI(title="Living Memory API", version="0.1.0")
 
@@ -432,6 +433,45 @@ async def get_concierge_url(guest_name: str = "Guest", property_name: str = "Ros
     )
     config = get_concierge_config()
     return {"signed_url": url, "config": config}
+
+
+# ── MCP Tool-Use Agent ───────────────────────────────────────────────────────
+
+
+class AgentQueryRequest(BaseModel):
+    query: str
+
+
+@app.post("/agent/query")
+async def agent_query(body: AgentQueryRequest) -> dict:
+    """
+    Run the MCP tool-use LangGraph agent on an arbitrary query.
+
+    The agent autonomously decides which tools to call (calculator, weather,
+    GitHub search), executes them, reasons over the results, and returns a
+    final answer along with a full log of every tool call made.
+    """
+    if not body.query.strip():
+        raise HTTPException(status_code=422, detail="Query cannot be empty.")
+    try:
+        result = run_mcp_agent(body.query)
+        if result.error:
+            raise HTTPException(status_code=500, detail=result.error)
+        return {
+            "answer": result.final_answer,
+            "tool_calls": result.tool_calls,
+            "steps_taken": result.steps_taken,
+        }
+    except HTTPException:
+        raise
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=str(exc))
+
+
+@app.get("/agent/tools")
+async def list_agent_tools() -> dict:
+    """Return the MCP tool definitions available to the agent."""
+    return {"tools": MCP_TOOLS, "count": len(MCP_TOOLS)}
 
 
 # ── Friend Filter Demo ────────────────────────────────────────────────────────

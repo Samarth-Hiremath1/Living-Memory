@@ -37,7 +37,7 @@
         "carlyle": "CAR-2023-0891"
       },
       "created_at": "2023-03-15T00:00:00",
-      "updated_at": "2026-05-17T00:15:42.216098"
+      "updated_at": "2026-05-17T06:36:11.169940"
     },
     "guest-marcus-chen": {
       "id": "guest-marcus-chen",
@@ -73,7 +73,7 @@
         "hong-kong": "RWHK-2023-MC"
       },
       "created_at": "2023-05-20T00:00:00",
-      "updated_at": "2026-05-17T00:15:42.216674"
+      "updated_at": "2026-05-17T06:36:11.170485"
     },
     "guest-elena-vasquez": {
       "id": "guest-elena-vasquez",
@@ -111,7 +111,7 @@
         "crillon": "CRL-2023-EV"
       },
       "created_at": "2023-09-10T00:00:00",
-      "updated_at": "2026-05-17T00:15:42.216678"
+      "updated_at": "2026-05-17T06:36:11.170493"
     },
     "guest-harrison-family": {
       "id": "guest-harrison-family",
@@ -143,7 +143,7 @@
       },
       "property_aliases": {},
       "created_at": "2026-01-10T00:00:00",
-      "updated_at": "2026-05-17T00:15:42.216685"
+      "updated_at": "2026-05-17T06:36:11.170501"
     },
     "guest-james-okafor": {
       "id": "guest-james-okafor",
@@ -173,7 +173,7 @@
       },
       "property_aliases": {},
       "created_at": "2024-01-08T00:00:00",
-      "updated_at": "2026-05-17T00:15:42.216688"
+      "updated_at": "2026-05-17T06:36:11.170504"
     },
     "guest-yuki-nakamura": {
       "id": "guest-yuki-nakamura",
@@ -210,7 +210,7 @@
         "sand-hill": "SF-2023-YN"
       },
       "created_at": "2023-06-01T00:00:00",
-      "updated_at": "2026-05-17T00:15:42.216690"
+      "updated_at": "2026-05-17T06:36:11.170507"
     },
     "guest-samarth-hiremath": {
       "id": "guest-samarth-hiremath",
@@ -238,8 +238,7 @@
           "trying new cuisines",
           "technology",
           "Bay Area outdoors",
-          "startups",
-          "music"
+          "startups"
         ],
         "dietary": [
           "vegetarian-friendly",
@@ -252,7 +251,7 @@
       },
       "property_aliases": {},
       "created_at": "2026-05-16T00:00:00",
-      "updated_at": "2026-05-17T00:15:42.216682"
+      "updated_at": "2026-05-17T06:36:11.170497"
     }
   },
   "stays": {
@@ -510,9 +509,7 @@
         "obs-samarth-1",
         "obs-samarth-2",
         "obs-samarth-3",
-        "obs-samarth-4",
-        "b868103c-3459-42e6-94a9-d9734d7187e0",
-        "40f84058-3376-4b62-a271-bb2ee571021d"
+        "obs-samarth-4"
       ],
       "flight_number": null,
       "notes": null
@@ -2310,6 +2307,39 @@
       "flight_status": null,
       "jet_lag_note": "No jet lag — he's traveling domestically. But after any flight, Marcus tends to dehydrate. Quiet hydration on arrival (juice, still water) will help him settle in faster.",
       "raw_dossier": "# Marcus Chen — Arrival Dossier\n**Arriving**: May 16, 2026 | **Property**: Rosewood Sand Hill | **Stay**: 2 nights\n\n## Who he is\nMarcus is a thoughtful planner who has spent twelve years building a Southeast and East Asian contemporary art collection. He's someone who values deep expertise and genuine conversation — whether he's discussing a new artist with a gallery owner or learning the story behind a natural wine from the winemaker. He doesn't rush through experiences; he takes time to understand provenance, philosophy, and craft. He's also someone who loves creating surprise moments for his wife Sophie, but wants them to feel effortless and natural, never staged.\n\n## Moments to create today\n- Have the sommelier select three Napa wines with strong producer stories — small estates, family-run, ideally biodynamic — and write a short note about each winemaker's philosophy to accompany the welcome flight\n- Set up the poolside cabana with fresh towels, chilled still water, and a light reading basket (New Yorker, Monocle, a local art gallery guide) so Marcus can ease into a full poolside afternoon without needing to ask\n- Introduce David Park casually over dinner tonight at Madera — not a formal meeting, just a warm 'David will be joining us for a glass' so the Private Napa Day conversation can unfold naturally tomorrow\n- Coordinate with the front desk to have a small carafe of cold-pressed green juice waiting in the room on arrival — quiet hydration support without making a production of it\n\n## First 24 hours\n**Arrival afternoon (May 16, post check-in)**  \nFull poolside afternoon. No agenda. The cabana is his — staff will check in once to refresh water and offer light bites, then leave him to settle in.\n\n**Tonight, 7:30pm**  \nDinner at Madera. Sommelier will guide him through the natural wine program, and David Park will join for a glass around 8:30pm to introduce the idea of a private Napa day tomorrow.\n\n**Tomorrow morning (May 17)**  \nLate breakfast, then depart mid-morning with David for a curated Napa visit — two small producers, lunch at a family estate, back by late afternoon so Marcus still has pool time before dinner.\n\n## Room setup\n- Temperature: 70°F\n- Welcome amenity: Napa Valley welcome flight (three wines with producer notes)\n- Cold-pressed green juice in room on arrival\n- Poolside cabana pre-set with reading materials and refreshments\n\n## Someone to introduce\nDavid Park — our wine curator who works exclusively with small Napa and Sonoma estates. David knows the families behind the wines, not just the labels. Marcus will appreciate the depth of conversation; this is someone who can talk terroir philosophy and biodynamic farming the way Marcus talks about Southeast Asian contemporary art. Introduce them casually at dinner tonight so the Napa day tomorrow feels like a natural next step, not a sales pitch.\n\n## Keep in mind\nMarcus values understated elegance. If something is coordinated for him, it should feel organic — never like he's being managed. He also tends to dehydrate after flights, so quiet hydration touchpoints (juice on arrival, still water by the pool) will help him settle in without drawing attention to it. He's here to slow down and think clearly. Give him space to do that."
+    },
+    "2a4b0361-b88d-4e05-b436-89e9207016de": {
+      "id": "2a4b0361-b88d-4e05-b436-89e9207016de",
+      "guest_id": "guest-harrison-family",
+      "stay_id": "stay-harrison-sandhill-2026",
+      "property_id": "sand-hill",
+      "generated_at": "2026-05-17T02:00:53.611969",
+      "room_temperature_f": 70,
+      "welcome_amenity": "valley-essentials",
+      "moments_to_create": [
+        "Print a trail map of the Stanford Dish Loop (family-friendly 3.7 miles) and leave it on the suite table with a handwritten note: 'Your hiking boots are calling'",
+        "Have Chef Reylon personally write the children's menu options on a card and include it in the welcome amenity basket — note the nut-free preparations",
+        "Pre-flag the nut allergy in Madera, room service, and poolside dining systems before they arrive; place a discreet kitchen note in the suite folder",
+        "Stock the suite fridge with cold-pressed apple juice and sparkling water — post-hike refreshments ready to go"
+      ],
+      "itinerary": [
+        {
+          "time": "Morning after arrival (7–9am)",
+          "suggestion": "Family breakfast at Madera — request the window table overlooking the oak grove. Chef can prepare a nut-free kids' plate if they order ahead the night before."
+        },
+        {
+          "time": "Mid-morning (9:30am)",
+          "suggestion": "Stanford Dish Loop hike — 3.7 miles, gentle elevation, sweeping views of the Bay. Trailhead is 10 minutes away. Pack water bottles from the suite."
+        },
+        {
+          "time": "Late afternoon (4–5pm)",
+          "suggestion": "Pool time — heated year-round, with shallow end perfect for young swimmers. Poolside team can bring nut-free snacks on request."
+        }
+      ],
+      "placemaker_intro": null,
+      "flight_status": null,
+      "jet_lag_note": null,
+      "raw_dossier": "# The Harrison Family — Arrival Dossier\n**Arriving**: May 16, 2026 | **Property**: Rosewood Sand Hill | **Stay**: 4 nights\n\n## Who they are\nA New York family of four who travel with intention: hiking boots packed, questions about kids' menus asked before they land. They're planners who love spontaneity — but only once the safety nets are in place. Their youngest has a nut allergy, which means every meal requires a conversation. They've stayed with us before and always ask the same things first: where can we hike, and what's safe for the kids to eat?\n\n## Moments to create today\n- Print a trail map of the Stanford Dish Loop (family-friendly 3.7 miles) and leave it on the suite table with a handwritten note: \"Your hiking boots are calling\"\n- Have Chef Reylon personally write the children's menu options on a card and include it in the welcome amenity basket — note the nut-free preparations\n- Pre-flag the nut allergy in Madera, room service, and poolside dining systems before they arrive; place a discreet kitchen note in the suite folder\n- Stock the suite fridge with cold-pressed apple juice and sparkling water — post-hike refreshments ready to go\n\n## First 24 hours\n**Morning after arrival (7–9am)**  \nFamily breakfast at Madera — request the window table overlooking the oak grove. Chef can prepare a nut-free kids' plate if they order ahead the night before.\n\n**Mid-morning (9:30am)**  \nStanford Dish Loop hike — 3.7 miles, gentle elevation, sweeping views of the Bay. Trailhead is 10 minutes away. Pack water bottles from the suite.\n\n**Late afternoon (4–5pm)**  \nPool time — heated year-round, with shallow end perfect for young swimmers. Poolside team can bring nut-free snacks on request.\n\n## Room setup\n- Temperature: 70°F\n- Welcome amenity: Valley essentials (Manresa Bread sourdough, Mariposa shortbread, Equator coffee, seasonal stone fruit) — with Chef Reylon's handwritten kids' menu card tucked inside\n- Suite fridge pre-stocked with cold apple juice and sparkling water\n- Nut allergy flagged across all dining systems\n\n## Someone to introduce\nNo PlaceMaker introduction recommended. The family's rhythm is outdoors and around the table — our current roster skews wine-serious and wellness-focused, neither quite right for two young kids. Better to let the concierge connect them with our preferred family hiking guide if they want a naturalist-led morning.\n\n## Keep in mind\nThey'll relax once they know the kitchen understands the allergy. Lead with that — it's the unlock. After that, they're easy: good boots, good food, and a trail map. Don't over-program them. They like having options, not obligations."
     }
   }
 }

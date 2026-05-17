@@ -673,7 +673,7 @@ function StaffAuth({ children }: { children: ReactNode }) {
   const [error, setError] = useState(false)
 
   useEffect(() => {
-    if (sessionStorage.getItem("staff_authed") === "true") {
+    if (sessionStorage.getItem("concierge_authed") === "true") {
       setAuthed(true)
     }
   }, [])
@@ -681,7 +681,7 @@ function StaffAuth({ children }: { children: ReactNode }) {
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     if (password === "sandhill2026") {
-      sessionStorage.setItem("staff_authed", "true")
+      sessionStorage.setItem("concierge_authed", "true")
       setAuthed(true)
       setError(false)
     } else {
