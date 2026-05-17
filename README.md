@@ -12,7 +12,7 @@ The guest never sees a screen. The AI never talks to a guest directly (except fo
 
 **Before arrival:** When a reservation is created, the guest receives a welcome link. They can have a short voice conversation with the Rosewood Ambassador (an ElevenLabs conversational AI), or fill out an optional form — or neither. Whatever they share is stored in their profile.
 
-**The morning briefing:** The manager dashboard runs a multi-agent pipeline for each arriving guest: it pulls flight status, reads past-stay observations, matches the guest's interests against the property's PlaceMakers and local inventory, and synthesizes everything into a "First 24 Hours" plan. The plan includes room temperature, welcome amenity, 3–4 moments to create, and a placemaker introduction.
+**The morning briefing:** The manager dashboard triggers the multi-agent pipeline for each arriving guest. Multiple AI agents run in parallel — checking the flight, reading past observations, scanning wellness signals — then combine their findings into a "First 24 Hours" plan: room temperature, welcome amenity, 3–4 moments to create, and a PlaceMaker introduction.
 
 **During the stay:** Staff capture observations by voice or text on the concierge tablet ("She mentioned wanting to photograph the valley at golden hour"). Claude parses the note, extracts action items, and the concierge view updates in real time — no forms, no tickets.
 
@@ -20,44 +20,71 @@ The guest never sees a screen. The AI never talks to a guest directly (except fo
 
 ---
 
-## Architecture
+## Orchestration: LangGraph multi-agent pipeline
+
+The arrival plan pipeline is built with [LangGraph](https://github.com/langchain-ai/langgraph) — a framework for building stateful, graph-structured multi-agent workflows. Each agent is a node; edges define what runs next and what runs in parallel.
 
 ```
-Guest signal (welcome call, form, staff note, flight)
-        ↓
-In-memory graph store (Guest → Stay → Observations → ArrivalPlan)
-        ↓
-Orchestrator — sequential multi-agent pipeline
-  ├── flight_agent     checks flight status and estimated arrival
-  ├── history_agent    reads past-stay observations and preferences
-  ├── place_agent      matches guest interests to PlaceMaker offerings
-  ├── wellness_agent   reads signals like jet lag, pace, occasion
-  └── synthesizer      composes the full arrival plan (Claude Sonnet)
-        ↓
-Friend Filter (Claude Haiku) — rewrites clinical output to warm, human language
-        ↓
-Staff briefing / dossier (manager dashboard, concierge tablet)
-        ↓
-Human staff delivers the moment
+START
+  │
+  ▼
+load_context          ← validates guest + stay, loads objects into shared state
+  │
+  ├──────────────────────────────┐─────────────────────────┐
+  ▼                              ▼                         ▼
+flight_node               history_node              wellness_node
+(AviationStack →          (Claude Haiku reads        (opt-in wellness
+ jet lag profile)          all past observations)     signals, mock)
+  │                              │                         │
+  └──────────────────────────────┴─────────────────────────┘
+                    fan-in: place_node waits for all three
+                                 │
+                                 ▼
+                           place_node
+                    (Claude Haiku matches guest
+                     interests → PlaceMaker offering)
+                                 │
+                                 ▼
+                          synthesize_node
+                    (Claude Sonnet writes the full
+                     arrival plan + dossier markdown)
+                                 │
+                                END
 ```
+
+**Why LangGraph?**
+
+The plain sequential version ran flight → history → wellness → place → synthesize in series. `flight_node`, `history_node`, and `wellness_node` have no dependency on each other, so LangGraph runs them in parallel — reducing wall time for every plan generation. `place_node` legitimately depends on `history_node`'s output (it needs the extracted interest patterns to match a PlaceMaker), so it runs after the fan-in.
+
+Beyond parallelism, LangGraph gives us:
+- **Typed shared state** (`ArrivalPipelineState`) — every agent reads and writes to the same explicitly typed object, making data flow inspectable
+- **Independent, swappable nodes** — each agent can be tested in isolation or replaced without touching the rest of the graph
+- **Conditional routing hooks** — ready to add branches (e.g. skip wellness node if guest hasn't opted in; route to a richer synthesizer for Living Memory guests)
+- **Built-in visualisation** — `pipeline.get_graph().draw_mermaid()` renders the exact diagram above from the live compiled graph
+
+---
+
+## System architecture
 
 **Two frontends:**
 - **Guest-facing:** Welcome page (voice + form), data transparency page, consent management
-- **Staff-facing:** Manager dashboard (today's arrivals, plan generation, dossier), concierge tablet (in-house guests, live observation capture)
+- **Staff-facing:** Manager dashboard (today's arrivals, plan generation, dossier view), concierge tablet (in-house guests, live observation capture)
 
-**Data layer:** In-memory Python dict with JSON persistence. Schema is Neo4j-compatible for a production migration. Consent model has two levels: Standard (this stay only) and Living Memory (cross-property, persistent).
+**Data layer:** In-memory Python dict with JSON persistence at `backend/data/graph_store.json`. Schema is Neo4j-compatible for a production migration. Consent model has two levels: Standard (this stay only) and Living Memory (cross-property, persistent).
+
+**Voice:** Two ElevenLabs agents — the Welcome Ambassador (pre-arrival, opt-in) and the In-Stay Concierge (available from the concierge tablet). Transcripts from the welcome call are processed by Claude Haiku to extract structured preferences and merge them into the guest's profile before the arrival plan runs.
 
 ---
 
 ## What's implemented
 
 - Full guest/stay/observation/plan data model with JSON persistence
-- Multi-agent orchestration pipeline (flight → history → place → wellness → synthesizer)
+- **LangGraph orchestration pipeline** — parallel fan-out across flight, history, and wellness agents; typed state; fan-in to PlaceMaker matching and synthesis
 - Arrival plan generation with Claude Sonnet producing a full staff dossier
-- Friend Filter — tone translation from clinical AI output to warm, readable language
+- Friend Filter — Claude Haiku tone translation from clinical AI output to warm, readable language
 - Staff observation capture via text and browser speech recognition (Web Speech API)
 - Welcome page with ElevenLabs voice conversation + optional survey form as fallback
-- Welcome transcript processing — Claude extracts structured preferences and merges them into the guest's profile
+- Welcome transcript processing — Claude Haiku extracts structured preferences and merges them into the guest's profile, ready for the pipeline
 - Manager dashboard: today's arrivals, per-guest plan generation, dossier view with cross-property memory timeline
 - Concierge tablet: in-house guest list, real-time observation capture with optimistic UI updates, editable action item list
 - Consent management: Standard vs. Living Memory, "Forget Me Everywhere" data deletion
@@ -73,7 +100,7 @@ Human staff delivers the moment
 
 **Cross-property memory** — The manager dashboard shows past-stay timelines, but the data is hardcoded in the frontend for the demo guests. The backend data model fully supports it; it's not yet dynamically fetched.
 
-**Flight tracking** — The AviationStack integration is wired in. If a stay has a flight number and an API key is configured, it returns live status. Without a key, it returns a mock.
+**Flight tracking** — The AviationStack integration is wired into `flight_node`. If a stay has a flight number and an API key is configured, it returns live status. Without a key, it falls back to a mock result.
 
 **ElevenLabs post-call webhook** — The backend endpoint exists and works, but ElevenLabs needs a publicly accessible URL to call it. For local development, this requires ngrok or a tunnel. The frontend-side transcript processing (which doesn't need a public URL) is the active fallback.
 
@@ -85,6 +112,8 @@ Human staff delivers the moment
 
 **SMS/email delivery** — The PMS webhook returns a welcome link, but sending it to the guest (SMS, email) is a commented TODO.
 
+**Conditional routing** — The LangGraph graph currently uses fixed edges. The framework is ready for conditional branches (e.g. skip wellness node if no opt-in, enrich the synthesizer for Living Memory guests), but those conditions aren't wired yet.
+
 ---
 
 ## What's not built
@@ -92,7 +121,7 @@ Human staff delivers the moment
 - Production deployment / hosting
 - Real PMS integration (a fake PMS client exists for testing)
 - Staff mobile push notifications
-- Automated placemaker availability or booking
+- Automated PlaceMaker availability or booking
 - Multi-property backend sync (all data currently lives in one instance)
 - Any real authentication beyond the demo password
 
@@ -124,7 +153,7 @@ npm run dev
 - `localhost:3000/my-data` — Guest data transparency
 - `localhost:8000/docs` — API documentation
 
-**Demo tip:** The manager dashboard falls back to demo data (Samarth Hiremath, arriving today) if the backend is unreachable. Guests whose arrival plans have already been generated show "View dossier →"; guests without a plan show the "Generate Arrival Plan" button — clicking it runs the full agent pipeline live.
+**Demo note:** The manager dashboard falls back to demo data (Samarth Hiremath, arriving today) if the backend is unreachable. Guests whose arrival plans have already been generated show "View dossier →"; guests without a plan show "Generate Arrival Plan" — clicking it runs the full LangGraph pipeline live against the real APIs.
 
 ---
 

@@ -18,7 +18,8 @@
       "Bash(pkill -f \"uvicorn\")",
       "Bash(python -c \"from src.api import app; print\\('Backend imports OK'\\)\")",
       "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\('arrival_plans:', list\\(d.get\\('arrival_plans',{}\\).keys\\(\\)\\)\\)\")",
-      "Bash(python3 -c ' *)"
+      "Bash(python3 -c ' *)",
+      "Bash(pip show *)"
     ]
   }
 }
