@@ -32,44 +32,25 @@ import anthropic
 from langgraph.graph import END, START, StateGraph
 
 from ..config import settings
-from ..tools.calculator_tool import calculate
-from ..tools.github_tool import search_github
+from ..tools.flight_status_tool import get_flight_info
+from ..tools.placemaker_tool import find_placemaker
 from ..tools.weather_tool import get_weather
 
 # ── MCP-style tool definitions ────────────────────────────────────────────────
 # These match the Anthropic tool_use schema (which is itself MCP-compatible).
+#
+# All three tools are scoped to the hospitality use case: a concierge or
+# manager can ask about live arrival conditions, an inbound flight, or
+# the best property expert to host a particular kind of guest.
 
 MCP_TOOLS: list[dict] = [
-    {
-        "name": "calculator",
-        "description": (
-            "Evaluate a mathematical expression. Supports arithmetic, percentages, "
-            "exponentiation, and common functions (sqrt, log, sin, cos, etc.). "
-            "Use this for any calculation rather than doing mental arithmetic. "
-            "Examples: '15% of 240', '450 * 4 * 1.085', 'sqrt(144)', '2^10'."
-        ),
-        "input_schema": {
-            "type": "object",
-            "properties": {
-                "expression": {
-                    "type": "string",
-                    "description": (
-                        "The mathematical expression to evaluate. "
-                        "Percentages: '15% of 240'. Powers: '2^10'. "
-                        "Functions: 'sqrt(144)', 'log(100)'."
-                    ),
-                }
-            },
-            "required": ["expression"],
-        },
-    },
     {
         "name": "get_weather",
         "description": (
             "Get the current weather conditions and temperature for any city or location. "
             "Returns temperature in both Celsius and Fahrenheit, humidity, wind speed, "
-            "and a short weather description. Use this whenever a user asks about "
-            "current weather, temperature, or climate conditions in a place."
+            "and a short description. Useful for arrival planning, activity "
+            "recommendations, what to suggest a guest pack, and golden-hour timing."
         ),
         "input_schema": {
             "type": "object",
@@ -77,8 +58,8 @@ MCP_TOOLS: list[dict] = [
                 "location": {
                     "type": "string",
                     "description": (
-                        "City name or location. Examples: 'San Francisco', "
-                        "'London', 'Tokyo', 'Menlo Park CA'."
+                        "City name or location. Examples: 'Menlo Park', "
+                        "'San Francisco', 'Tokyo', 'Napa Valley'."
                     ),
                 }
             },
@@ -86,53 +67,88 @@ MCP_TOOLS: list[dict] = [
         },
     },
     {
-        "name": "search_github",
+        "name": "get_flight_status",
         "description": (
-            "Search GitHub for repositories or users. Returns the top matches with "
-            "star counts, descriptions, and primary programming language. "
-            "Use this to find open-source projects, look up an organisation's repos, "
-            "or find GitHub users."
+            "Look up live status for an inbound flight by its IATA flight number. "
+            "Returns airline, route, scheduled vs. estimated arrival, gate/terminal, "
+            "delay information, and a jet-lag severity note based on the origin "
+            "timezone. Use this whenever a guest's flight is mentioned or staff "
+            "need to know when (or how tired) a guest will arrive."
         ),
         "input_schema": {
             "type": "object",
             "properties": {
-                "query": {
+                "flight_number": {
                     "type": "string",
                     "description": (
-                        "Full-text search query. Be specific for better results. "
-                        "Examples: 'anthropic claude python sdk', "
-                        "'langchain langgraph examples'."
+                        "IATA flight number, e.g. 'LH456', 'UA890', 'AA135'. "
+                        "Case-insensitive; spaces are ignored."
+                    ),
+                }
+            },
+            "required": ["flight_number"],
+        },
+    },
+    {
+        "name": "find_placemaker",
+        "description": (
+            "Search the property's internal roster of PlaceMakers — chefs, "
+            "sommeliers, wellness directors, art curators, and other in-house "
+            "experts — for the best match given a description of a guest's "
+            "interests or current state. Returns ranked matches with their "
+            "signature offerings. Use this to decide who should host an "
+            "experience for a guest, not to recommend external venues."
+        ),
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "interests": {
+                    "type": "string",
+                    "description": (
+                        "Free-text description of guest interests or context. "
+                        "Examples: 'natural wine and slow afternoons', "
+                        "'long-haul arrival, needs to decompress', "
+                        "'food-curious, wants to meet the chef', "
+                        "'art collector exploring contemporary work'."
                     ),
                 },
-                "search_type": {
+                "property_id": {
                     "type": "string",
-                    "enum": ["repositories", "users"],
-                    "description": "Whether to search repositories (default) or GitHub users.",
+                    "description": (
+                        "Property to search. Defaults to 'sand-hill' "
+                        "(Rosewood Sand Hill). Other options: 'crillon', "
+                        "'carlyle', 'hong-kong'."
+                    ),
                 },
             },
-            "required": ["query"],
+            "required": ["interests"],
         },
     },
 ]
 
 # Map tool name → callable for dispatch
 _TOOL_REGISTRY: dict[str, Any] = {
-    "calculator": lambda inp: calculate(inp["expression"]),
     "get_weather": lambda inp: get_weather(inp["location"]),
-    "search_github": lambda inp: search_github(
-        inp["query"], inp.get("search_type", "repositories")
+    "get_flight_status": lambda inp: get_flight_info(inp["flight_number"]),
+    "find_placemaker": lambda inp: find_placemaker(
+        inp["interests"],
+        inp.get("property_id", "sand-hill"),
     ),
 }
 
 _SYSTEM_PROMPT = """\
-You are a research assistant with access to real-time tools. Use them whenever \
-a query requires current data or precise calculation — don't estimate or guess.
+You are a Rosewood concierge research assistant. You help staff prepare for and \
+respond to guest needs by querying real-time external data (weather, flights) and \
+the property's internal roster of in-house experts.
 
 Guidelines:
-- Always call the right tool rather than approximating.
-- After receiving tool results, synthesise them into a concise, direct answer.
-- If a calculation involves multiple steps, you may call the calculator more than once.
-- Keep final answers brief and factual. No need to explain that you used a tool.
+- Reach for a tool whenever the answer depends on live data, a specific flight, or \
+  who at the property should host an experience.
+- You can chain multiple tools in a single response — for example, check the \
+  weather at the destination, then find the right PlaceMaker for the guest's interests.
+- After receiving tool results, synthesise them into a concise, warm reply that a \
+  staff member could relay directly. No clinical readouts, no mention of "the system".
+- If no tool is needed, just answer directly.
 """
 
 _MAX_STEPS = 6  # max tool-call rounds before forcing a final answer

@@ -11,7 +11,6 @@ class Settings(BaseSettings):
     elevenlabs_assistant_agent_id: str = ""  # General Assistance / PlaceMaker Engine
     elevenlabs_voice_id: str = "EXAVITQu4vr4xnSDxMaL"  # default: Bella
     aviationstack_api_key: str = ""
-    github_token: str = ""  # Optional — raises rate limit from 60 to 5,000 req/hr
 
     backend_port: int = 8000
     frontend_url: str = "http://localhost:3000"

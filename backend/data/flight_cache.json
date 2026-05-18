@@ -101,5 +101,59 @@
       },
       "live": null
     }
+  },
+  "LH456": {
+    "cached_at": 1779002664.767655,
+    "data": {
+      "flight_date": "2026-05-17",
+      "flight_status": "scheduled",
+      "departure": {
+        "airport": "Frankfurt International Airport",
+        "timezone": "Europe/Berlin",
+        "iata": "FRA",
+        "icao": "EDDF",
+        "terminal": "1",
+        "gate": "Z66",
+        "delay": null,
+        "scheduled": "2026-05-17T10:40:00+00:00",
+        "estimated": "2026-05-17T10:40:00+00:00",
+        "actual": null,
+        "estimated_runway": null,
+        "actual_runway": null
+      },
+      "arrival": {
+        "airport": "Los Angeles International",
+        "timezone": "America/Los_Angeles",
+        "iata": "LAX",
+        "icao": "KLAX",
+        "terminal": "TBIT",
+        "gate": null,
+        "baggage": null,
+        "scheduled": "2026-05-17T13:10:00+00:00",
+        "delay": 10,
+        "estimated": null,
+        "actual": null,
+        "estimated_runway": null,
+        "actual_runway": null
+      },
+      "airline": {
+        "name": "Lufthansa",
+        "iata": "LH",
+        "icao": "DLH"
+      },
+      "flight": {
+        "number": "456",
+        "iata": "LH456",
+        "icao": "DLH456",
+        "codeshared": null
+      },
+      "aircraft": {
+        "registration": null,
+        "iata": null,
+        "icao": null,
+        "icao24": "3C4B27"
+      },
+      "live": null
+    }
   }
 }

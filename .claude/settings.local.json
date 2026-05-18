@@ -20,7 +20,8 @@
       "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\('arrival_plans:', list\\(d.get\\('arrival_plans',{}\\).keys\\(\\)\\)\\)\")",
       "Bash(python3 -c ' *)",
       "Bash(pip show *)",
-      "Bash(python -m pytest tests/test_mcp_agent.py -v -m \"not integration\")"
+      "Bash(python -m pytest tests/test_mcp_agent.py -v -m \"not integration\")",
+      "Bash(/Users/samarthhiremath/miniconda3/bin/python -m pytest tests/test_mcp_agent.py -v -m \"not integration\")"
     ]
   }
 }
