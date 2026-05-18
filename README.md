@@ -38,6 +38,7 @@ The system is made up of several purpose-built agents, each responsible for a na
 | **Observation Parser** | Turns freeform staff voice notes into structured tags, sentiment, and action items using Claude Haiku |
 | **Welcome Ambassador** | ElevenLabs conversational AI agent that conducts the pre-arrival voice call; asks about arrival mood, pace, room setup, and anything the guest is looking forward to |
 | **In-Stay Concierge** | Second ElevenLabs agent available during the stay; has full knowledge of the property, PlaceMakers, and local area for live voice requests |
+| **Concierge Research Agent** | On-demand LangGraph ReAct agent with MCP-style tool definitions; queries live weather, flight status, and the internal PlaceMaker roster to answer ad-hoc staff questions like *"Guest is inbound on LH456, loves California cuisine — check the flight and tell me who should host them"* |
 
 ---
 
@@ -93,6 +94,48 @@ The filter runs on Claude Haiku and is applied to history patterns, wellness not
 
 ---
 
+## Concierge Research Agent (MCP tool-use)
+
+The arrival pipeline above runs on a schedule — it produces the morning dossier. But staff also have **ad-hoc questions** throughout the day: *"Is LH456 on time?"*, *"What's the weather in Napa tomorrow?"*, *"Who at the property should host a guest who loves natural wine?"* The Concierge Research Agent answers those.
+
+It's a separate LangGraph graph — this one is a ReAct loop rather than a DAG — that gives Claude three hospitality-scoped tools defined in **MCP format** (the same `name` / `description` / `input_schema` spec used in Anthropic's tool-use API and Model Context Protocol):
+
+| Tool | What it does |
+|---|---|
+| **`get_weather`** | Live conditions for any city via `wttr.in` (no API key) — for arrival packing notes, golden-hour timing, activity recommendations |
+| **`get_flight_status`** | IATA flight lookup via AviationStack; returns route, scheduled vs. estimated arrival, gate, and a computed jet-lag severity note based on the origin timezone |
+| **`find_placemaker`** | Searches the property's **internal** roster (chefs, sommeliers, wellness directors) by keyword overlap against role, bio, offerings, and ideal-guest-profile descriptions |
+
+```
+START
+  │
+  ▼
+agent_node  ←─────────────────────┐
+(Claude decides: answer            │
+ directly or call tools)           │
+  │                                │
+  ├──(tool_use)──→ tool_node ──────┘   (loop until no more tool calls)
+  │
+  └──(end_turn)──→ END
+```
+
+The `find_placemaker` tool is the architecturally interesting one — it's the only tool that queries Living Memory's **own knowledge graph** rather than an external API. So the agent reasons across both live external data and the system's internal state in the same loop.
+
+**The killer demo query:**
+
+> *"Guest is inbound on LH456. They mentioned they're passionate about California cuisine. Check the flight and tell me who at the property would be the right host."*
+
+Claude calls `get_flight_status` and `find_placemaker` in parallel within a single turn, then composes a warm reply: *"Perfect timing. Here's what you need to know: **Flight Status:** LH456 from Frankfurt is arriving at LAX Terminal TBIT around 1:20 PM... **Reylon Agustin** at Madera would be the perfect host..."*
+
+**Eval suite.** Endpoint behaviour is locked in by 25 pytest cases under `backend/tests/test_mcp_agent.py`:
+
+- **16 unit tests** for the tools — no LLM calls, no API keys, run in ~3 seconds
+- **9 integration tests** for the full agent loop — assert correct tool selection, correct keywords in the final answer, and that the agent doesn't loop indefinitely (≤6 steps)
+
+Run with `pytest tests/test_mcp_agent.py -v`. The endpoint is exposed at `POST /agent/query` and the tool catalogue at `GET /agent/tools`.
+
+---
+
 ## System architecture
 
 **Two frontends:**
@@ -129,6 +172,13 @@ npm run dev
 1. Go to `localhost:3000/welcome` and have a 60-second conversation with the Ambassador (or fill out the quick form). This seeds your guest profile.
 2. Open `localhost:3000/manager` (password: `sandhill2026`) and click "Generate Arrival Plan" — watch the LangGraph pipeline run live: flight check, history read, wellness scan, PlaceMaker match, and final synthesis.
 3. Open `localhost:3000/concierge` and capture an observation by voice or text. Watch it appear in the feed immediately, with action items extracted automatically.
+4. Hit the Concierge Research Agent directly:
+   ```bash
+   curl -X POST localhost:8000/agent/query \
+     -H "Content-Type: application/json" \
+     -d '{"query": "Guest inbound on LH456 loves California cuisine — check the flight and tell me who should host them."}'
+   ```
+   The response includes the final answer plus a full log of which tools the agent chose, what it passed them, and what they returned.
 
 **Other views:**
 - `localhost:3000/my-data` — Guest data transparency and consent management
@@ -141,6 +191,7 @@ npm run dev
 - Full guest/stay/observation/plan data model with JSON persistence
 - LangGraph orchestration pipeline — parallel fan-out across flight, history, and wellness agents; typed shared state; fan-in to PlaceMaker matching and synthesis
 - Arrival plan generation with Claude Sonnet producing a full staff dossier
+- Concierge Research Agent — second LangGraph graph (ReAct loop) with MCP-style tool definitions for weather, flight status, and internal PlaceMaker search; backed by a 25-case pytest eval suite
 - Friend Filter — tone translation from clinical AI output to warm, readable language
 - Staff observation capture via text and browser speech recognition (Web Speech API)
 - Welcome page with ElevenLabs voice conversation + optional survey form as fallback
