@@ -143,76 +143,11 @@ class TestPlaceMaker:
 
 # ── Integration eval cases ────────────────────────────────────────────────────
 #
-# Each case specifies:
-#   query              — the input to the agent
-#   expected_tools     — tools that MUST appear in tool_calls (subset match)
-#   expected_keywords  — string (must appear) or list (any one must appear)
-#   description        — human-readable label
+# EVAL_CASES is the canonical eval set, defined in eval/cases.py so both this
+# pytest suite and the rubric-scorer CLI consume the same source of truth.
+# Each case includes a `slice` tag for failure-mode analysis.
 
-EVAL_CASES = [
-    {
-        "id": "weather_arrival_planning",
-        "description": "Weather for arrival planning",
-        "query": "What's the weather like in Menlo Park right now? A guest is arriving this afternoon.",
-        "expected_tools": ["get_weather"],
-        "expected_keywords": ["°"],
-    },
-    {
-        "id": "flight_status_basic",
-        "description": "Inbound flight lookup",
-        "query": "Can you check the status of flight LH456? A guest is on it.",
-        "expected_tools": ["get_flight_status"],
-        "expected_keywords": [["LH456", "Lufthansa", "Frankfurt"]],
-    },
-    {
-        "id": "flight_jet_lag_aware",
-        "description": "Flight lookup with jet lag implications",
-        "query": (
-            "A guest is flying in on LH456 from Frankfurt. "
-            "What should we know about how they'll arrive?"
-        ),
-        "expected_tools": ["get_flight_status"],
-        "expected_keywords": [["jet lag", "long-haul", "fatigue", "tired"]],
-    },
-    {
-        "id": "placemaker_wine",
-        "description": "PlaceMaker search — wine enthusiast",
-        "query": (
-            "I have a guest arriving who loves Napa wines and small "
-            "family estates. Who at the property should host them?"
-        ),
-        "expected_tools": ["find_placemaker"],
-        "expected_keywords": [["David", "Park", "sommelier", "wine"]],
-    },
-    {
-        "id": "placemaker_wellness",
-        "description": "PlaceMaker search — wellness / long-haul recovery",
-        "query": (
-            "A guest is arriving exhausted from a 14-hour flight from Asia. "
-            "Who do we have at the property who can help them recover?"
-        ),
-        "expected_tools": ["find_placemaker"],
-        "expected_keywords": [["Natalie", "Cheng", "wellness", "recovery"]],
-    },
-    {
-        "id": "chained_flight_and_placemaker",
-        "description": "Chained reasoning — flight then PlaceMaker match",
-        "query": (
-            "Guest is inbound on LH456. They mentioned they're "
-            "passionate about California cuisine. Check the flight and tell "
-            "me who at the property would be the right host."
-        ),
-        "expected_tools": ["get_flight_status", "find_placemaker"],
-        "expected_keywords": [["Reylon", "chef", "Madera"]],
-    },
-    {
-        "id": "no_tool_needed",
-        "description": "Agent answers directly without any tool",
-        "query": "What is the capital of France?",
-        "expected_tools": [],
-        "expected_keywords": [["Paris", "paris"]],
-    },
-]
+from eval.cases import EVAL_CASES  # noqa: E402
 
 
 @integration
