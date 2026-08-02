@@ -1,5 +1,5 @@
 """
-MCP Tool-Use Agent — LangGraph ReAct loop with MCP-style tool definitions.
+MCP Tool-Use Agent — LangGraph ReAct loop driven by a real MCP server.
 
 Architecture:
 
@@ -14,16 +14,27 @@ Architecture:
       │
       └──(end_turn / max_steps)──→ END
 
-Each tool follows the MCP tool-definition schema:
-  { name, description, input_schema: { type, properties, required } }
+Tool discovery and execution both go over MCP
+---------------------------------------------
+This agent holds NO hardcoded tool list. On each run it calls `tools/list`
+against the Living Memory MCP server (src/mcp_server/server.py, spoken to over
+stdio via src/mcp_server/client.py), translates the returned MCP schemas into
+the Anthropic tool format, and routes every execution through `tools/call`.
 
-Claude reads the full conversation history on every agent_node pass,
-so it can chain multiple tool calls and reason across their outputs.
+Consequences worth understanding:
+  * Adding a tool to the server makes it available here with no change to this
+    file. Discovery is dynamic.
+  * This agent would work against any MCP server exposing any tools — nothing
+    below names get_weather, get_flight_status or find_placemaker.
+  * If the server is unreachable the agent degrades to a no-tool assistant
+    rather than crashing (see _discover_tools).
+
+Claude reads the full conversation history on every agent_node pass, so it can
+chain multiple tool calls and reason across their outputs.
 """
 
 from __future__ import annotations
 
-import json
 import operator
 from dataclasses import dataclass, field
 from typing import Annotated, Any, TypedDict
@@ -32,109 +43,38 @@ import anthropic
 from langgraph.graph import END, START, StateGraph
 
 from ..config import settings
-from ..tools.flight_status_tool import get_flight_info
-from ..tools.placemaker_tool import find_placemaker
-from ..tools.weather_tool import get_weather
+from ..mcp_server.client import get_bridge
+from ..observability import configure_logging, instrument, logger
 
-# ── MCP-style tool definitions ────────────────────────────────────────────────
-# These match the Anthropic tool_use schema (which is itself MCP-compatible).
-#
-# All three tools are scoped to the hospitality use case: a concierge or
-# manager can ask about live arrival conditions, an inbound flight, or
-# the best property expert to host a particular kind of guest.
+# ── Tool discovery over MCP ───────────────────────────────────────────────────
 
-MCP_TOOLS: list[dict] = [
-    {
-        "name": "get_weather",
-        "description": (
-            "Get the current weather conditions and temperature for any city or location. "
-            "Returns temperature in both Celsius and Fahrenheit, humidity, wind speed, "
-            "and a short description. Useful for arrival planning, activity "
-            "recommendations, what to suggest a guest pack, and golden-hour timing."
-        ),
-        "input_schema": {
-            "type": "object",
-            "properties": {
-                "location": {
-                    "type": "string",
-                    "description": (
-                        "City name or location. Examples: 'Menlo Park', "
-                        "'San Francisco', 'Tokyo', 'Napa Valley'."
-                    ),
-                }
-            },
-            "required": ["location"],
-        },
-    },
-    {
-        "name": "get_flight_status",
-        "description": (
-            "Look up live status for an inbound flight by its IATA flight number. "
-            "Returns airline, route, scheduled vs. estimated arrival, gate/terminal, "
-            "delay information, and a jet-lag severity note based on the origin "
-            "timezone. Use this whenever a guest's flight is mentioned or staff "
-            "need to know when (or how tired) a guest will arrive."
-        ),
-        "input_schema": {
-            "type": "object",
-            "properties": {
-                "flight_number": {
-                    "type": "string",
-                    "description": (
-                        "IATA flight number, e.g. 'LH456', 'UA890', 'AA135'. "
-                        "Case-insensitive; spaces are ignored."
-                    ),
-                }
-            },
-            "required": ["flight_number"],
-        },
-    },
-    {
-        "name": "find_placemaker",
-        "description": (
-            "Search the property's internal roster of PlaceMakers — chefs, "
-            "sommeliers, wellness directors, art curators, and other in-house "
-            "experts — for the best match given a description of a guest's "
-            "interests or current state. Returns ranked matches with their "
-            "signature offerings. Use this to decide who should host an "
-            "experience for a guest, not to recommend external venues."
-        ),
-        "input_schema": {
-            "type": "object",
-            "properties": {
-                "interests": {
-                    "type": "string",
-                    "description": (
-                        "Free-text description of guest interests or context. "
-                        "Examples: 'natural wine and slow afternoons', "
-                        "'long-haul arrival, needs to decompress', "
-                        "'food-curious, wants to meet the chef', "
-                        "'art collector exploring contemporary work'."
-                    ),
-                },
-                "property_id": {
-                    "type": "string",
-                    "description": (
-                        "Property to search. Defaults to 'sand-hill' "
-                        "(Rosewood Sand Hill). Other options: 'crillon', "
-                        "'carlyle', 'hong-kong'."
-                    ),
-                },
-            },
-            "required": ["interests"],
-        },
-    },
-]
 
-# Map tool name → callable for dispatch
-_TOOL_REGISTRY: dict[str, Any] = {
-    "get_weather": lambda inp: get_weather(inp["location"]),
-    "get_flight_status": lambda inp: get_flight_info(inp["flight_number"]),
-    "find_placemaker": lambda inp: find_placemaker(
-        inp["interests"],
-        inp.get("property_id", "sand-hill"),
-    ),
-}
+def _discover_tools() -> list[dict]:
+    """
+    Call `tools/list` on the MCP server and return Anthropic-format tools.
+
+    The bridge caches the catalogue per process, so this is a dict lookup after
+    the first call rather than a round trip.
+
+    Degradation: if the server cannot be reached we log and return an empty
+    list. Claude then answers without tools instead of the request failing —
+    a degraded answer beats a 500 for a concierge asking a question mid-shift.
+    """
+    configure_logging()
+    try:
+        return get_bridge().list_tools()
+    except Exception as exc:  # noqa: BLE001
+        logger.warning(
+            "MCP tool discovery failed; running tool-less: %s",
+            exc,
+            extra={"event": "mcp_discovery_failed"},
+        )
+        return []
+
+
+def get_mcp_tools() -> list[dict]:
+    """Public accessor for the discovered tool catalogue (used by the API)."""
+    return _discover_tools()
 
 _SYSTEM_PROMPT = """\
 You are a Rosewood concierge research assistant. You help staff prepare for and \
@@ -167,6 +107,8 @@ class MCPAgentState(TypedDict):
     final_answer: str | None
     # Set on unrecoverable error
     error: str | None
+    # True when the loop was cut off by _MAX_STEPS rather than finishing
+    hit_step_cap: bool
 
 
 # ── Return type ───────────────────────────────────────────────────────────────
@@ -180,6 +122,9 @@ class MCPAgentResult:
     tool_calls: list[dict] = field(default_factory=list)
     steps_taken: int = 0
     error: str | None = None
+    # True when the answer was forced by the step cap. Without this a truncated
+    # run and a clean run are indistinguishable to the caller.
+    hit_step_cap: bool = False
 
 
 # ── Nodes ─────────────────────────────────────────────────────────────────────
@@ -187,14 +132,19 @@ class MCPAgentResult:
 _client = anthropic.Anthropic(api_key=settings.anthropic_api_key)
 
 
+@instrument("mcp_agent", "agent_node")
 def agent_node(state: MCPAgentState) -> dict:
     """
-    Call Claude with the current conversation history and the tool definitions.
+    Call Claude with the current conversation history and the tool definitions
+    discovered from the MCP server.
+
     If Claude chooses to use a tool, append its response and return.
     If Claude produces a final answer, set final_answer and stop.
     """
     if state.get("steps", 0) >= _MAX_STEPS:
-        # Force a finish by asking Claude to summarise without tools
+        # Force a finish. Note there is no `tools=` argument here: with no tools
+        # in the request Claude *cannot* emit a tool_use block, so the router
+        # cannot reach tool_node. Termination is structural, not persuasion.
         forced = _client.messages.create(
             model=settings.fast_model,
             max_tokens=512,
@@ -202,15 +152,28 @@ def agent_node(state: MCPAgentState) -> dict:
             messages=state["messages"],
         )
         text = _extract_text(forced.content)
-        return {"final_answer": text or "I've reached my reasoning limit.", "messages": []}
+        logger.info(
+            "agent hit max steps, forcing final answer",
+            extra={"event": "max_steps", "steps": state.get("steps", 0)},
+        )
+        return {
+            "final_answer": text or "I've reached my reasoning limit.",
+            "messages": [],
+            "hit_step_cap": True,
+        }
 
-    response = _client.messages.create(
-        model=settings.fast_model,
-        max_tokens=1024,
-        system=_SYSTEM_PROMPT,
-        tools=MCP_TOOLS,
-        messages=state["messages"],
-    )
+    tools = _discover_tools()
+    kwargs: dict[str, Any] = {
+        "model": settings.fast_model,
+        "max_tokens": 1024,
+        "system": _SYSTEM_PROMPT,
+        "messages": state["messages"],
+    }
+    # Passing tools=[] is rejected by the API; omit the key entirely instead.
+    if tools:
+        kwargs["tools"] = tools
+
+    response = _client.messages.create(**kwargs)
 
     # Convert Anthropic content blocks to plain dicts for JSON-serialisable state
     content_dicts = [_block_to_dict(b) for b in response.content]
@@ -228,10 +191,15 @@ def agent_node(state: MCPAgentState) -> dict:
     return {"messages": [assistant_msg]}
 
 
+@instrument("mcp_agent", "tool_node")
 def tool_node(state: MCPAgentState) -> dict:
     """
-    Find all tool_use blocks in the last assistant message, execute each tool,
-    and return a single user message containing all tool_result blocks.
+    Find all tool_use blocks in the last assistant message, execute each one via
+    the MCP server's `tools/call`, and return a single user message containing
+    all tool_result blocks.
+
+    A response may contain several tool_use blocks (Claude can request tools in
+    parallel), so this iterates rather than handling one.
     """
     messages = state["messages"]
     last_assistant = next(
@@ -247,19 +215,20 @@ def tool_node(state: MCPAgentState) -> dict:
         return {"steps": state.get("steps", 0) + 1, "messages": []}
 
     tool_results = []
+    bridge = get_bridge()
     for block in tool_use_blocks:
         tool_name = block["name"]
         tool_input = block["input"]
         tool_use_id = block["id"]
 
-        fn = _TOOL_REGISTRY.get(tool_name)
-        if fn is None:
-            result_text = f"Error: unknown tool '{tool_name}'"
-        else:
-            try:
-                result_text = fn(tool_input)
-            except Exception as exc:
-                result_text = f"Error executing {tool_name}: {exc}"
+        # Every execution is a JSON-RPC `tools/call` to the MCP server.
+        # call_tool never raises — protocol and tool errors both come back as
+        # text so the model can read and reason about the failure.
+        result_text = bridge.call_tool(tool_name, tool_input)
+        logger.info(
+            "tool executed via MCP",
+            extra={"event": "tool_call", "tool": tool_name},
+        )
 
         tool_results.append(
             {
@@ -329,6 +298,7 @@ def run_mcp_agent(query: str) -> MCPAgentResult:
         "steps": 0,
         "final_answer": None,
         "error": None,
+        "hit_step_cap": False,
     }
 
     try:
@@ -344,6 +314,7 @@ def run_mcp_agent(query: str) -> MCPAgentResult:
         tool_calls=tool_calls,
         steps_taken=final.get("steps", 0),
         error=final.get("error"),
+        hit_step_cap=bool(final.get("hit_step_cap", False)),
     )
 
 

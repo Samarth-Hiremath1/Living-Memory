@@ -37,7 +37,7 @@
         "carlyle": "CAR-2023-0891"
       },
       "created_at": "2023-03-15T00:00:00",
-      "updated_at": "2026-05-17T06:36:11.169940"
+      "updated_at": "2026-08-02T01:16:46.775239"
     },
     "guest-marcus-chen": {
       "id": "guest-marcus-chen",
@@ -73,7 +73,7 @@
         "hong-kong": "RWHK-2023-MC"
       },
       "created_at": "2023-05-20T00:00:00",
-      "updated_at": "2026-05-17T06:36:11.170485"
+      "updated_at": "2026-08-02T01:16:46.775393"
     },
     "guest-elena-vasquez": {
       "id": "guest-elena-vasquez",
@@ -111,7 +111,7 @@
         "crillon": "CRL-2023-EV"
       },
       "created_at": "2023-09-10T00:00:00",
-      "updated_at": "2026-05-17T06:36:11.170493"
+      "updated_at": "2026-08-02T01:16:46.775399"
     },
     "guest-harrison-family": {
       "id": "guest-harrison-family",
@@ -143,7 +143,7 @@
       },
       "property_aliases": {},
       "created_at": "2026-01-10T00:00:00",
-      "updated_at": "2026-05-17T06:36:11.170501"
+      "updated_at": "2026-08-02T01:16:46.775406"
     },
     "guest-james-okafor": {
       "id": "guest-james-okafor",
@@ -173,7 +173,7 @@
       },
       "property_aliases": {},
       "created_at": "2024-01-08T00:00:00",
-      "updated_at": "2026-05-17T06:36:11.170504"
+      "updated_at": "2026-08-02T01:16:46.775409"
     },
     "guest-yuki-nakamura": {
       "id": "guest-yuki-nakamura",
@@ -210,7 +210,7 @@
         "sand-hill": "SF-2023-YN"
       },
       "created_at": "2023-06-01T00:00:00",
-      "updated_at": "2026-05-17T06:36:11.170507"
+      "updated_at": "2026-08-02T01:16:46.775412"
     },
     "guest-samarth-hiremath": {
       "id": "guest-samarth-hiremath",
@@ -251,7 +251,7 @@
       },
       "property_aliases": {},
       "created_at": "2026-05-16T00:00:00",
-      "updated_at": "2026-05-17T06:36:11.170497"
+      "updated_at": "2026-08-02T01:16:46.775402"
     }
   },
   "stays": {
@@ -2340,6 +2340,204 @@
       "flight_status": null,
       "jet_lag_note": null,
       "raw_dossier": "# The Harrison Family — Arrival Dossier\n**Arriving**: May 16, 2026 | **Property**: Rosewood Sand Hill | **Stay**: 4 nights\n\n## Who they are\nA New York family of four who travel with intention: hiking boots packed, questions about kids' menus asked before they land. They're planners who love spontaneity — but only once the safety nets are in place. Their youngest has a nut allergy, which means every meal requires a conversation. They've stayed with us before and always ask the same things first: where can we hike, and what's safe for the kids to eat?\n\n## Moments to create today\n- Print a trail map of the Stanford Dish Loop (family-friendly 3.7 miles) and leave it on the suite table with a handwritten note: \"Your hiking boots are calling\"\n- Have Chef Reylon personally write the children's menu options on a card and include it in the welcome amenity basket — note the nut-free preparations\n- Pre-flag the nut allergy in Madera, room service, and poolside dining systems before they arrive; place a discreet kitchen note in the suite folder\n- Stock the suite fridge with cold-pressed apple juice and sparkling water — post-hike refreshments ready to go\n\n## First 24 hours\n**Morning after arrival (7–9am)**  \nFamily breakfast at Madera — request the window table overlooking the oak grove. Chef can prepare a nut-free kids' plate if they order ahead the night before.\n\n**Mid-morning (9:30am)**  \nStanford Dish Loop hike — 3.7 miles, gentle elevation, sweeping views of the Bay. Trailhead is 10 minutes away. Pack water bottles from the suite.\n\n**Late afternoon (4–5pm)**  \nPool time — heated year-round, with shallow end perfect for young swimmers. Poolside team can bring nut-free snacks on request.\n\n## Room setup\n- Temperature: 70°F\n- Welcome amenity: Valley essentials (Manresa Bread sourdough, Mariposa shortbread, Equator coffee, seasonal stone fruit) — with Chef Reylon's handwritten kids' menu card tucked inside\n- Suite fridge pre-stocked with cold apple juice and sparkling water\n- Nut allergy flagged across all dining systems\n\n## Someone to introduce\nNo PlaceMaker introduction recommended. The family's rhythm is outdoors and around the table — our current roster skews wine-serious and wellness-focused, neither quite right for two young kids. Better to let the concierge connect them with our preferred family hiking guide if they want a naturalist-led morning.\n\n## Keep in mind\nThey'll relax once they know the kitchen understands the allergy. Lead with that — it's the unlock. After that, they're easy: good boots, good food, and a trail map. Don't over-program them. They like having options, not obligations."
+    },
+    "89fb0ad2-08e6-4b78-8b0d-5aa68324b5d0": {
+      "id": "89fb0ad2-08e6-4b78-8b0d-5aa68324b5d0",
+      "guest_id": "guest-anna-lindqvist",
+      "stay_id": "stay-anna-hk-2023",
+      "property_id": "hong-kong",
+      "generated_at": "2026-08-02T00:15:41.547237",
+      "room_temperature_f": 67,
+      "welcome_amenity": "hk-tea-ceremony",
+      "moments_to_create": [
+        "Set her room to 67°F before arrival and confirm it holds—she notices and appreciates when this is remembered",
+        "Have a handwritten trail map ready at check-in: Dragon's Back Trail (coastal views, 8.5km loop) and Tai Mo Shan (highest peak, oak forest sections)—both accessible by taxi, both quiet before 8am",
+        "Ask the sommelier to pull two natural wines for her first dinner—ideally something Austrian or low-intervention from the reserve list, with a brief note on each",
+        "Arrange a harbour-facing table for breakfast at 7am tomorrow—early enough to beat the crowd, positioned where she can see the city wake up"
+      ],
+      "itinerary": [
+        {
+          "time": "Evening of arrival",
+          "suggestion": "Light dinner at Holt's Bar—simple, late, harbour view. The sommelier will have two natural wines pulled for her to choose from."
+        },
+        {
+          "time": "Tomorrow, 6:15am",
+          "suggestion": "Sunrise Tai Chi with Mei Lin Wong on the harbour terrace—this catches her natural rhythm and sets the day beautifully"
+        },
+        {
+          "time": "Tomorrow, 7am",
+          "suggestion": "Quiet breakfast overlooking the harbour before the rush—she'll arrive energized from Tai Chi and ready to engage"
+        }
+      ],
+      "placemaker_intro": "Mei Lin Wong — Mei Lin leads sunrise Tai Chi sessions on the harbour terrace at 6:15am—the timing mirrors Anna's pattern of starting her day outdoors and early, and the movement practice offers a distinctly Hong Kong way to greet the morning before the city fully wakes.",
+      "flight_status": null,
+      "jet_lag_note": "She's coming from San Francisco (15-hour time difference)—her body will want to wake early anyway, which works in her favor. A calm, unhurried arrival tonight and access to quiet morning spaces will let her settle into her natural rhythm.",
+      "raw_dossier": "# Anna Lindqvist — Arrival Dossier\n**Arriving**: March 15, 2023 | **Property**: Rosewood Hong Kong | **Stay**: 4 nights\n\n## Who she is\nAnna is a San Francisco-based guest who lives in her mornings—she'll be up before 6:45am, whether that means a trail run or a quiet breakfast with the city waking around her. She's genuinely curious about wine (especially natural and Austrian varieties), architecture (mid-century and brutalist), and green spaces that feel removed from crowds. She arrives energized and stays that way when given room to move at her own pace.\n\n## Moments to create today\n- Set her room to 67°F before arrival and confirm it holds—she notices and appreciates when this is remembered\n- Have a handwritten trail map ready at check-in: Dragon's Back Trail (coastal views, 8.5km loop) and Tai Mo Shan (highest peak, oak forest sections)—both accessible by taxi, both quiet before 8am\n- Ask the sommelier to pull two natural wines for her first dinner—ideally something Austrian or low-intervention from the reserve list, with a brief note on each\n- Arrange a harbour-facing table for breakfast at 7am tomorrow—early enough to beat the crowd, positioned where she can see the city wake up\n\n## First 24 hours\n**Evening of arrival**: Light dinner at Holt's Bar—simple, late, harbour view. The sommelier will have two natural wines pulled for her to choose from.\n\n**Tomorrow, 6:15am**: Sunrise Tai Chi with Mei Lin Wong on the harbour terrace—this catches her natural rhythm and sets the day beautifully.\n\n**Tomorrow, 7am**: Quiet breakfast overlooking the harbour before the rush—she'll arrive energized from Tai Chi and ready to engage.\n\n## Room setup\n- Temperature: 67°F (critical—confirm it holds)\n- Welcome amenity: In-room Pu-erh tea ceremony setup\n- Harbour-facing suite as booked\n- Trail map (handwritten) on the desk\n\n## Someone to introduce\n**Mei Lin Wong**, our wellness guide, leads sunrise Tai Chi sessions on the harbour terrace at 6:15am. The timing mirrors Anna's pattern of starting her day outdoors and early, and the movement practice offers a distinctly Hong Kong way to greet the morning before the city fully wakes. Introduce them at check-in if she's interested—Mei Lin's sessions are small and unhurried.\n\n## Keep in mind\nShe's crossing 15 time zones from San Francisco, which means her body will want to wake early anyway—this works in her favor. A calm, unhurried arrival tonight and access to quiet morning spaces will let her settle into her natural rhythm. She dislikes crowded breakfast environments, so early or off-peak timing is key. She also notices design details—this property will speak to her, and she'll appreciate any conversation about the building's architecture if it comes up naturally."
+    },
+    "49ba5972-b613-4c14-9671-2d9265bf418e": {
+      "id": "49ba5972-b613-4c14-9671-2d9265bf418e",
+      "guest_id": "guest-anna-lindqvist",
+      "stay_id": "stay-anna-hk-2023",
+      "property_id": "hong-kong",
+      "generated_at": "2026-08-02T00:16:16.293135",
+      "room_temperature_f": 67,
+      "welcome_amenity": "hk-tea-ceremony",
+      "moments_to_create": [
+        "Confirm Mei Lin's sunrise tai chi for 6:15am tomorrow — text Anna the meeting point tonight so she can sleep knowing it's set",
+        "Queue up a quiet breakfast table by the window before 7am, away from the main dining flow",
+        "Leave a handwritten note with three brutalist landmarks within running distance — including the old Government Offices and Hopewell Centre",
+        "Ask the sommelier to pull an Austrian Grüner Veltliner for her first dinner — mention we know she's curious about natural wines"
+      ],
+      "itinerary": [
+        {
+          "time": "6:15am, Day 1",
+          "suggestion": "Sunrise tai chi with Mei Lin at the harbour promenade — movement, solitude, and the city waking up"
+        },
+        {
+          "time": "Morning, Day 2",
+          "suggestion": "Trail run at Dragon's Back — one of Hong Kong's most beautiful routes, overlooking the South China Sea"
+        },
+        {
+          "time": "Evening, Day 1 or 2",
+          "suggestion": "Holt's Bar after 9pm for a quiet nightcap and conversation with the bartender about Hong Kong's architectural layers"
+        }
+      ],
+      "placemaker_intro": "Mei Lin Wong — she leads sunrise tai chi sessions by the harbour before the city crowds arrive. Given Anna's non-negotiable need for early-morning movement and her preference for solitude, this is a perfect way to reset after travel and establish her rhythm immediately.",
+      "flight_status": null,
+      "jet_lag_note": "We don't have flight details, but assume she may arrive tired — give her space to settle and don't over-program the first afternoon.",
+      "raw_dossier": "# Anna Lindqvist — Arrival Dossier\n**Arriving**: March 15, 2023 | **Property**: Rosewood Hong Kong | **Stay**: 4 nights\n\n## Who she is\nAnna lives in San Francisco but grew up in Sweden. She's a designer with a deep curiosity about built environments — particularly brutalism and mid-century architecture. She energizes through early-morning movement, often running trails or exploring parks before 7am. She's also genuinely engaged with wine, especially natural and Austrian varieties, and will take time with sommeliers rather than just ordering off a list. At the Carlyle, she arrived from an architecture conference buzzing with ideas and immediately wanted to explore the library and the city's mid-century story. She turns travel into a mini-pilgrimage around her passions.\n\n## Moments to create today\n- Confirm Mei Lin's sunrise tai chi for 6:15am tomorrow — text Anna the meeting point tonight so she can sleep knowing it's set\n- Queue up a quiet breakfast table by the window before 7am, away from the main dining flow\n- Leave a handwritten note with three brutalist landmarks within running distance — including the old Government Offices and Hopewell Centre\n- Ask the sommelier to pull an Austrian Grüner Veltliner for her first dinner — mention we know she's curious about natural wines\n\n## First 24 hours\n**6:15am, Day 1**: Sunrise tai chi with Mei Lin at the harbour promenade — movement, solitude, and the city waking up.\n\n**Morning, Day 2**: Trail run at Dragon's Back — one of Hong Kong's most beautiful routes, overlooking the South China Sea. (Concierge can arrange a car to the trailhead.)\n\n**Evening, Day 1 or 2**: Holt's Bar after 9pm for a quiet nightcap and conversation with the bartender about Hong Kong's architectural layers.\n\n## Room setup\n- Temperature: 67°F (she's consistent about this — set it before she arrives)\n- Welcome amenity: In-room Pu-erh tea ceremony setup — aged tea, gaiwan, handwritten provenance card\n- Harbour-facing room, away from early-morning noise\n- Queue up trail run recommendations and a map of nearby brutalist landmarks\n\n## Someone to introduce\n**Mei Lin Wong** — she leads sunrise tai chi by the harbour before the city crowds arrive. This is exactly what Anna needs: deliberate early-morning movement in a serene setting. It resets her rhythm after travel and honors the non-negotiable role movement plays in how she feels. Mei Lin's 6:15am session gives Anna the solitude and intentionality she craves at the start of each day.\n\n## Keep in mind\nWe don't have her flight details, but assume she may arrive a bit tired. Give her space to settle — don't over-program the first afternoon. She'll appreciate having everything quietly anticipated (the cool room, the early breakfast option, the tai chi confirmed) without needing to ask. And if she starts talking about Hong Kong's architectural history with anyone on the team, lean in — that's her love language."
+    },
+    "ded35b5a-8ca8-4ebb-95e7-dabe40cb3129": {
+      "id": "ded35b5a-8ca8-4ebb-95e7-dabe40cb3129",
+      "guest_id": "guest-anna-lindqvist",
+      "stay_id": "stay-anna-hk-2023",
+      "property_id": "hong-kong",
+      "generated_at": "2026-08-02T00:16:50.317759",
+      "room_temperature_f": 67,
+      "welcome_amenity": "hk-tea-ceremony",
+      "moments_to_create": [
+        "Book her a harbour-facing table at Holt's Kitchen for 7:00am breakfast — quiet, before the crowd, with a window view",
+        "Leave a handwritten note about the Dragon's Back trail (45 min from hotel) with a car offer for tomorrow morning",
+        "Have the sommelier leave a card about the Austrian Grüner Veltliner on the list at Holt's Bar — she'll appreciate the nod",
+        "Print a map of Hong Kong's brutalist landmarks (Central Government Complex, HKU + the hotel itself) with walking routes marked"
+      ],
+      "itinerary": [
+        {
+          "time": "6:30am Day 1",
+          "suggestion": "Sunrise Harbour Tai Chi with Mei Lin Wong on the rooftop — quiet, energizing, harbour light. Perfect first-morning reset."
+        },
+        {
+          "time": "Morning Day 2",
+          "suggestion": "Dragon's Back trail run (we'll arrange a 6:00am car) — coastal views, green ridgeline, back by 9:00am. The Marin Headlands of Hong Kong."
+        },
+        {
+          "time": "Evening Day 1 or 2",
+          "suggestion": "Holt's Bar after 9pm — talk wine with the sommelier, try the Austrian flight, harbour lights in full force."
+        }
+      ],
+      "placemaker_intro": "Mei Lin Wong — Sunrise Harbour Tai Chi — Mei Lin leads a dawn practice on the rooftop overlooking Victoria Harbour — exactly the kind of intentional, solitary morning movement Anna seeks. It's the Hong Kong version of her Central Park ritual.",
+      "flight_status": null,
+      "jet_lag_note": null,
+      "raw_dossier": "# Anna Lindqvist — Arrival Dossier\n**Arriving**: March 15, 2023 | **Property**: Rosewood Hong Kong | **Stay**: 4 nights\n\n## Who she is\nAnna's a San Francisco-based Swede who starts every great day the same way: outdoors, early, moving. At the Carlyle she was back from a Central Park run by 7am, talking about missing the trails in Marin — that's her rhythm. She's intellectually curious about wine (natural and Austrian especially) and architecture (modernist, brutalist), runs a degree cooler than most guests, and thrives when mornings are quiet and hers alone.\n\n## Moments to create today\n- Book her a harbour-facing table at Holt's Kitchen for 7:00am breakfast — quiet, before the crowd, with a window view\n- Leave a handwritten note about the Dragon's Back trail (45 min from hotel) with a car offer for tomorrow morning\n- Have the sommelier leave a card about the Austrian Grüner Veltliner on the list at Holt's Bar — she'll appreciate the nod\n- Print a map of Hong Kong's brutalist landmarks (Central Government Complex, HKU + the hotel itself) with walking routes marked\n\n## First 24 hours\n**6:30am Day 1**: Sunrise Harbour Tai Chi with Mei Lin Wong on the rooftop — quiet, energizing, harbour light. Perfect first-morning reset.\n\n**Morning Day 2**: Dragon's Back trail run (we'll arrange a 6:00am car) — coastal views, green ridgeline, back by 9:00am. The Marin Headlands of Hong Kong.\n\n**Evening Day 1 or 2**: Holt's Bar after 9pm — talk wine with the sommelier, try the Austrian flight, harbour lights in full force.\n\n## Room setup\n- Temperature: 67°F\n- Welcome amenity: In-room Pu-erh tea ceremony setup (the aged tea, the ritual — she'll sit with this)\n- Harbour-facing room, early-morning quiet essential\n\n## Someone to introduce\n**Mei Lin Wong** leads a dawn Tai Chi practice on the rooftop overlooking Victoria Harbour. It's the kind of intentional, solitary morning movement Anna gravitates toward — her Central Park ritual, Hong Kong edition. Offer it for tomorrow morning.\n\n## Keep in mind\nShe runs warm and needs that 67° room. And she's here for business but will show up alive if she can move outdoors early — giving her that space is the gesture that matters most."
+    },
+    "e106a2dd-cbea-4a10-b898-10c30140c0ef": {
+      "id": "e106a2dd-cbea-4a10-b898-10c30140c0ef",
+      "guest_id": "guest-anna-lindqvist",
+      "stay_id": "stay-anna-sandhill-2026",
+      "property_id": "sand-hill",
+      "generated_at": "2026-08-02T01:17:28.274693",
+      "room_temperature_f": 67,
+      "welcome_amenity": "recovery-basket",
+      "moments_to_create": [
+        "Prepare a trail map of the Dish Loop at Stanford (3.7 miles, moderate) with a handwritten note marking the best sunrise viewpoint",
+        "Ask housekeeping to set the Garden Bungalow terrace with morning coffee service at 7:00 AM—quiet, private, no interruption",
+        "Have David Park leave a brief note in the room mentioning an Austrian Grüner Veltliner he's just received from a small Wachau producer",
+        "Ensure the meditation garden path is cleared and signage visible—she'll likely walk it on arrival to decompress"
+      ],
+      "itinerary": [
+        {
+          "time": "Late afternoon, Day 1 (today)",
+          "suggestion": "Light arrival—no plans. A walk through the oak groves or meditation garden if she wants to move, otherwise just settle into the bungalow."
+        },
+        {
+          "time": "Morning, Day 2",
+          "suggestion": "Trail run at the Dish (30 min drive). The concierge can arrange a car for 6:30 AM departure if she'd like to catch sunrise."
+        },
+        {
+          "time": "Late afternoon, Day 2",
+          "suggestion": "Private cellar tasting with David Park—focused on cool-climate California and a rare Austrian Grüner he's sourced. Serious, unhurried conversation."
+        }
+      ],
+      "placemaker_intro": "David Park, Wine Director. He curates small, thoughtful producers—natural wines, Austrian Grüners, cool-climate Pinots—exactly the kind of serious, non-commercial conversation Anna enjoys. He's just received a rare Wachau Grüner Veltliner that she'll appreciate.",
+      "flight_status": null,
+      "jet_lag_note": "Nine-hour shift from Frankfurt. She'll want to move outdoors to reset, but avoid scheduling anything formal in the first few hours—let her arrive on her own rhythm.",
+      "raw_dossier": "# Anna Lindqvist — Arrival Dossier\n**Arriving**: May 16, 2026 (via LH454, landed SFO 12:58 PM) | **Property**: Rosewood Sand Hill | **Stay**: 4 nights\n\n## Who she is\nAnna lives in San Francisco but just flew in from Frankfurt—nine time zones, long-haul fatigue. She's Swedish, a trail runner, and someone who processes the world through movement and green spaces. She's also deeply curious about architecture and wine, especially natural and Austrian whites. When she's tired, she doesn't collapse—she walks, runs, or finds a trail. That's how she resets.\n\n## Moments to create today\n- Prepare a trail map of the Dish Loop at Stanford (3.7 miles, moderate) with a handwritten note marking the best sunrise viewpoint\n- Ask housekeeping to set the Garden Bungalow terrace with morning coffee service at 7:00 AM—quiet, private, no interruption\n- Have David Park leave a brief note in the room mentioning an Austrian Grüner Veltliner he's just received from a small Wachau producer\n- Ensure the meditation garden path is cleared and signage visible—she'll likely walk it on arrival to decompress\n\n## First 24 hours\n**Late afternoon today**: No plans. Let her settle. If she wants to move, the meditation garden or oak grove paths are there. Otherwise, the terrace and quiet.\n\n**Tomorrow morning**: She'll likely ask about trail running options. The Dish at Stanford is 30 minutes away—offer a 6:30 AM car if she wants to catch sunrise. It's a 3.7-mile loop with bay views, and it'll give her exactly what she needs.\n\n**Tomorrow late afternoon**: David Park can host a private cellar tasting—focused, serious, no crowds. He's sourced a rare Austrian Grüner Veltliner from Wachau that she'll genuinely appreciate. Let it be a conversation, not a sales pitch.\n\n## Room setup\n- Temperature: 67°F (she runs warm; standard hotel temps feel stifling)\n- Welcome amenity: Recovery basket (cold-pressed greens, dark chocolate, magnesium water, handwritten note)\n- Terrace prepped for morning coffee service—unhurried, private\n\n## Someone to introduce\n**David Park**, Wine Director. He curates small, natural-wine-focused producers—exactly the kind of thoughtful, non-commercial experience Anna gravitates toward. He's just received a rare Wachau Grüner Veltliner that fits her palate perfectly, and he can steer her toward cool-climate California wines that feel closer to what she loves in Austrian and natural styles.\n\n## Keep in mind\nNine-hour time shift from Frankfurt. She'll want to move outdoors to reset—don't fight it, facilitate it. Avoid scheduling anything formal in the first three hours. A quiet, unhurried arrival is the priority. She's serious about wine and trails—treat those requests as important, not casual."
+    },
+    "2e59558c-d741-4bb0-b447-17485be47f26": {
+      "id": "2e59558c-d741-4bb0-b447-17485be47f26",
+      "guest_id": "guest-anna-lindqvist",
+      "stay_id": "stay-anna-sandhill-2026",
+      "property_id": "sand-hill",
+      "generated_at": "2026-08-02T01:18:14.671878",
+      "room_temperature_f": 67,
+      "welcome_amenity": "recovery-basket",
+      "moments_to_create": [
+        "Set out a printed trail map of Windy Hill Open Space Preserve (15 min away) with a note: 'The Anniversary Trail has morning fog views that remind people of Marin — 3.2 miles, trailhead opens at sunrise.'",
+        "Ask David Park to leave a bottle of Austrian Grüner Veltliner in Anna's room with a handwritten note suggesting a quiet tasting tomorrow evening after her first trail run.",
+        "Reserve the corner terrace table at Madera for 7:15am breakfast tomorrow — away from the main dining room, with a view of the meditation garden.",
+        "Arrange a 4pm spa appointment today for the 'Jet Lag Recovery' treatment — just the essentials, nothing elaborate, so she has time to rest before dinner."
+      ],
+      "itinerary": [
+        {
+          "time": "Today, 4:00pm",
+          "suggestion": "Jet Lag Recovery treatment at the spa — a focused 50-minute session designed to reset your system after long-haul travel. The treatment room overlooks the meditation garden."
+        },
+        {
+          "time": "Tomorrow, 6:45am",
+          "suggestion": "Sunrise trail run at Windy Hill Open Space Preserve. The Anniversary Trail loop is 3.2 miles with oak groves and fog-clearing views of the bay — it has the same quiet energy as the Marin Headlands."
+        },
+        {
+          "time": "Tomorrow evening",
+          "suggestion": "A quiet tasting with David Park to explore natural wines from Sonoma Coast producers. He's set aside a few bottles that share the same mineral tension as the Austrian Grüner you love."
+        }
+      ],
+      "placemaker_intro": "David Park — our wine curator who works beyond the obvious Napa mainstream. He knows the Sonoma Coast intimately and has access to small, natural-wine-focused producers. Anna's interest in Austrian Grüner Veltliner and her design sensibility suggest she'd appreciate David's approach: cooler-climate estates, mineral-driven wines, and producers who think like architects.",
+      "flight_status": null,
+      "jet_lag_note": "Nine-hour time shift from Frankfurt — she'll arrive tired but will energize quickly with outdoor time. Give her space this afternoon and let tomorrow's trail run reset her rhythm.",
+      "raw_dossier": "# Anna Lindqvist — Arrival Dossier\n**Arriving**: May 16, 2026 (just landed SFO) | **Property**: Rosewood Sand Hill | **Stay**: 4 nights\n\n## Who she is\nAnna is Swedish, San Francisco-based for eight years, and someone who moves between worlds with real curiosity — architecture, natural wine, and early-morning trails. She just flew in from Frankfurt (nine-hour time shift) and will arrive tired but ready to reset. She's the kind of guest who energizes outdoors, takes time with sommeliers, and notices design details. At The Carlyle, she asked for architecture books and spent a thoughtful hour exploring natural wines before a 6:45am Central Park run the next morning.\n\n## Moments to create today\n- Set out a printed trail map of Windy Hill Open Space Preserve (15 min away) with a note: 'The Anniversary Trail has morning fog views that remind people of Marin — 3.2 miles, trailhead opens at sunrise.'\n- Ask David Park to leave a bottle of Austrian Grüner Veltliner in Anna's room with a handwritten note suggesting a quiet tasting tomorrow evening after her first trail run.\n- Reserve the corner terrace table at Madera for 7:15am breakfast tomorrow — away from the main dining room, with a view of the meditation garden.\n- Arrange a 4pm spa appointment today for the 'Jet Lag Recovery' treatment — just the essentials, nothing elaborate, so she has time to rest before dinner.\n\n## First 24 hours\n**Today, 4:00pm** — Jet Lag Recovery treatment at the spa. A focused 50-minute session designed to reset your system after long-haul travel. The treatment room overlooks the meditation garden.\n\n**Tomorrow, 6:45am** — Sunrise trail run at Windy Hill Open Space Preserve. The Anniversary Trail loop is 3.2 miles with oak groves and fog-clearing views of the bay — it has the same quiet energy as the Marin Headlands.\n\n**Tomorrow evening** — A quiet tasting with David Park to explore natural wines from Sonoma Coast producers. He's set aside a few bottles that share the same mineral tension as the Austrian Grüner you love.\n\n## Room setup\n- Temperature: 67°F (she will mention this if it's not right — set it before she arrives)\n- Welcome amenity: Recovery basket (cold-pressed greens, dark chocolate, magnesium water, handwritten note)\n- Garden Bungalow with private terrace — quiet location away from early morning noise\n- Trail map and David's wine note on the console table\n\n## Someone to introduce\nDavid Park — our wine curator who works beyond the obvious Napa mainstream. He knows the Sonoma Coast intimately and has access to small, natural-wine-focused producers that don't take walk-ins. Anna's interest in Austrian Grüner Veltliner and her design sensibility suggest she'd appreciate David's approach: cooler-climate estates, mineral-driven wines, and producers who think like architects. Timing for the full Sonoma Coast day: after she's done at least one trail run and settled in — day 2 or 3 feels right.\n\n## Keep in mind\nNine-hour time shift from Frankfurt. She'll arrive tired but will energize quickly with outdoor time. Give her space this afternoon and let tomorrow's trail run reset her rhythm. She prefers solitude at breakfast — the corner terrace table at Madera keeps her away from the main dining room during peak hours."
+    },
+    "bd4a0354-df2d-4d0f-9cb2-4fb03623438f": {
+      "id": "bd4a0354-df2d-4d0f-9cb2-4fb03623438f",
+      "guest_id": "guest-anna-lindqvist",
+      "stay_id": "stay-anna-sandhill-2026",
+      "property_id": "sand-hill",
+      "generated_at": "2026-08-02T01:18:57.883422",
+      "room_temperature_f": 67,
+      "welcome_amenity": "recovery-basket",
+      "moments_to_create": [
+        "Place Natalie Cheng's card in the room tonight with a handwritten note: 'Tomorrow at sunrise (6:30 a.m.), if you'd like company on the trails — no agenda, just oaks and quiet. — Natalie'",
+        "Set breakfast for 8:00 a.m. in the meditation garden terrace corner table (quietest spot, away from the main dining flow)",
+        "Ask the sommelier to leave a small tasting note about tonight's Austrian Grüner Veltliner selection at Madera — she'll appreciate the gesture",
+        "Ensure her bungalow is on the far end of the garden row, away from early morning service traffic"
+      ],
+      "itinerary": [
+        {
+          "time": "Tomorrow, 6:30 a.m.",
+          "suggestion": "Sand Hill Trail Walk with Natalie Cheng — an unhurried sunrise walk through oak groves before breakfast. No schedule, just movement and green space."
+        },
+        {
+          "time": "Tomorrow, 8:00 a.m.",
+          "suggestion": "Breakfast on the meditation garden terrace (reserved corner table). Cold-pressed greens, avocado toast, and quiet."
+        },
+        {
+          "time": "Tomorrow evening",
+          "suggestion": "Madera for dinner — the sommelier will have a natural Austrian selection ready if she's interested in continuing the conversation."
+        }
+      ],
+      "placemaker_intro": "Natalie Cheng, Sand Hill Trail Walk guide. Anna energizes through early-morning movement in nature, and Natalie's sunrise walk through the oak groves is built exactly for that rhythm — no agenda, just the landscape and her thoughts.",
+      "flight_status": null,
+      "jet_lag_note": "Long-haul fatigue is real. A quiet, unhurried arrival is the priority — give her space to settle in without rushing into anything.",
+      "raw_dossier": "# Anna Lindqvist — Arrival Dossier\n**Arriving**: May 16, 2026 (12:58 p.m. from FRA) | **Property**: Rosewood Sand Hill | **Stay**: 4 nights\n\n## Who she is\nAnna's a Swedish architect based in San Francisco who recharges through early-morning movement in nature — trail running or quiet walks before the world wakes up. She's genuinely curious about wine (especially natural and Austrian varietals), architecture history (brutalist and mid-century design light her up), and landscape. She runs warm and prefers cooler spaces. She's coming in from a long-haul flight from Frankfurt with a 9-hour time difference, so a calm, unhurried arrival will set the right tone.\n\n## Moments to create today\n- Place Natalie Cheng's card in the room tonight with a handwritten note: \"Tomorrow at sunrise (6:30 a.m.), if you'd like company on the trails — no agenda, just oaks and quiet. — Natalie\"\n- Set breakfast for 8:00 a.m. in the meditation garden terrace corner table (quietest spot, away from the main dining flow)\n- Ask the sommelier to leave a small tasting note about tonight's Austrian Grüner Veltliner selection at Madera — she'll appreciate the gesture\n- Ensure her bungalow is on the far end of the garden row, away from early morning service traffic\n\n## First 24 hours\n**Tomorrow, 6:30 a.m.** — Sand Hill Trail Walk with Natalie Cheng. An unhurried sunrise walk through oak groves before breakfast. No schedule, just movement and green space — exactly what she'll crave after the flight.\n\n**Tomorrow, 8:00 a.m.** — Breakfast on the meditation garden terrace (reserved corner table). Cold-pressed greens, avocado toast, and quiet to ease into the day.\n\n**Tomorrow evening** — Madera for dinner. The sommelier will have a natural Austrian selection ready if she's interested in continuing the conversation.\n\n## Room setup\n- **Temperature**: 67°F (don't offer adjustment — this is her sweet spot)\n- **Welcome amenity**: Recovery basket (cold-pressed greens, organic dark chocolate, magnesium water, handwritten note)\n- **Garden Bungalow placement**: Far end of the garden row, away from early morning service noise\n- **Terrace fireplace**: Pre-set for this evening if she wants to decompress outdoors\n\n## Someone to introduce\n**Natalie Cheng**, Sand Hill Trail Walk guide. Anna energizes through early-morning movement in nature, and Natalie's sunrise walk through the oak groves is built exactly for that rhythm — no agenda, just the landscape and her thoughts. If Anna's interested in extending her nature exploration, Filoli Gardens are in early bloom right now (historic estate gardens 15 minutes away) — private morning access can be arranged for day two or three. The architecture and landscape design history will speak to her.\n\n## Keep in mind\nLong-haul fatigue is real. A quiet, unhurried arrival is the priority — give her space to settle in without rushing into anything. She dislikes crowded morning dining, so the meditation garden terrace corner table will feel right. She's based in San Francisco but originally from Sweden — she may appreciate Nordic design references or connections if they come up naturally in conversation."
     }
   }
 }

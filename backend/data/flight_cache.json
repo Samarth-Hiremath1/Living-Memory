@@ -49,9 +49,9 @@
     }
   },
   "LH454": {
-    "cached_at": 1778972038.250617,
+    "cached_at": 1785633407.14281,
     "data": {
-      "flight_date": "2026-05-16",
+      "flight_date": "2026-08-01",
       "flight_status": "landed",
       "departure": {
         "airport": "Frankfurt International Airport",
@@ -59,13 +59,13 @@
         "iata": "FRA",
         "icao": "EDDF",
         "terminal": "1",
-        "gate": "Z23",
-        "delay": 5,
-        "scheduled": "2026-05-16T10:25:00+00:00",
-        "estimated": "2026-05-16T10:25:00+00:00",
-        "actual": "2026-05-16T11:05:00+00:00",
-        "estimated_runway": "2026-05-16T11:05:00+00:00",
-        "actual_runway": "2026-05-16T11:05:00+00:00"
+        "gate": "Z52",
+        "delay": 18,
+        "scheduled": "2026-08-01T10:25:00+00:00",
+        "estimated": "2026-08-01T10:25:00+00:00",
+        "actual": "2026-08-01T11:05:00+00:00",
+        "estimated_runway": "2026-08-01T11:05:00+00:00",
+        "actual_runway": "2026-08-01T11:05:00+00:00"
       },
       "arrival": {
         "airport": "San Francisco International",
@@ -74,13 +74,13 @@
         "icao": "KSFO",
         "terminal": "I",
         "gate": "G13",
-        "baggage": "CL4",
-        "scheduled": "2026-05-16T12:40:00+00:00",
-        "delay": 5,
-        "estimated": "2026-05-16T12:39:00+00:00",
-        "actual": "2026-05-16T12:45:00+00:00",
-        "estimated_runway": "2026-05-16T12:45:00+00:00",
-        "actual_runway": "2026-05-16T12:45:00+00:00"
+        "baggage": "CL6",
+        "scheduled": "2026-08-01T12:40:00+00:00",
+        "delay": 18,
+        "estimated": "2026-08-01T12:58:00+00:00",
+        "actual": "2026-08-01T12:58:00+00:00",
+        "estimated_runway": "2026-08-01T12:58:00+00:00",
+        "actual_runway": "2026-08-01T12:58:00+00:00"
       },
       "airline": {
         "name": "Lufthansa",
@@ -97,44 +97,44 @@
         "registration": null,
         "iata": null,
         "icao": null,
-        "icao24": "3C4AD8"
+        "icao24": "3C4B2D"
       },
       "live": null
     }
   },
   "LH456": {
-    "cached_at": 1779002664.767655,
+    "cached_at": 1785629360.597835,
     "data": {
-      "flight_date": "2026-05-17",
-      "flight_status": "scheduled",
+      "flight_date": "2026-08-01",
+      "flight_status": "landed",
       "departure": {
         "airport": "Frankfurt International Airport",
         "timezone": "Europe/Berlin",
         "iata": "FRA",
         "icao": "EDDF",
         "terminal": "1",
-        "gate": "Z66",
-        "delay": null,
-        "scheduled": "2026-05-17T10:40:00+00:00",
-        "estimated": "2026-05-17T10:40:00+00:00",
-        "actual": null,
-        "estimated_runway": null,
-        "actual_runway": null
+        "gate": "Z58",
+        "delay": 1,
+        "scheduled": "2026-08-01T10:40:00+00:00",
+        "estimated": "2026-08-01T10:40:00+00:00",
+        "actual": "2026-08-01T11:26:00+00:00",
+        "estimated_runway": "2026-08-01T11:26:00+00:00",
+        "actual_runway": "2026-08-01T11:26:00+00:00"
       },
       "arrival": {
         "airport": "Los Angeles International",
         "timezone": "America/Los_Angeles",
         "iata": "LAX",
         "icao": "KLAX",
-        "terminal": "TBIT",
-        "gate": null,
+        "terminal": "B",
+        "gate": "152",
         "baggage": null,
-        "scheduled": "2026-05-17T13:10:00+00:00",
-        "delay": 10,
-        "estimated": null,
-        "actual": null,
-        "estimated_runway": null,
-        "actual_runway": null
+        "scheduled": "2026-08-01T13:10:00+00:00",
+        "delay": 1,
+        "estimated": "2026-08-01T13:19:00+00:00",
+        "actual": "2026-08-01T13:11:00+00:00",
+        "estimated_runway": "2026-08-01T13:11:00+00:00",
+        "actual_runway": "2026-08-01T13:11:00+00:00"
       },
       "airline": {
         "name": "Lufthansa",
@@ -151,7 +151,7 @@
         "registration": null,
         "iata": null,
         "icao": null,
-        "icao24": "3C4B27"
+        "icao24": "3C4B31"
       },
       "live": null
     }

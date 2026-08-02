@@ -1,0 +1,48 @@
+# Living Memory — full stack, locally.
+#
+#   docker compose up --build
+#
+# Backend on :8000, frontend on :3000. The backend waits for its own health
+# check before compose reports it healthy, and the frontend waits on that.
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: living-memory-backend:local
+    ports:
+      - "8000:8000"
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - ELEVENLABS_API_KEY=${ELEVENLABS_API_KEY:-}
+      - ELEVENLABS_AGENT_ID=${ELEVENLABS_AGENT_ID:-}
+      - AVIATIONSTACK_API_KEY=${AVIATIONSTACK_API_KEY:-}
+      - FRONTEND_URL=http://localhost:3000
+      - LOG_LEVEL=INFO
+    volumes:
+      # Seed data lives outside the image so it can be edited without a rebuild.
+      - ./data:/data:ro
+    healthcheck:
+      # Compose health uses the LIVENESS endpoint. Readiness depends on an API
+      # key being present, which we do not want to block local `up` on.
+      test: ["CMD", "curl", "-fsS", "http://localhost:8000/health/live"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: living-memory-frontend:local
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped

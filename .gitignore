@@ -37,3 +37,6 @@ Thumbs.db
 
 # Claude Code (local IDE settings — not project config)
 .claude/
+
+# Eval output
+backend/eval_report.md

@@ -12,6 +12,7 @@ from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 
 from .config import settings
+from .observability import configure_logging
 from .graph.schema import Guest, Stay, Observation, ObservationSource, ConsentLevel
 from .graph.store import graph
 from .graph.identity import find_cross_property_duplicates, merge_guest_profiles
@@ -23,7 +24,7 @@ from .voice.ambassador import get_signed_url, get_ambassador_config, get_concier
 from .voice.stt import transcribe_audio
 from .voice.briefing_tts import dossier_to_audio
 from .agents.welcome_summarizer import summarize_welcome_transcript, extract_preferences_from_transcript
-from .agents.mcp_agent import run_mcp_agent, MCP_TOOLS
+from .agents.mcp_agent import run_mcp_agent, get_mcp_tools
 
 app = FastAPI(title="Living Memory API", version="0.1.0")
 
@@ -40,6 +41,7 @@ app.add_middleware(
 
 @app.on_event("startup")
 async def seed_data() -> None:
+    configure_logging()
     """Load synthetic data and property data into the graph on startup."""
     data_dir = Path("../data")
 
@@ -75,10 +77,66 @@ async def seed_data() -> None:
 
 
 # ── Health ────────────────────────────────────────────────────────────────────
+#
+# Liveness and readiness are DELIBERATELY different endpoints.
+#
+#   /health/live   — "is this process alive?" Touches nothing external. If it
+#                    fails the process is wedged and restarting is correct.
+#   /health/ready  — "can this process serve traffic?" Checks dependencies
+#                    (seed data loaded, Anthropic key configured). If it fails
+#                    the pod is pulled from the Service endpoints but is NOT
+#                    restarted.
+#
+# Pointing liveness at a dependency check is a classic outage amplifier: a slow
+# or down dependency makes every pod fail liveness, so Kubernetes restarts the
+# entire fleet in a loop, guaranteeing the outage instead of riding it out.
 
 @app.get("/health")
 async def health() -> dict:
+    """Legacy combined health endpoint. Retained for the existing frontend."""
     return {"status": "ok", "guests": len(graph.list_guests())}
+
+
+@app.get("/health/live")
+async def health_live() -> dict:
+    """
+    Liveness. Intentionally trivial — no I/O, no dependency checks.
+
+    Answers exactly one question: is the event loop running and able to serve
+    a request? Anything more turns a dependency blip into a restart storm.
+    """
+    return {"status": "alive"}
+
+
+@app.get("/health/ready")
+async def health_ready() -> dict:
+    """
+    Readiness. Verifies this instance can actually do useful work.
+
+    Returns 503 when not ready so Kubernetes removes the pod from the Service
+    endpoint list without restarting it. Recovery is automatic once the
+    dependency comes back.
+    """
+    checks: dict[str, Any] = {}
+
+    guest_count = len(graph.list_guests())
+    checks["seed_data_loaded"] = guest_count > 0
+    checks["guest_count"] = guest_count
+
+    properties = len(graph.list_properties()) if hasattr(graph, "list_properties") else 0
+    checks["properties_loaded"] = properties > 0
+
+    checks["anthropic_key_configured"] = bool(settings.anthropic_api_key)
+
+    required = ["seed_data_loaded", "anthropic_key_configured"]
+    ready = all(checks.get(k) for k in required)
+
+    if not ready:
+        raise HTTPException(
+            status_code=503,
+            detail={"status": "not_ready", "checks": checks},
+        )
+    return {"status": "ready", "checks": checks}
 
 
 # ── Guests ────────────────────────────────────────────────────────────────────
@@ -471,7 +529,8 @@ async def agent_query(body: AgentQueryRequest) -> dict:
 @app.get("/agent/tools")
 async def list_agent_tools() -> dict:
     """Return the MCP tool definitions available to the agent."""
-    return {"tools": MCP_TOOLS, "count": len(MCP_TOOLS)}
+    tools = get_mcp_tools()
+    return {"tools": tools, "count": len(tools), "source": "mcp:tools/list"}
 
 
 # ── Friend Filter Demo ────────────────────────────────────────────────────────

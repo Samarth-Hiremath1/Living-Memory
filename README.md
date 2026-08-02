@@ -42,7 +42,7 @@ flight_node               history_node              wellness_node
                                 END
 ```
 
-`flight_node`, `history_node`, and `wellness_node` have no dependency on each other so LangGraph runs them concurrently — reducing wall time compared to a naive sequential chain. `place_node` legitimately needs the history output before it can match a PlaceMaker, so it runs after the fan-in. The `synthesize_node` then has the full picture from all four upstream agents.
+`flight_node`, `history_node`, and `wellness_node` have no dependency on each other so LangGraph runs them concurrently. **Measured:** on a controlled 3×1s workload the fan-out gives a **3.00x** speedup, confirming the mechanism is real. On the actual pipeline it currently saves ~3ms (**1.00x**) — because only `history_node` has meaningful latency (~6.4s Claude call) while `flight_node` (~3ms, cached) and `wellness_node` (~0ms, mock) return almost instantly. There is nothing to overlap. The parallelism pays off once the other two nodes do real work; see [Measured results](#measured-results). `place_node` legitimately needs the history output before it can match a PlaceMaker, so it runs after the fan-in. The `synthesize_node` then has the full picture from all four upstream agents.
 
 **Why LangGraph over a plain function chain:**
 - **Typed shared state** (`ArrivalPipelineState`) — every agent reads and writes to the same explicitly typed object; data flow is inspectable and each node is independently testable
@@ -68,13 +68,50 @@ flight_node               history_node              wellness_node
 
 The arrival pipeline produces the morning dossier on a schedule. But staff also have **ad-hoc questions** throughout the day: *"Is LH456 on time?"*, *"What's the weather in Napa?"*, *"Who at the property should host a guest who loves natural wine?"*
 
-The **Concierge Research Agent** answers those. It's a separate LangGraph graph — a ReAct loop rather than a DAG — that gives Claude three hospitality-scoped tools defined in **MCP format** (the same `name` / `description` / `input_schema` spec used in Anthropic's tool-use API and Model Context Protocol):
+The **Concierge Research Agent** answers those. It's a separate LangGraph graph — a ReAct loop rather than a DAG — and it talks to a **real MCP server** over stdio.
+
+The agent holds **no hardcoded tool list**. On each run it calls `tools/list` against `src/mcp_server/server.py`, translates the returned MCP schemas (`inputSchema`) into the Anthropic tool format (`input_schema`), and routes every execution through `tools/call`. Adding a tool to the server makes it available to the agent with no change to the agent code.
 
 | Tool | What it does |
 |---|---|
 | **`get_weather`** | Live conditions for any city via `wttr.in` — arrival packing notes, golden-hour timing, activity recommendations |
 | **`get_flight_status`** | IATA flight lookup with route, scheduled vs. estimated arrival, gate, and a computed jet-lag severity note based on the origin timezone |
 | **`find_placemaker`** | Searches the property's **internal** roster (chefs, sommeliers, wellness directors) by keyword overlap — the only tool that queries Living Memory's own graph rather than an external API |
+
+
+### The MCP server
+
+`src/mcp_server/server.py` is a genuine Model Context Protocol server: JSON-RPC 2.0 over **stdio**, real `initialize` handshake, built on the official `mcp` Python SDK (pinned `>=1.9,<2.0` — the 2.x line reworked the low-level `Server` API).
+
+It exposes **all three MCP primitives**:
+
+| Primitive | Controlled by | What this server exposes |
+|---|---|---|
+| **Tools** | the model | `get_weather`, `get_flight_status`, `find_placemaker` |
+| **Resources** | the application | `livingmemory://sand-hill/placemakers` (expert roster), `livingmemory://sand-hill/profile` (property character, amenities, calendar) |
+| **Prompts** | the user | `brief_me_on_guest` — a briefing template taking `guest_name`, optional `flight_number` and `interests` |
+
+The server contains **no business logic**. Every tool delegates to the same functions the rest of the app uses (`src/tools/*`); this module is purely the protocol layer.
+
+Run it standalone (it will appear to hang — correct, it's waiting for JSON-RPC on stdin):
+
+```bash
+cd backend && python -m src.mcp_server.server
+```
+
+Or drive it from the client bridge:
+
+```bash
+cd backend && python -c "
+from src.mcp_server.client import get_bridge
+b = get_bridge()
+print([t['name'] for t in b.list_tools()])
+print(b.call_tool('find_placemaker', {'interests': 'Napa wine'}))
+"
+```
+
+Tested by `tests/test_mcp_server.py` — 18 tests that spawn a real server subprocess and speak actual JSON-RPC. No mocks.
+
 
 ```
 START
@@ -140,6 +177,124 @@ pytest tests/test_rubric_scorer.py -v   # 39 tests, ~0.5s
 ```
 
 **Real result from the degraded-api slice:** The judge correctly flagged the agent short-circuiting — refusing to call the tool on an obviously bad location instead of letting it return its real error. Weighted score: 0.30. Tool selection: 0.00. This is the kind of failure mode that a pass/fail assertion wouldn't distinguish.
+
+---
+
+## Measured results
+
+Every number here was produced by a command in this repo. Nothing is estimated.
+
+### Test suite — 110 tests, 109 passing
+
+```bash
+cd backend && pytest tests/ -q          # 109 passed, 1 failed in 93.9s
+pytest tests/ -q -m "not integration"   # 83 passed (no API key needed)
+```
+
+| Group | Count |
+|---|---:|
+| Tool unit tests | 16 |
+| Rubric scorer tests (mocked judge) | 39 |
+| **MCP server tests** (real subprocess, real JSON-RPC) | **18** |
+| Eval-suite structural tests | 7 |
+| Friend filter tests | 3 |
+| Integration eval cases (25) + agent shape (2) | 27 |
+| **Total** | **110** |
+
+The one failure is real and left red on purpose — see below.
+
+### Rubric eval — 25 cases, 6 slices
+
+```bash
+cd backend && python -m eval.run_eval    # 198.9s, judge: claude-sonnet-4-5
+```
+
+**Composite: 0.828** (n=25, all 25 scored successfully)
+
+| Slice | N | tool_selection | factuality | step_efficiency | loop_safety | Weighted |
+|---|---:|---:|---:|---:|---:|---:|
+| `no-tool` | 3 | 1.000 | 1.000 | 1.000 | 1.000 | **1.000** |
+| `degraded-api` | 5 | 1.000 | 0.800 | 1.000 | 1.000 | **0.920** |
+| `ambiguous-query` | 3 | 1.000 | 0.667 | 1.000 | 1.000 | **0.867** |
+| `single-tool-external` | 6 | 1.000 | 0.667 | 1.000 | 1.000 | **0.867** |
+| `multi-tool` | 4 | 0.750 | 0.750 | 0.750 | 1.000 | **0.775** |
+| `single-tool-internal` | 4 | 0.500 | 0.500 | 0.500 | 1.000 | **0.550** |
+
+### What the eval actually found
+
+**1. Over-clarification is the dominant failure mode** (3 cases at 0.100). The agent asks the user for details instead of calling a tool it has enough information to call. Asked *"Guest is a serious food person and wants to actually meet the chef — what can we set up and with whom?"* it returned a list of clarifying questions and made zero tool calls. This is the worst kind of failure because the response reads helpful and professional while delivering nothing. It sinks `single-tool-internal` to 0.550.
+
+**2. Silent wrong-data pass-through** (`weather_location_extraction`, 0.600). Asked for Napa Valley, `wttr.in` returned data for a place called "Fu Tei". The agent presented it as Napa Valley weather and built packing advice on top of it. Tool selection scored 1.00 — it called the right tool with the right argument — but factuality scored 0.00. **No binary assertion would ever catch this**, which is precisely the argument for a graded layer.
+
+**3. The original "degraded-api tool-routing failure" was substantially a rubric bug.** That case previously scored 0.30 with tool_selection 0.00. The agent's behaviour is **unchanged** — it still makes 0 tool calls on a nonsense location. It now scores **1.000**, because the case was rewritten from `tool_policy: required` to `optional`. The old rubric encoded *an action* ("get_weather must be called") as ground truth and punished the agent for correctly declining to call an API on obvious garbage. Fixing the rubric made a false finding disappear and surfaced three real ones.
+
+### Pipeline parallelism — 1.00x, and why
+
+```bash
+cd backend && python -m scripts.bench_pipeline --runs 3
+```
+
+| Measurement | Value |
+|---|---:|
+| Controlled 3×1s fan-out (mechanism check) | **3.00x** |
+| Real pipeline — serial cost of fan-out | 6408 ms |
+| Real pipeline — actual wall time | 6406 ms |
+| **Real pipeline speedup** | **1.00x** |
+| Full pipeline end-to-end | ~43 s |
+
+LangGraph's fan-out genuinely runs sync nodes concurrently — a controlled test with three 1-second nodes measures 3.00x. But on the real pipeline the speedup is **zero**, because only `history_node` has latency (~6.4 s Claude call). `flight_node` returns in ~3 ms (cache/demo fallback) and `wellness_node` in ~0 ms (mock data). You cannot overlap one slow thing with two instant things.
+
+The architecture is correct and the benefit is currently theoretical. It materialises when the other two branches do real work — a live AviationStack call and a real wellness integration.
+
+---
+
+## Deployment
+
+### Docker
+
+```bash
+docker compose up --build       # backend :8000, frontend :3000
+```
+
+Both images are verified to build and run. Dependency layers are copied before source so a code edit doesn't reinstall the world — the backend installs from a generated `requirements.txt`, so pins (notably `mcp<2.0`) are identical in local dev and in the image.
+
+| Image | Size |
+|---|---:|
+| `living-memory-backend:local` | 450 MB |
+| `living-memory-frontend:local` | 828 MB (multi-stage: deps → builder → runner) |
+
+### Kubernetes
+
+```bash
+kubectl apply -f k8s/
+kubeconform -summary -strict k8s/*.yaml   # 4 resources, 0 invalid
+```
+
+**Liveness and readiness deliberately point at different endpoints:**
+
+| Probe | Endpoint | Checks | On failure |
+|---|---|---|---|
+| `livenessProbe` | `/health/live` | Nothing external — is the process alive? | Pod restarted |
+| `readinessProbe` | `/health/ready` | Seed data loaded, API key configured | Pod pulled from Service, **not** restarted |
+
+Pointing liveness at a dependency check is an outage amplifier: one slow dependency fails liveness on every pod at once, Kubernetes restarts the whole fleet in a loop, and a recoverable degradation becomes a self-inflicted outage. A `startupProbe` suspends both until first boot completes.
+
+### Observability
+
+Every node in both graphs is wrapped by `@instrument`, emitting one JSON line per execution:
+
+```json
+{"ts":"2026-08-02T00:05:13.012+00:00","level":"INFO","logger":"living_memory",
+ "msg":"node history_node finished in 6161.0ms (ok)","event":"node",
+ "graph":"arrival_pipeline","node":"history_node","duration_ms":6161.0,"status":"ok"}
+```
+
+Wall-clock start/end are retained in a process-local registry so `scripts/bench_pipeline.py` can compute overlap directly rather than scraping logs.
+
+### CI
+
+`.github/workflows/ci.yml` runs on every push: backend tests (no API key needed), eval-suite shape assertions, rubric weight validation, both Docker builds, a container smoke test against `/health/live`, and offline manifest validation with `kubeconform`.
+
 
 ---
 

@@ -171,14 +171,29 @@ def test_agent_eval(case: dict) -> None:
         f"[{case['id']}] Agent errored: {result.error}"
     )
 
-    # ── 3. Tool selection ───────────────────────────────────────────────────
+    # ── 3. Tool selection, per the case's tool_policy ───────────────────────
+    #
+    # "required"  — every expected tool must have been called
+    # "optional"  — graded on outcome only; any tool choice is acceptable
+    # "forbidden" — no tool should have been called
     tools_used = {call["tool"] for call in result.tool_calls}
-    for expected_tool in case["expected_tools"]:
-        assert expected_tool in tools_used, (
-            f"[{case['id']}] Expected tool '{expected_tool}' was not called.\n"
-            f"Tools used: {tools_used}\n"
+    policy = case.get("tool_policy", "required")
+
+    if policy == "required":
+        for expected_tool in case["expected_tools"]:
+            assert expected_tool in tools_used, (
+                f"[{case['id']}] Expected tool '{expected_tool}' was not called.\n"
+                f"Tools used: {tools_used}\n"
+                f"Answer: {result.final_answer[:300]}"
+            )
+    elif policy == "forbidden":
+        assert not tools_used, (
+            f"[{case['id']}] Expected NO tool calls but agent called: {tools_used}\n"
             f"Answer: {result.final_answer[:300]}"
         )
+    # policy == "optional": deliberately no tool assertion. The case is graded
+    # on the answer content below. This exists because asserting a specific tool
+    # call encodes HOW the agent should work rather than WHETHER it worked.
 
     # ── 4. Answer content ───────────────────────────────────────────────────
     # Each entry is either a plain string (must appear) or a list of strings
@@ -200,6 +215,10 @@ def test_agent_eval(case: dict) -> None:
     # ── 5. No infinite loops ────────────────────────────────────────────────
     assert result.steps_taken <= 6, (
         f"[{case['id']}] Agent took {result.steps_taken} steps — possible loop."
+    )
+    assert not result.hit_step_cap, (
+        f"[{case['id']}] Agent was cut off by the step cap rather than finishing "
+        f"on its own — the answer is truncated reasoning, not a real answer."
     )
 
     # Print a summary line for readable -s output
@@ -238,3 +257,48 @@ def test_tool_call_log_populated() -> None:
     assert "flight_number" in call["input"]
     # Output should mention the route or jet lag
     assert "FRA" in call["output"] or "Frankfurt" in call["output"]
+
+
+# ── Structural tests on the eval suite itself ────────────────────────────────
+#
+# These guard the harness, not the agent. They run without an API key.
+
+
+class TestEvalSuiteShape:
+    def test_case_count(self):
+        assert len(EVAL_CASES) == 25, f"expected 25 cases, got {len(EVAL_CASES)}"
+
+    def test_no_slice_under_three_cases(self):
+        from eval.cases import slice_counts
+
+        thin = {s: n for s, n in slice_counts().items() if n < 3}
+        assert not thin, f"slices with fewer than 3 cases: {thin}"
+
+    def test_case_ids_unique(self):
+        ids = [c["id"] for c in EVAL_CASES]
+        assert len(ids) == len(set(ids)), "duplicate case ids"
+
+    def test_every_case_has_required_fields(self):
+        for c in EVAL_CASES:
+            for field_name in ("id", "slice", "description", "query", "expected_tools"):
+                assert field_name in c, f"{c.get('id')} missing '{field_name}'"
+
+    def test_tool_policy_values_are_valid(self):
+        valid = {"required", "optional", "forbidden"}
+        for c in EVAL_CASES:
+            policy = c.get("tool_policy", "required")
+            assert policy in valid, f"{c['id']} has bad tool_policy '{policy}'"
+
+    def test_required_policy_cases_name_their_tools(self):
+        for c in EVAL_CASES:
+            if c.get("tool_policy", "required") == "required":
+                assert c["expected_tools"], (
+                    f"{c['id']} is policy=required but names no expected tools"
+                )
+
+    def test_forbidden_policy_cases_expect_no_tools(self):
+        for c in EVAL_CASES:
+            if c.get("tool_policy") == "forbidden":
+                assert not c["expected_tools"], (
+                    f"{c['id']} is policy=forbidden but lists expected tools"
+                )

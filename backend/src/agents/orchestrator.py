@@ -37,6 +37,7 @@ from typing import Any, TypedDict
 from langgraph.graph import StateGraph, END, START
 
 from ..graph.store import graph
+from ..observability import instrument
 from .flight_agent import run_flight_agent
 from .history_agent import run_history_agent
 from .place_agent import run_place_agent
@@ -75,6 +76,7 @@ class ArrivalPipelineState(TypedDict):
 
 # ── Node 1: Load context ──────────────────────────────────────────────────────
 
+@instrument("arrival_pipeline", "load_context")
 def load_context(state: ArrivalPipelineState) -> dict:
     """
     Load Guest and Stay objects from the graph store.
@@ -97,6 +99,7 @@ def load_context(state: ArrivalPipelineState) -> dict:
 
 # ── Nodes 2a / 2b / 2c: Run in parallel after load_context ───────────────────
 
+@instrument("arrival_pipeline", "flight_node")
 def flight_node(state: ArrivalPipelineState) -> dict:
     """
     Pull live flight data via AviationStack and compute jet lag profile.
@@ -108,6 +111,7 @@ def flight_node(state: ArrivalPipelineState) -> dict:
     return {"flight_result": result.to_dict()}
 
 
+@instrument("arrival_pipeline", "history_node")
 def history_node(state: ArrivalPipelineState) -> dict:
     """
     Analyse all past observations for this guest across every property.
@@ -125,6 +129,7 @@ def history_node(state: ArrivalPipelineState) -> dict:
     return {"history": run_history_agent(state["guest"])}
 
 
+@instrument("arrival_pipeline", "wellness_node")
 def wellness_node(state: ArrivalPipelineState) -> dict:
     """
     Read opt-in wellness signals (mock wearable data in this demo).
@@ -137,6 +142,7 @@ def wellness_node(state: ArrivalPipelineState) -> dict:
 
 # ── Node 3: PlaceMaker matching (sequential — depends on history output) ──────
 
+@instrument("arrival_pipeline", "place_node")
 def place_node(state: ArrivalPipelineState) -> dict:
     """
     Match guest interests and patterns to the right PlaceMaker at this property.
@@ -155,6 +161,7 @@ def place_node(state: ArrivalPipelineState) -> dict:
 
 # ── Node 4: Synthesizer ───────────────────────────────────────────────────────
 
+@instrument("arrival_pipeline", "synthesize_node")
 def synthesize_node(state: ArrivalPipelineState) -> dict:
     """
     Combine all agent outputs into a full arrival plan.

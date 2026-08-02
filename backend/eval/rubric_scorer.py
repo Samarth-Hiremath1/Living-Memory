@@ -100,8 +100,19 @@ Case id:         {case_id}
 Slice category:  {slice_tag}
 Description:     {description}
 Query:           {query}
+Tool policy:     {tool_policy}
 Expected tools:  {expected_tools}
+Acceptable tools (may be called, no penalty either way): {acceptable_tools}
 Expected answer signals: {expected_keywords}
+
+HOW TO APPLY THE TOOL POLICY when scoring `tool_selection`:
+  - "required":  every tool in Expected tools must have been called. Missing one
+                 is a partial or total miss.
+  - "optional":  the agent is graded on the OUTCOME, not the path. Calling a
+                 listed acceptable tool and not calling it are BOTH fully
+                 correct. Score 1.0 unless it called something irrelevant or
+                 produced a bad outcome (e.g. fabricated data).
+  - "forbidden": no tool should have been called. Calling one is the penalty.
 
 # THE AGENT'S ACTUAL BEHAVIOUR
 
@@ -151,6 +162,31 @@ class RubricConfig:
     def weights_sum_to_one(self) -> bool:
         return abs(sum(d.weight for d in self.dimensions) - 1.0) < 1e-6
 
+    def validate(self) -> None:
+        """
+        Raise if the rubric is internally inconsistent.
+
+        Called at the top of score_case and aggregate_scores. Previously this
+        check existed but was never invoked, so a config whose weights summed to
+        1.5 would silently produce composite scores above 1.0 and every report
+        built from it would be quietly wrong.
+        """
+        if not self.dimensions:
+            raise ValueError("RubricConfig has no dimensions")
+        if not self.weights_sum_to_one():
+            total = sum(d.weight for d in self.dimensions)
+            raise ValueError(
+                f"Rubric weights must sum to 1.0, got {total:.4f} "
+                f"({{{', '.join(f'{d.name}={d.weight}' for d in self.dimensions)}}}). "
+                "Composite scores would be uninterpretable."
+            )
+        for d in self.dimensions:
+            if not 0.0 <= d.weight <= 1.0:
+                raise ValueError(f"Dimension '{d.name}' weight {d.weight} outside [0,1]")
+        names = [d.name for d in self.dimensions]
+        if len(names) != len(set(names)):
+            raise ValueError(f"Duplicate dimension names: {names}")
+
 
 DEFAULT_RUBRIC = RubricConfig()
 
@@ -193,6 +229,13 @@ class AggregateReport:
     judge_model: str
     generated_at: str
     weights: dict[str, float]
+    # Honest denominator: every mean above is computed over `scored_count`
+    # cases, NOT over len(case_scores). Cases whose judge call failed are
+    # excluded from the arithmetic, so reporting the total as the denominator
+    # would overstate the sample the numbers actually rest on.
+    total_count: int = 0
+    scored_count: int = 0
+    errored_count: int = 0
 
 
 # ── Scoring ──────────────────────────────────────────────────────────────────
@@ -232,6 +275,8 @@ def _build_judge_prompt(case: dict, result: Any, config: RubricConfig) -> str:
         slice_tag=case.get("slice", "unknown"),
         description=case.get("description", ""),
         query=case.get("query", ""),
+        tool_policy=case.get("tool_policy", "required"),
+        acceptable_tools=case.get("acceptable_tools", []),
         expected_tools=case.get("expected_tools", []),
         expected_keywords=case.get("expected_keywords", []),
         steps_taken=getattr(result, "steps_taken", 0),
@@ -308,6 +353,7 @@ def score_case(case: dict, result: Any, config: RubricConfig | None = None) -> C
     Always returns a CaseScore — errors are captured in the .error field.
     """
     cfg = config or DEFAULT_RUBRIC
+    cfg.validate()
     base = CaseScore(
         case_id=case.get("id", "?"),
         slice_tag=case.get("slice", "unknown"),
@@ -349,6 +395,7 @@ def aggregate_scores(
 ) -> AggregateReport:
     """Compute overall and per-slice aggregates."""
     cfg = config or DEFAULT_RUBRIC
+    cfg.validate()
     dim_names = [d.name for d in cfg.dimensions]
     valid = [cs for cs in case_scores if cs.error is None]
 
@@ -390,6 +437,9 @@ def aggregate_scores(
         judge_model=cfg.model(),
         generated_at=datetime.now(timezone.utc).isoformat(timespec="seconds"),
         weights={d.name: d.weight for d in cfg.dimensions},
+        total_count=len(case_scores),
+        scored_count=len(valid),
+        errored_count=len(case_scores) - len(valid),
     )
 
 
@@ -418,12 +468,19 @@ def generate_markdown_report(
     lines.append("")
     lines.append(f"- **Generated:** {report.generated_at}")
     lines.append(f"- **Judge model:** `{report.judge_model}`")
-    lines.append(f"- **Cases evaluated:** {len(report.case_scores)}")
-    errored = [cs for cs in report.case_scores if cs.error]
-    if errored:
-        lines.append(f"- **Cases with scoring errors:** {len(errored)}")
+    lines.append(f"- **Cases in suite:** {report.total_count}")
     lines.append(
-        f"- **Overall weighted score:** **{report.overall_weighted_total:.3f}**"
+        f"- **Cases successfully scored (denominator for every mean below):** "
+        f"**{report.scored_count}**"
+    )
+    if report.errored_count:
+        lines.append(
+            f"- **Cases excluded — judge call failed:** {report.errored_count} "
+            f"(these are NOT in any mean)"
+        )
+    lines.append(
+        f"- **Overall weighted score:** **{report.overall_weighted_total:.3f}** "
+        f"(n={report.scored_count})"
     )
     lines.append("")
 

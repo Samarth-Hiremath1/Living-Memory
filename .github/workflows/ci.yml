@@ -1,0 +1,118 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: [main]
+
+jobs:
+  backend-tests:
+    name: Backend tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+          pip install "mcp>=1.0.0"
+
+      - name: Lint
+        run: ruff check src eval tests
+        continue-on-error: true
+
+      # Runs unit tests, the eval-suite structural tests, and the full MCP
+      # server suite (real subprocess + real JSON-RPC). No API key needed —
+      # integration tests are excluded by the marker.
+      - name: Run tests
+        run: pytest tests/ -v -m "not integration" --tb=short
+
+      - name: Verify eval suite shape
+        run: |
+          python -c "
+          from eval.cases import EVAL_CASES, slice_counts
+          counts = slice_counts()
+          print(f'{len(EVAL_CASES)} cases across {len(counts)} slices')
+          for s, n in sorted(counts.items()):
+              print(f'  {s:24} {n}')
+          assert len(EVAL_CASES) == 25, 'expected 25 eval cases'
+          assert min(counts.values()) >= 3, 'a slice has fewer than 3 cases'
+          "
+
+      - name: Validate rubric config
+        run: |
+          python -c "
+          from eval.rubric_scorer import DEFAULT_RUBRIC
+          DEFAULT_RUBRIC.validate()
+          print('rubric weights valid, sum =', sum(d.weight for d in DEFAULT_RUBRIC.dimensions))
+          "
+
+  docker-build:
+    name: Docker images build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Build backend image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend
+          push: false
+          load: true
+          tags: living-memory-backend:ci
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Build frontend image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./frontend
+          push: false
+          load: true
+          tags: living-memory-frontend:ci
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      # Boots the backend container and asserts the liveness endpoint answers.
+      # Catches "image builds but app is broken" — which a build-only job misses.
+      - name: Smoke test backend container
+        run: |
+          docker run -d --name lm-backend -p 8000:8000 \
+            -e ANTHROPIC_API_KEY=ci-dummy living-memory-backend:ci
+          for i in $(seq 1 30); do
+            if curl -fsS http://localhost:8000/health/live; then
+              echo "backend is live"; exit 0
+            fi
+            sleep 2
+          done
+          echo "backend never became live"; docker logs lm-backend; exit 1
+
+  k8s-manifests:
+    name: Kubernetes manifests valid
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # kubeconform validates against the published Kubernetes JSON schemas
+      # offline. `kubectl apply --dry-run=client` is NOT usable here: it still
+      # contacts the API server to download the OpenAPI spec, so it fails on a
+      # runner with no cluster.
+      - name: Install kubeconform
+        run: |
+          curl -sL https://github.com/yannh/kubeconform/releases/latest/download/kubeconform-linux-amd64.tar.gz \
+            | tar xz -C /usr/local/bin kubeconform
+
+      - name: Validate manifests
+        run: kubeconform -summary -strict k8s/backend.yaml k8s/frontend.yaml
