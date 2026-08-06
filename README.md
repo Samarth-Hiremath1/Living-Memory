@@ -140,43 +140,53 @@ Exposed at `POST /agent/query`. Tool catalogue at `GET /agent/tools`.
 
 Agent behaviour is locked in by a two-layer pytest suite under `backend/tests/` and `backend/eval/`.
 
-### Layer 1 — Unit + integration tests (`test_mcp_agent.py`)
+### Layer 1 — pytest (110 tests, 109 passing)
 
-- **16 unit tests** for the individual tools — no LLM calls, no API keys, run in ~3 seconds
-- **11 integration tests** for the full ReAct loop — assert correct tool selection, expected keywords in the final answer, and that the agent stays bounded (≤6 steps)
-- Eval cases span 6 failure-mode slices: `single-tool-external`, `single-tool-internal`, `multi-tool`, `no-tool`, `ambiguous-query`, `degraded-api`
+| File | Tests | Needs API key |
+|---|---:|---|
+| `test_mcp_agent.py` | 50 | 27 of them (25 eval cases + 2 shape tests) |
+| `test_rubric_scorer.py` | 39 | no — judge is mocked |
+| `test_mcp_server.py` | 18 | no — protocol layer is model-independent |
+| `test_friend_filter.py` | 3 | yes |
+| **Total** | **110** | **83 run without one** |
 
 ```bash
-pytest tests/test_mcp_agent.py -v                   # all 27 tests
-pytest tests/test_mcp_agent.py -m "not integration" # unit tests only
+pytest tests/ -q                      # 109 passed, 1 failed in 93.9s
+pytest tests/ -q -m "not integration" # 83 passed in ~5s, no API key
 ```
+
+The single failure is left red deliberately — it's a real agent defect (see below), and a green suite that hides it is worth less than a red one that names it.
 
 ### Layer 2 — Rubric-based LLM-as-judge (`eval/rubric_scorer.py`)
 
-A Claude-based judge scores each agent run on four weighted dimensions and produces a markdown report with per-dimension means and per-slice breakdowns.
+A Claude judge scores each run on four weighted dimensions and writes a markdown report with per-dimension means, per-slice breakdowns, and worst cases first.
 
 | Dimension | Weight | What the judge looks at |
 |---|---:|---|
-| `tool_selection` | 0.30 | Right tool(s) chosen? Penalises wrong, missing, or unnecessary calls |
+| `tool_selection` | 0.30 | Right tool(s) for the case's `tool_policy`? |
 | `factuality` | 0.40 | Answer grounded in tool output? Penalises fabrication |
-| `step_efficiency` | 0.20 | Minimum reasonable steps taken? Penalises redundancy |
+| `step_efficiency` | 0.20 | Minimum reasonable steps? Penalises redundancy |
 | `loop_safety` | 0.10 | Stayed bounded (≤4 steps ideal)? Penalises loops |
 
-The rubric — dimensions, weights, judge model, and prompt template — is fully configurable via `RubricConfig`. The report surfaces worst-performing cases at the top, then breaks down scores by slice so it's easy to see which categories the agent fails on.
+Judge is Sonnet, agent is Haiku — different tiers, so it is not literally self-grading, though same-family bias remains. Weights are validated at run time (`RubricConfig.validate()`), and the report prints the **scored** count as the denominator for every mean, excluding any case whose judge call failed.
+
+**`tool_policy` — grading outcomes, not paths.** Each case declares `required`, `optional`, or `forbidden`. This replaced a schema that hardcoded *which tool must be called*, which punished the agent for correctly declining to call an API on obviously bad input. See [Measured results](#measured-results) for what that change revealed.
 
 ```bash
-python -m eval.run_eval                        # all cases → eval_report.md
+python -m eval.run_eval                        # 25 cases → eval_report.md
 python -m eval.run_eval --slice degraded-api   # single slice
 python -m eval.run_eval --judge-model claude-haiku-4-5
 ```
 
-**39 unit tests** cover the scorer itself (mocked judge — no API needed):
+**39 tests** cover the scorer itself with a mocked judge — JSON parsing edge cases (code fences, missing dimensions, out-of-range scores), weight validation, slice aggregation, and report ordering:
 
 ```bash
-pytest tests/test_rubric_scorer.py -v   # 39 tests, ~0.5s
+pytest tests/test_rubric_scorer.py -q   # 39 passed
 ```
 
-**Real result from the degraded-api slice:** The judge correctly flagged the agent short-circuiting — refusing to call the tool on an obviously bad location instead of letting it return its real error. Weighted score: 0.30. Tool selection: 0.00. This is the kind of failure mode that a pass/fail assertion wouldn't distinguish.
+### What is NOT validated
+
+The judge has never been calibrated. No repeat runs to measure score variance, no human-labelled set to check agreement, no adversarial probes for verbosity bias. These scores are an unvalidated signal, not a measurement — treat them as directional.
 
 ---
 
@@ -378,7 +388,8 @@ npm run dev
 - Full guest/stay/observation/plan data model with JSON persistence
 - LangGraph orchestration pipeline — parallel fan-out, typed shared state, fan-in
 - Arrival plan generation with Claude Sonnet producing a full staff dossier
-- Concierge Research Agent — ReAct loop with MCP-style tools and 27-case pytest eval suite
+- Real MCP server (JSON-RPC over stdio) exposing tools, resources and prompts; ReAct agent refactored into an MCP client
+- 110-test pytest suite (109 passing) + 25-case rubric eval harness across 6 failure-mode slices
 - Rubric-based LLM-as-judge eval layer — 4-dimension scoring, slice breakdowns, markdown report, 39 scorer tests
 - Friend Filter — tone translation from clinical AI output to warm, readable language
 - Staff observation capture via text and browser speech recognition (Web Speech API)
@@ -409,11 +420,16 @@ npm run dev
 
 **Conditional pipeline routing** — LangGraph graph uses fixed edges. Conditional branches (e.g. richer synthesizer for Living Memory guests) are architecturally ready but not wired.
 
+**Kubernetes deployment** — Manifests exist and validate against the published schemas (`kubeconform -strict`, 4 resources, 0 invalid), and both Docker images are verified to build and run. But the manifests have **never been applied to a live cluster**. This is deployment configuration, not a deployment.
+
+**MCP server scope** — It is a genuine server (stdio, JSON-RPC 2.0, real handshake, all three primitives), but deliberately narrow. Not covered: HTTP/SSE transport, authentication, resource *templates* (parameterized URIs), `resources/subscribe`, `notifications/tools/list_changed` (the client caches the catalogue after first fetch), sampling, roots, and non-text content blocks — the client flattens everything to text, so `ImageContent` or `EmbeddedResource` would be mangled. It has also never been consumed by a third-party host such as Claude Desktop, so cross-host compatibility is unproven.
+
+**Judge calibration** — See the Eval Suite section. The rubric scores have never been checked against human labels or tested for run-to-run variance.
+
 ---
 
 ## What's not built
 
-- Production deployment / hosting
 - Real PMS integration (fake client exists for testing)
 - Staff mobile push notifications
 - Automated PlaceMaker availability or booking
